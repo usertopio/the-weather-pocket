@@ -1,4 +1,4 @@
-#include "neo6m.h"
+// #include "neo6m.h"
 
-HardwareSerial gpsSerial(1);
-TinyGPSPlus gps;
+// HardwareSerial gpsSerial(0);
+// TinyGPSPlus gps;
