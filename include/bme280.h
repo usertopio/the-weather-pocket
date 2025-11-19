@@ -5,18 +5,22 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 
-// Define variables
-// Pinouts
-#define BME_SCK  18 //SCL
-#define BME_MISO 19 //SDA
-#define BME_MOSI 23 //SDO
-#define BME_CS   5 //CSB
+// Header files
+#include <sensor.h>
 
-// Data
-#define SEA_LEVEL_PRESSURE_HPA 1010
+class BME280 : public Sensor {
+    private:
+        const int BME_MOSI; // SDA
+        const int BME_MISO; // SDO
+        const int BME_SCK; // SCL
+        const int BME_CS; // CSB
 
-// Declare variables
-// Sensor object
-extern Adafruit_BME280 bme;
+        const int SEA_LEVEL_PRESSURE_HPA;
+
+        Adafruit_BME280 bme;
+    public:
+        BME280(int bme_mosi, int bme_miso, int bme_scl, int bme_cs);
+        void begin() override;
+    };
 
 #endif
