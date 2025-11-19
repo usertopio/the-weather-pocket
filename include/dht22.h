@@ -11,8 +11,10 @@
 class DHT22 : public Sensor {
     private:
         const int DHT22_PIN;
+        const int DHT_TYPE;
+        DHT dht;
     public:
-        DHT22(int dht22_pin);
+        DHT22(int dht22_pin, int dht_type);
         void begin() override;
 };
 
