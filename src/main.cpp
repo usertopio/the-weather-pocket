@@ -11,9 +11,9 @@
 
 // ===== Component Instances =====
 // BME280 bme(BME_MOSI, BME_MISO, BME_SCK, BME_CS);
-DHTSensor dht(10);
-NEO6M gps(20, 21);
-OLEDDisplay oled(128, 64, 0x3C);
+DHTSensor dhtSensor(10);
+NEO6M gpsSensor(20, 21);
+OLEDDisplay oledDisplay(128, 64, 0x3C);
 LED led(0);
 
 void setup() {
@@ -25,10 +25,19 @@ void loop() {
     switch (currentState)
     {
         case INIT:
-            /* code */
+            // Initialize all components
+            dhtSensor.begin();
+            gpsSensor.begin();
+            oledDisplay.begin();
+            led.begin();
+
+            // Display
             break;
         case MEASURE:
-            /* code */
+            // if (dhtSensor.getStatus() == Status::ON){
+            //     Serial.print("This is called");
+            // }
+            
             break;
         case DATA:
             /* code */
