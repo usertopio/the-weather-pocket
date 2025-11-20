@@ -20,11 +20,20 @@ public:
     };
 
     // ===== Constructor & Destructor =====
-    BME280(int bme_mosi, int bme_miso, int bme_scl, int bme_cs);
+    BME280(int bme_mosi, int bme_miso, int bme_scl, int bme_cs, float sea_level_pressure_hpa);
 
     // ===== Public Methods =====
     void begin() override;
     State getState() const;
+    void readTemp();
+    void readHumid();
+    void readPressure();
+    void readAltitude();
+
+    float getTemp();
+    float getHumid();
+    float getPressure();
+    float getAltitude();
 
 private:
     // ===== Pin Configuration =====
@@ -38,6 +47,11 @@ private:
 
     // ===== Sensor Data =====
     Adafruit_BME280 bme;
+
+    float temp;
+    float humid;
+    float pressure;
+    float altitude;
     const int SEA_LEVEL_PRESSURE_HPA;
 };
 
