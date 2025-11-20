@@ -22,6 +22,10 @@ public:
     // ===== Public Methods =====
     void begin() override;
     State getState() const;
+    float readTemp();
+    float readHumid();
+    float getTemp();
+    float getHumid();
 
 private:
     // ===== Pin Configuration =====
@@ -32,6 +36,9 @@ private:
 
     // ===== Sensor Data =====
     DHT dht;
+
+    float temp;
+    float humid;
 };
 
 #endif

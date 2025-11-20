@@ -1,6 +1,10 @@
 // Header files
 #include "dht22.h"
 
+// Sensor Data
+float temp = 0.0;
+float humid = 0.0;
+
 // Constructor
 DHTSensor::DHTSensor(int dht_pin) :
     // Pins
@@ -22,4 +26,22 @@ void DHTSensor::begin() {
 // State
 DHTSensor::State DHTSensor::getState() const {
     return state;
+}
+
+float DHTSensor::readTemp(){
+    temp = dht.readTemperature();
+    return temp;
+}
+
+float DHTSensor::readHumid(){
+    humid = dht.readHumidity();
+    return humid;
+}
+
+float DHTSensor::getTemp(){
+    return temp;
+}
+
+float DHTSensor::getHumid(){
+    return humid;
 }
