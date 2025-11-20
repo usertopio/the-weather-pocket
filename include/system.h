@@ -3,7 +3,8 @@
 
 enum class SystemState {
     INIT,
-    MEASURE_WEATHER,
+    MEASURE_BME280,
+    MEASURE_MQ2,
     MEASURE_GPS,
     PROCESS_DATA,
     UPLOAD_DATA
