@@ -7,7 +7,7 @@
 // Header files
 #include "sensor.h"
 
-class DHT22 : public Sensor {
+class DHTSensor : public Sensor {
 public:
     // ===== Types & Enums =====
     enum class State {
@@ -17,7 +17,7 @@ public:
     };
 
     // ===== Constructor & Destructor =====
-    DHT22(int dht_pin);
+    DHTSensor(int dht_pin);
 
     // ===== Public Methods =====
     void begin() override;
