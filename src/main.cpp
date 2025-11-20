@@ -1,3 +1,4 @@
+// Libraries
 #include <Arduino.h>
 
 // Component headers
@@ -7,8 +8,8 @@
 #include "oledDisplay.h"
 #include "led.h"
 
+// Processing headers
 #include "system.h"
-#include "measureWeather.h"
 
 // ===== Component Instances =====
 // BME280 bme(BME_MOSI, BME_MISO, BME_SCK, BME_CS);
@@ -17,26 +18,8 @@ NEO6M gpsSensor(20, 21);
 OLEDDisplay oledDisplay(128, 64, 0x3C);
 LED led(0);
 
-struct weatherSensorState {
-    
-};
-
-
-
-bool isDHT22(){
-    return dhtSensor.getStatus() == DHTSensor::Status::ON;
-}
-
-bool isBME280(){
-    return true;
-}
-
-bool isMQ2(){
-    return true;
-}
-
 void setup() {
-  Serial.begin(115200);
+    Serial.begin(115200);
     delay(1000);
 }
 
@@ -49,73 +32,121 @@ void loop() {
             gpsSensor.begin();
             oledDisplay.begin();
             led.begin();
+            // WIFI
+
+
+            // Action
+            
+
+            // DHT22
+
 
             // Display
+
 
             // Next state
             systemState = SystemState::MEASURE_BME280;
-
             break;
         case SystemState::MEASURE_BME280:
-            if (isDHT22() && isMQ2())
-            {
-                // DHT22
-                dhtSensor.getTemp();
-                dhtSensor.getHumid();
-            }
-            else if (!isDHT22() && isMQ2())
-            {
-                /* code */
-            }
-            else if (isDHT22() && !isMQ2())
-            {
-                // DHT22
-                dhtSensor.getTemp();
-                dhtSensor.getHumid();
-            }
-            else if (!isDHT22() && !isMQ2())
-            {
+            // WIFI
 
+
+            // Action
+
+
+            // DHT22
+
+            if (dhtSensor.getStatus() == DHTSensor::Status::ON)
+            {
+                // Measure
+                dhtSensor.readTemp();
+                dhtSensor.setState();
+                
+                dhtSensor.readHumid();
+
+                // Serial monitor
+                // Data
+                Serial.println("========="); 
+                Serial.print("DHT22 Temperature: "); Serial.println(dhtSensor.getTemp());
+                Serial.print("DHT22 Humidity: "); Serial.println(dhtSensor.getHumid());
+                // System
+                Serial.print("System State: "); Serial.println(static_cast<int>(systemState));
+                Serial.print("Sensor Status: "); Serial.println();
+                Serial.println("========="); 
             }
 
             // Display
+
 
             // Next state
             systemState = SystemState::MEASURE_MQ2;
-        case SystemState::MEASURE_MQ2:
-            /* code */
             break;
+        case SystemState::MEASURE_MQ2:
+            // WIFI
+
+
+            // Action
+            
+
+            // DHT22
+
 
             // Display
+
 
             // Next state
-            systemState = SystemState::MEASURE_GPS;
-        case SystemState::MEASURE_GPS:
-            /* code */
+            systemState = SystemState::MEASURE_NEO6M;
             break;
+        case SystemState::MEASURE_NEO6M:
+            // WIFI
+
+
+            // Action
+            
+
+            // DHT22
+
 
             // Display
+
 
             // Next state
             systemState = SystemState::PROCESS_DATA;
-        case SystemState::PROCESS_DATA:
-            /* code */
             break;
+        case SystemState::PROCESS_DATA:
+            // WIFI
+
+
+            // Action
+            
+
+            // DHT22
+
 
             // Display
+
 
             // Next state
             systemState = SystemState::UPLOAD_DATA;
-        case SystemState::UPLOAD_DATA:
-            /* code */
             break;
+        case SystemState::UPLOAD_DATA:
+            // WIFI
+
+
+            // Action
+            
+
+            // DHT22
+
 
             // Display
 
+
             // Next state
             systemState = SystemState::MEASURE_BME280;
+            break;
         default:
-            Serial.print("Not fit to any state");
+            Serial.println("Not fit to any state. Code need to be fixed!");
             break;
     }
 }

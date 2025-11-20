@@ -5,7 +5,7 @@ enum class SystemState {
     INIT,
     MEASURE_BME280,
     MEASURE_MQ2,
-    MEASURE_GPS,
+    MEASURE_NEO6M,
     PROCESS_DATA,
     UPLOAD_DATA
 };
