@@ -8,6 +8,7 @@
 #include "led.h"
 
 #include "system.h"
+#include "measureWeather.h"
 
 // ===== Component Instances =====
 // BME280 bme(BME_MOSI, BME_MISO, BME_SCK, BME_CS);
@@ -52,16 +53,15 @@ void loop() {
             // Display
 
             // Next state
-            systemState = SystemState::MEASURE_WEATHER;
+            systemState = SystemState::MEASURE_BME280;
 
             break;
-        case SystemState::MEASURE_WEATHER:
+        case SystemState::MEASURE_BME280:
             if (isDHT22() && isMQ2())
             {
                 // DHT22
                 dhtSensor.getTemp();
                 dhtSensor.getHumid();
-
             }
             else if (!isDHT22() && isMQ2())
             {
@@ -81,8 +81,15 @@ void loop() {
             // Display
 
             // Next state
+            systemState = SystemState::MEASURE_MQ2;
+        case SystemState::MEASURE_MQ2:
+            /* code */
+            break;
+
+            // Display
+
+            // Next state
             systemState = SystemState::MEASURE_GPS;
-            
         case SystemState::MEASURE_GPS:
             /* code */
             break;
@@ -106,7 +113,7 @@ void loop() {
             // Display
 
             // Next state
-            systemState = SystemState::MEASURE_WEATHER;
+            systemState = SystemState::MEASURE_BME280;
         default:
             Serial.print("Not fit to any state");
             break;
