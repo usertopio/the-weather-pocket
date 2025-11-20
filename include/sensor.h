@@ -2,6 +2,11 @@
 #define SENSOR_H
 
 class Sensor {
+    // Constructor
+    public:
+        Sensor();
+        virtual ~Sensor() = default;
+
     // Initialization
     public:
         // Methods

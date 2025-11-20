@@ -5,14 +5,38 @@
 #include <Arduino.h>
 
 // Header files
-#include <sensor.h>
+#include "sensor.h"
 
 class LED : public Sensor {
-    private:
-        const int LED_PIN;
+    // Constructor
     public:
+        // Methods
         LED(int led_pin);
+
+    // Initialization
+    public:
+        // Methods
         void begin() override;
+
+    // Pins
+    private:
+        // Variables
+        const int LED_PIN;
+
+    // State
+    protected:
+        // Variables
+        enum class State {
+            INIT,
+            ON,
+            OFF
+        };
+  
+        State state;
+
+    public:
+        // Methods
+        State getState() const;
 };
 
 #endif

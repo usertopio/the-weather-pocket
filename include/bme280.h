@@ -6,7 +6,7 @@
 #include <Adafruit_BME280.h>
 
 // Header files
-#include <sensor.h>
+#include "sensor.h"
 
 class BME280 : public Sensor {
     // Constructor
@@ -39,6 +39,7 @@ class BME280 : public Sensor {
         };
   
         State state;
+
     public:
         // Methods
         State getState() const;
@@ -50,6 +51,6 @@ class BME280 : public Sensor {
         Adafruit_BME280 bme;
         // My data
         const int SEA_LEVEL_PRESSURE_HPA;
-    };
+};
 
 #endif

@@ -7,6 +7,9 @@ DHT22::DHT22(int dht22_pin, int dht_type) :
     DHT22_PIN(dht22_pin),
     DHT_TYPE(dht_type),
 
+    // State
+    state(State::INIT),
+
     // Library
     dht(dht22_pin, dht_type)
 {}
@@ -14,6 +17,7 @@ DHT22::DHT22(int dht22_pin, int dht_type) :
 // Initialization
 void DHT22::begin() {
     dht.begin();
+    status = Status::ON;
 }
 
 // State

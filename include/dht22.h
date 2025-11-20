@@ -3,6 +3,8 @@
 
 // Libraries
 #include <DHT.h>
+
+// Header files
 #include "sensor.h"
 
 class DHT22 : public Sensor {

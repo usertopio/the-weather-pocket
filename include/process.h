@@ -1,17 +1,31 @@
-#ifndef LED_H
-#define LED_H
+#ifndef PROCESS_H
+#define PROCESS_H
 
-// State
-// Process states
-typedef enum
-{
-    INIT,
-    MEASURE,
-    DATA,
-} ProcessState;
+class Process {
+    // Constructor
+    public:
+        // Methods
+        Process();
 
-ProcessState currentState;
+    // Initialization
+    public:
+        // Methods
+        void begin();
 
+    // State
+    protected:
+        // Variables
+        enum class State {
+            INIT,
+            MEASURE,
+            DATA
+        };
+  
+        State state;
 
+    public:
+        // Methods
+        State getState() const;
+};
 
 #endif
