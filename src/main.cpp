@@ -24,7 +24,7 @@ void setup() {
 void loop() {
     switch (currentState)
     {
-        case INIT:
+        case SystemState::INIT:
             // Initialize all components
             dhtSensor.begin();
             gpsSensor.begin();
@@ -32,17 +32,27 @@ void loop() {
             led.begin();
 
             // Display
+
+            // Next state
+
             break;
-        case MEASURE:
-            // if (dhtSensor.getStatus() == Status::ON){
-            //     Serial.print("This is called");
-            // }
+        case SystemState::MEASURE_WEATHER:
+            if (dhtSensor.getStatus() == DHTSensor::Status::ON){
+                Serial.print("This is called");
+            }
             
             break;
-        case DATA:
+        case SystemState::MEASURE_GPS:
+            /* code */
+            break;
+        case SystemState::PROCESS_DATA:
+            /* code */
+            break;
+        case SystemState::UPLOAD_DATA:
             /* code */
             break;
         default:
+            Serial.print("Not fit to any state");
             break;
     }
 }

@@ -1,4 +1,4 @@
 #include "system.h"
 
 // Define the global state variable
-SystemState currentState = INIT;
+SystemState currentState = SystemState::INIT;
