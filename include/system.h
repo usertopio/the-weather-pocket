@@ -1,11 +1,13 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-typedef enum {
+enum class SystemState {
     INIT,
-    MEASURE,
-    DATA
-} SystemState;
+    MEASURE_WEATHER,
+    MEASURE_GPS,
+    PROCESS_DATA,
+    UPLOAD_DATA
+};
 
 extern SystemState currentState;
 

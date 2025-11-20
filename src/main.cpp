@@ -11,9 +11,9 @@
 
 // ===== Component Instances =====
 // BME280 bme(BME_MOSI, BME_MISO, BME_SCK, BME_CS);
-DHTSensor dht(10);
-NEO6M gps(20, 21);
-OLEDDisplay oled(128, 64, 0x3C);
+DHTSensor dhtSensor(10);
+NEO6M gpsSensor(20, 21);
+OLEDDisplay oledDisplay(128, 64, 0x3C);
 LED led(0);
 
 void setup() {
@@ -24,16 +24,35 @@ void setup() {
 void loop() {
     switch (currentState)
     {
-        case INIT:
+        case SystemState::INIT:
+            // Initialize all components
+            dhtSensor.begin();
+            gpsSensor.begin();
+            oledDisplay.begin();
+            led.begin();
+
+            // Display
+
+            // Next state
+
+            break;
+        case SystemState::MEASURE_WEATHER:
+            if (dhtSensor.getStatus() == DHTSensor::Status::ON){
+                Serial.print("This is called");
+            }
+            
+            break;
+        case SystemState::MEASURE_GPS:
             /* code */
             break;
-        case MEASURE:
+        case SystemState::PROCESS_DATA:
             /* code */
             break;
-        case DATA:
+        case SystemState::UPLOAD_DATA:
             /* code */
             break;
         default:
+            Serial.print("Not fit to any state");
             break;
     }
 }
