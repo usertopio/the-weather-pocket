@@ -5,7 +5,10 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-class OLEDDisplay {
+// Header files
+#include "sensor.h"
+
+class OLEDDisplay : public Sensor {
 public:
     // ===== Types & Enums =====
     enum class State {
