@@ -1,18 +1,29 @@
 #ifndef LED_H
 #define LED_H
 
-// Libraries
-#include <Arduino.h>
+class LED {
+public:
+    // ===== Types & Enums =====
+    enum class State {
+        INIT,
+        OFF,
+        ON,
+        BLINK
+    };
 
-// Header files
-#include <sensor.h>
+    // ===== Constructor & Destructor =====
+    LED(int led_pin);
 
-class LED : public Sensor {
-    private:
-        const int LED_PIN;
-    public:
-        LED(int led_pin);
-        void begin() override;
+    // ===== Public Methods =====
+    void begin();
+    State getState() const;
+
+private:
+    // ===== Pin Configuration =====
+    const int LED_PIN;
+
+    // ===== State Variables =====
+    State state;
 };
 
 #endif

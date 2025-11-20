@@ -3,19 +3,35 @@
 
 // Libraries
 #include <DHT.h>
-#include <Wire.h>
 
 // Header files
-#include <sensor.h>
+#include "sensor.h"
 
 class DHT22 : public Sensor {
-    private:
-        const int DHT22_PIN;
-        const int DHT_TYPE;
-        DHT dht;
-    public:
-        DHT22(int dht22_pin, int dht_type);
-        void begin() override;
+public:
+    // ===== Types & Enums =====
+    enum class State {
+        INIT,
+        MEASURE_TEMPERATURE,
+        MEASURE_HUMIDITY
+    };
+
+    // ===== Constructor & Destructor =====
+    DHT22(int dht_pin);
+
+    // ===== Public Methods =====
+    void begin() override;
+    State getState() const;
+
+private:
+    // ===== Pin Configuration =====
+    const int DHT_PIN;
+
+    // ===== State Variables =====
+    State state;
+
+    // ===== Sensor Data =====
+    DHT dht;
 };
 
 #endif
