@@ -3,10 +3,7 @@
 
 // Libraries
 #include <DHT.h>
-#include <Wire.h>
-
-// Header files
-#include <sensor.h>
+#include "sensor.h"
 
 class DHT22 : public Sensor {
     // Constructor
@@ -23,6 +20,7 @@ class DHT22 : public Sensor {
     private:
         // Variables
         const int DHT22_PIN;
+        const int DHT_TYPE;
 
     // State
     protected:
@@ -34,15 +32,15 @@ class DHT22 : public Sensor {
         };
   
         State state;
+
     public:
         // Methods
         State getState() const;
-    
+
     // Data
     private:
         // Variables
         // Library constants
-        const int DHT_TYPE;
         DHT dht;
 };
 
