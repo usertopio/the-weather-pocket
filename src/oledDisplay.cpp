@@ -2,17 +2,12 @@
 #include "oledDisplay.h"
 
 // Constructor
-OLEDDisplay::OLEDDisplay(int screen_width, int screen_height, int address): 
-    // Pins
-    SCREEN_WIDTH(screen_width), 
-    SCREEN_HEIGHT(screen_height), 
+OLEDDisplay::OLEDDisplay(int screen_width, int screen_height, int address):   SCREEN_WIDTH(screen_width),
+    SCREEN_HEIGHT(screen_height),
     ADDRESS(address),
-
-    // State
+    OLED_RESET(-1),               // must initialize const member
     state(State::INIT),
-
-    // Library
-    display(screen_width, screen_height, &Wire, -1)
+    display(screen_width, screen_height, &Wire, OLED_RESET)
 {}
 
 // Initialization

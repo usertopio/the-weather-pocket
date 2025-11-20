@@ -30,6 +30,7 @@ private:
     // ===== Display Configuration =====
     const int SCREEN_WIDTH;
     const int SCREEN_HEIGHT;
+    const int ADDRESS;
     const int OLED_RESET;
 
     // ===== State Variables =====
