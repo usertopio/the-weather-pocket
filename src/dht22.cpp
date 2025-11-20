@@ -45,6 +45,10 @@ float DHTSensor::readTemp(){
 
 float DHTSensor::readHumid(){
     humid = dht.readHumidity();
+
+    // Update state
+    setState(State::MEASURE_HUMIDITY);
+
     return humid;
 }
 
