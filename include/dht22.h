@@ -8,42 +8,30 @@
 #include "sensor.h"
 
 class DHT22 : public Sensor {
-    // Constructor
-    public:
-        // Methods
-        DHT22(int dht22_pin, int dht_type);
+public:
+    // ===== Types & Enums =====
+    enum class State {
+        INIT,
+        MEASURE_TEMPERATURE,
+        MEASURE_HUMIDITY
+    };
 
-    // Initialization
-    public:
-        // Methods
-        void begin() override;
+    // ===== Constructor & Destructor =====
+    DHT22(int dht_pin);
 
-    // Pins
-    private:
-        // Variables
-        const int DHT22_PIN;
-        const int DHT_TYPE;
+    // ===== Public Methods =====
+    void begin() override;
+    State getState() const;
 
-    // State
-    protected:
-        // Variables
-        enum class State {
-            INIT,
-            MEASURE_TEMPERATURE,
-            MEASURE_HUMIDITY
-        };
-  
-        State state;
+private:
+    // ===== Pin Configuration =====
+    const int DHT_PIN;
 
-    public:
-        // Methods
-        State getState() const;
+    // ===== State Variables =====
+    State state;
 
-    // Data
-    private:
-        // Variables
-        // Library constants
-        DHT dht;
+    // ===== Sensor Data =====
+    DHT dht;
 };
 
 #endif

@@ -2,48 +2,41 @@
 #define NEO6M_H
 
 // Libraries
-#include <HardwareSerial.h>
 #include <TinyGPS++.h>
+#include <SoftwareSerial.h>
 
 // Header files
 #include "sensor.h"
 
 class NEO6M : public Sensor {
-    // Constructor
-    public:
-        // Methods
-        NEO6M(HardwareSerial &serial);
+public:
+    // ===== Types & Enums =====
+    enum class State {
+        INIT,
+        ACQUIRE_SIGNAL,
+        READ_LOCATION,
+        READ_DATE,
+        READ_TIME
+    };
 
-    // Initialization
-    public:
-        // Methods
-        void begin() override;
+    // ===== Constructor & Destructor =====
+    NEO6M(int neo_rx, int neo_tx);
 
-    // Pins
-    private:
-        // Variables
-        HardwareSerial &gpsSerial;
+    // ===== Public Methods =====
+    void begin() override;
+    State getState() const;
 
-    // State
-    protected:
-        // Variables
-        enum class State {
-            INIT,
-            NO_FIX,
-            FIX
-        };
-  
-        State state;
+private:
+    // ===== Pin Configuration =====
+    const int NEO_RX;
+    const int NEO_TX;
 
-    public:
-        // Methods
-        State getState() const;
+    // ===== State Variables =====
+    State state;
 
-    // Data
-    private:
-        // Variables
-        // Library constants
-        TinyGPSPlus gps;
+    // ===== Sensor Data =====
+    TinyGPSPlus gps;
+    SoftwareSerial ss;
 };
 
 #endif
