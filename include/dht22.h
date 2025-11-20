@@ -13,7 +13,8 @@ public:
     enum class State {
         INIT,
         MEASURE_TEMPERATURE,
-        MEASURE_HUMIDITY
+        MEASURE_HUMIDITY,
+        FAIL
     };
 
     // ===== Constructor & Destructor =====
@@ -21,9 +22,12 @@ public:
 
     // ===== Public Methods =====
     void begin() override;
+
     State getState() const;
-    float readTemp();
-    float readHumid();
+    void setState(State newState); 
+
+    void readTemp();
+    void readHumid();
     float getTemp();
     float getHumid();
 

@@ -28,14 +28,23 @@ DHTSensor::State DHTSensor::getState() const {
     return state;
 }
 
-float DHTSensor::readTemp(){
-    temp = dht.readTemperature();
-    return temp;
+// State
+void DHTSensor::setState(State newState) {
+    state = newState;
 }
 
-float DHTSensor::readHumid(){
+void DHTSensor::readTemp(){
+    temp = dht.readTemperature();
+
+    // Update state
+    setState(State::MEASURE_TEMPERATURE);
+}
+
+void DHTSensor::readHumid(){
     humid = dht.readHumidity();
-    return humid;
+
+    // Update state
+    setState(State::MEASURE_HUMIDITY);
 }
 
 float DHTSensor::getTemp(){
