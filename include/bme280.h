@@ -39,7 +39,7 @@ class BME280 : public Sensor {
         };
   
         State state;
-
+    public:
         // Methods
         State getState() const;
 
