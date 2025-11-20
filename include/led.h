@@ -1,7 +1,10 @@
 #ifndef LED_H
 #define LED_H
 
-class LED {
+// Header files
+#include "sensor.h"
+
+class LED : public Sensor {
 public:
     // ===== Types & Enums =====
     enum class State {

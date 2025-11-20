@@ -2,8 +2,8 @@
 #define NEO6M_H
 
 // Libraries
+#include <HardwareSerial.h>
 #include <TinyGPS++.h>
-#include <SoftwareSerial.h>
 
 // Header files
 #include "sensor.h"
@@ -36,7 +36,6 @@ private:
 
     // ===== Sensor Data =====
     TinyGPSPlus gps;
-    SoftwareSerial ss;
 };
 
 #endif
