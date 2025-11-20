@@ -23,7 +23,7 @@ public:
     // ===== Public Methods =====
     void begin() override;
     State getState() const;
-    State setState();
+    void setState(State newState); 
     float readTemp();
     float readHumid();
     float getTemp();

@@ -29,12 +29,17 @@ DHTSensor::State DHTSensor::getState() const {
 }
 
 // State
-DHTSensor::State DHTSensor::setState() {
-    state = DHTSensor::State::MEASURE_TEMPERATURE;
+void DHTSensor::setState(State newState) {
+    state = newState;
 }
 
 float DHTSensor::readTemp(){
     temp = dht.readTemperature();
+
+    // Update state
+    setState(State::MEASURE_TEMPERATURE);
+    
+
     return temp;
 }
 

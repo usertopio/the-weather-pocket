@@ -60,8 +60,6 @@ void loop() {
             {
                 // Measure
                 dhtSensor.readTemp();
-                dhtSensor.setState();
-                
                 dhtSensor.readHumid();
 
                 // Serial monitor
