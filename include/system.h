@@ -9,6 +9,6 @@ enum class SystemState {
     UPLOAD_DATA
 };
 
-extern SystemState currentState;
+extern SystemState systemState;
 
 #endif

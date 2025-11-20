@@ -16,13 +16,31 @@ NEO6M gpsSensor(20, 21);
 OLEDDisplay oledDisplay(128, 64, 0x3C);
 LED led(0);
 
+struct weatherSensorState {
+    
+};
+
+
+
+bool isDHT22(){
+    return dhtSensor.getStatus() == DHTSensor::Status::ON;
+}
+
+bool isBME280(){
+    return true;
+}
+
+bool isMQ2(){
+    return true;
+}
+
 void setup() {
   Serial.begin(115200);
     delay(1000);
 }
 
 void loop() {
-    switch (currentState)
+    switch (systemState)
     {
         case SystemState::INIT:
             // Initialize all components
@@ -34,23 +52,61 @@ void loop() {
             // Display
 
             // Next state
+            systemState = SystemState::MEASURE_WEATHER;
 
             break;
         case SystemState::MEASURE_WEATHER:
-            if (dhtSensor.getStatus() == DHTSensor::Status::ON){
-                Serial.print("This is called");
+            if (isDHT22() && isMQ2())
+            {
+                // DHT22
+                dhtSensor.getTemp();
+                dhtSensor.getHumid();
+
             }
+            else if (!isDHT22() && isMQ2())
+            {
+                /* code */
+            }
+            else if (isDHT22() && !isMQ2())
+            {
+                // DHT22
+                dhtSensor.getTemp();
+                dhtSensor.getHumid();
+            }
+            else if (!isDHT22() && !isMQ2())
+            {
+
+            }
+
+            // Display
+
+            // Next state
+            systemState = SystemState::MEASURE_GPS;
             
-            break;
         case SystemState::MEASURE_GPS:
             /* code */
             break;
+
+            // Display
+
+            // Next state
+            systemState = SystemState::PROCESS_DATA;
         case SystemState::PROCESS_DATA:
             /* code */
             break;
+
+            // Display
+
+            // Next state
+            systemState = SystemState::UPLOAD_DATA;
         case SystemState::UPLOAD_DATA:
             /* code */
             break;
+
+            // Display
+
+            // Next state
+            systemState = SystemState::MEASURE_WEATHER;
         default:
             Serial.print("Not fit to any state");
             break;

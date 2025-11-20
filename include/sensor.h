@@ -22,6 +22,7 @@ class Sensor {
 
         // Methods
         Status getStatus() const;
+        Status toggleStatus();
     
     protected:
         // Variables
