@@ -13,7 +13,7 @@
 // BME280 bme(BME_MOSI, BME_MISO, BME_SCK, BME_CS);
 DHTSensor dht(10);
 NEO6M gps(20, 21);
-OLEDDisplay oled(SCREEN_WIDTH, SCREEN_HEIGHT, OLED_RESET);
+OLEDDisplay oled(128, 64, 0x3C);
 LED led(0);
 
 void setup() {
