@@ -10,8 +10,10 @@ public:
     // ===== Types & Enums =====
     enum class State {
         INIT,
-        CLEAR_SCREEN,
-        DISPLAY_INFO
+        DISPLAY_WEATHER_1,
+        DISPLAY_WEATHER_2,
+        DISPLAY_STATUS,
+        DISPLAY_SETTING
     };
 
     // ===== Constructor & Destructor =====
