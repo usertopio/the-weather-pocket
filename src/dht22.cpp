@@ -33,23 +33,18 @@ void DHTSensor::setState(State newState) {
     state = newState;
 }
 
-float DHTSensor::readTemp(){
+void DHTSensor::readTemp(){
     temp = dht.readTemperature();
 
     // Update state
     setState(State::MEASURE_TEMPERATURE);
-    
-
-    return temp;
 }
 
-float DHTSensor::readHumid(){
+void DHTSensor::readHumid(){
     humid = dht.readHumidity();
 
     // Update state
     setState(State::MEASURE_HUMIDITY);
-
-    return humid;
 }
 
 float DHTSensor::getTemp(){

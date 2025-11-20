@@ -22,10 +22,12 @@ public:
 
     // ===== Public Methods =====
     void begin() override;
+
     State getState() const;
     void setState(State newState); 
-    float readTemp();
-    float readHumid();
+
+    void readTemp();
+    void readHumid();
     float getTemp();
     float getHumid();
 
