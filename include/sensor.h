@@ -2,21 +2,24 @@
 #define SENSOR_H
 
 class Sensor {
+    // Initialization
+    public:
+        // Methods
+        virtual void begin() = 0;
+
+    // Status
     public:
         // Variables
-        // Status  
         enum class Status {
             ON,
             OFF
         };
 
-        // Method
-        virtual void begin() = 0;
-        // Status
+        // Methods
         Status getStatus() const;
+    
     protected:
         // Variables
-        // Status  
         Status status;
 };
 
