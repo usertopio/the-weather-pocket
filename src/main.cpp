@@ -11,13 +11,6 @@
 // Processing headers
 #include "system.h"
 
-// ===== Component Instances =====
-// BME280 bme(BME_MOSI, BME_MISO, BME_SCK, BME_CS);
-DHTSensor dhtSensor(10);
-NEO6M gpsSensor(20, 21);
-OLEDDisplay oledDisplay(128, 64, 0x3C);
-LED led(0);
-
 // Experiment buffer
 bool isMQ2On = true;
 bool isNEO6MOn = true;

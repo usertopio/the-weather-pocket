@@ -2,8 +2,20 @@
 #define SYSTEM_H
 
 // Header files
+// Components
 #include "sensor.h"
+
+#include "bme280.h"
 #include "dht22.h"
+#include "neo6m.h"
+#include "oledDisplay.h"
+#include "led.h"
+
+// Components
+extern DHTSensor dhtSensor;
+extern NEO6M gpsSensor;
+extern OLEDDisplay oledDisplay;
+extern LED led;
 
 // State
 enum class SystemState {

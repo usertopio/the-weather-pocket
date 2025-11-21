@@ -2,9 +2,14 @@
 #include <Arduino.h>
 
 // Header file
+// System
 #include "system.h"
-#include "sensor.h"
-#include "dht22.h"
+
+// Components
+DHTSensor dhtSensor(10);
+NEO6M gpsSensor(20, 21);
+OLEDDisplay oledDisplay(128, 64, 0x3C);
+LED led(0);
 
 // Define the global state variable
 SystemState systemState = SystemState::INIT;
