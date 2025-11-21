@@ -63,15 +63,9 @@ void loop() {
                 dhtSensor.readHumid();
 
                 // Serial monitor
-                // Data
-                Serial.println("========="); 
-                Serial.print("DHT22 Temperature: "); Serial.println(dhtSensor.getTemp());
-                Serial.print("DHT22 Humidity: "); Serial.println(dhtSensor.getHumid());
-                // System
-                Serial.print("System State: "); Serial.println(static_cast<int>(systemState));
-                Serial.print("Sensor Status: "); Serial.println(static_cast<int>(dhtSensor.getStatus()));
-                Serial.print("Sensor State: "); Serial.println(static_cast<int>(dhtSensor.getState()));
-                Serial.println("========="); 
+                monitor(dhtSensor.getTemp(), dhtSensor.getHumid(), dhtSensor.getStatus(), dhtSensor.getState());
+            } else {
+                
             }
 
             // Display
