@@ -123,8 +123,10 @@ void loop() {
             
             // Read data
             dhtSensor.readTemp();
-            dhtSensor.readHumid();
+            // Serial monitor
+            monitor(dhtSensor.getTemp(), dhtSensor.getHumid(), dhtSensor.getStatus(), dhtSensor.getState());
 
+            dhtSensor.readHumid();
             // Serial monitor
             monitor(dhtSensor.getTemp(), dhtSensor.getHumid(), dhtSensor.getStatus(), dhtSensor.getState());
             
