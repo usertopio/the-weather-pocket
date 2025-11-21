@@ -1,6 +1,10 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+// Header files
+#include "sensor.h"
+#include "dht22.h"
+
 // State
 enum class SystemState {
     INIT,
@@ -14,6 +18,6 @@ enum class SystemState {
 extern SystemState systemState;
 
 // Serial monitor
-void monitor(float dht_temp, float dht_humid, DHTSensor::Status component_status, DHTSensor::State component_state);
+void monitor(float dht_temp, float dht_humid, Sensor::Status component_status, DHTSensor::State component_state);
 
 #endif

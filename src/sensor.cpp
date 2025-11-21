@@ -10,12 +10,10 @@ Sensor::Status Sensor::getStatus() const {
 }
 
 Sensor::Status Sensor::toggleStatus() {
-    if (status == Sensor::Status::OFF)
-    {
-        status == Sensor::Status::ON;
+    if (status == Status::OFF) {
+        status = Status::ON;   // assignment
+    } else {
+        status = Status::OFF;
     }
-    else
-    {
-        status == Sensor::Status::OFF;
-    }    
+    return status;
 }
