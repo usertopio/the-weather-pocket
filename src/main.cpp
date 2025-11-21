@@ -75,12 +75,7 @@ void updateSystemState(){
     }
 }
 
-void setup() {
-    Serial.begin(115200);
-    delay(1000);
-}
-
-void loop() {
+void runSystemState(){
     switch (systemState)
     {
         case SystemState::INIT:
@@ -105,7 +100,7 @@ void loop() {
             
 
             // Next state
-            updateSystemState();
+            
             break;
         case SystemState::MEASURE_BME280:
             // WIFI
@@ -127,7 +122,7 @@ void loop() {
 
 
             // Next state
-            updateSystemState();
+            
             break;
         case SystemState::MEASURE_MQ2:
             // WIFI
@@ -146,7 +141,7 @@ void loop() {
 
 
             // Next state
-            updateSystemState();
+            
             break;
         case SystemState::MEASURE_NEO6M:
             // WIFI
@@ -165,7 +160,7 @@ void loop() {
 
 
             // Next state
-            updateSystemState();
+            
             break;
         case SystemState::PROCESS_DATA:
             // WIFI
@@ -184,7 +179,7 @@ void loop() {
 
 
             // Next state
-            updateSystemState();
+            
             break;
         case SystemState::UPLOAD_DATA:
             // WIFI
@@ -203,11 +198,21 @@ void loop() {
 
 
             // Next state
-            updateSystemState();
+            
             break;
         default:
             Serial.println("Not fit to any state. Code need to be fixed!");
             break;
     }
+}
+
+void setup() {
+    Serial.begin(115200);
+    delay(1000);
+}
+
+void loop() {
+    updateSystemState();
+    runSystemState();
     delay(1000);
 }
