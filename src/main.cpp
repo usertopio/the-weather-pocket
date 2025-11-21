@@ -112,15 +112,7 @@ void loop() {
 
 
             // Next state
-            if (dhtSensor.getStatus() == DHTSensor::Status::ON){
-                systemState = SystemState::MEASURE_BME280;
-            } else if (isMQ2On){
-                systemState = SystemState::MEASURE_MQ2;
-            } else if (isNEO6MOn){
-                systemState = SystemState::MEASURE_NEO6M;
-            } else {
-                systemState = SystemState::PROCESS_DATA;
-            }
+            updateSystemState();
             break;
         case SystemState::MEASURE_BME280:
             // WIFI
@@ -140,7 +132,7 @@ void loop() {
 
 
             // Next state
-            systemState = SystemState::MEASURE_MQ2;
+            updateSystemState();
             break;
         case SystemState::MEASURE_MQ2:
             // WIFI
@@ -156,7 +148,7 @@ void loop() {
 
 
             // Next state
-            systemState = SystemState::MEASURE_NEO6M;
+            updateSystemState();
             break;
         case SystemState::MEASURE_NEO6M:
             // WIFI
@@ -172,7 +164,7 @@ void loop() {
 
 
             // Next state
-            systemState = SystemState::PROCESS_DATA;
+            updateSystemState();
             break;
         case SystemState::PROCESS_DATA:
             // WIFI
@@ -188,7 +180,7 @@ void loop() {
 
 
             // Next state
-            systemState = SystemState::UPLOAD_DATA;
+            updateSystemState();
             break;
         case SystemState::UPLOAD_DATA:
             // WIFI
@@ -204,7 +196,7 @@ void loop() {
 
 
             // Next state
-            systemState = SystemState::MEASURE_BME280;
+            updateSystemState();
             break;
         default:
             Serial.println("Not fit to any state. Code need to be fixed!");
