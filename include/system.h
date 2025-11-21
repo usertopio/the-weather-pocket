@@ -9,13 +9,13 @@
 #include "dht22.h"
 #include "neo6m.h"
 #include "oledDisplay.h"
-#include "led.h"
+#include "ledMq2.h"
 
 // Components
 extern DHTSensor dhtSensor;
 extern NEO6M gpsSensor;
 extern OLEDDisplay oledDisplay;
-extern LED led;
+extern LedMQ2 led;
 
 // State
 enum class SystemState {

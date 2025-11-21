@@ -2,24 +2,24 @@
 #include <Arduino.h>
 
 // Header files
-#include "led.h"
+#include "ledMq2.h"
 
 // Constructor
-LED::LED(int led_pin): 
+LedMQ2::LedMQ2(int led_mq2_pin): 
     // Pins
-    LED_PIN(led_pin),
+    LED_MQ2_PIN(led_mq2_pin),
     
     // State
     state(State::INIT)
 {}
 
 // Initialization
-void LED::begin(){
-    pinMode(LED_PIN, OUTPUT);
+void LedMQ2::begin(){
+    pinMode(LED_MQ2_PIN, OUTPUT);
     status = Status::ON;
 }
 
 // State
-LED::State LED::getState() const {
+LedMQ2::State LedMQ2::getState() const {
     return state;
 }
