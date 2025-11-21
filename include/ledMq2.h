@@ -7,19 +7,22 @@
 class LedMQ2 : public Sensor {
 public:
     // ===== Types & Enums =====
+    // State
     enum class State {
-        INIT,
-        OFF,
         ON,
-        BLINK
+        OFF,
     };
 
     // ===== Constructor & Destructor =====
     LedMQ2(int led_mq2_pin);
 
     // ===== Public Methods =====
+    // Initialization
     void begin();
+
+    // State
     State getState() const;
+    void setState(State newState); 
 
 private:
     // ===== Pin Configuration =====

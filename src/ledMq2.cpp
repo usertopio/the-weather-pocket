@@ -10,7 +10,7 @@ LedMQ2::LedMQ2(int led_mq2_pin):
     LED_MQ2_PIN(led_mq2_pin),
     
     // State
-    state(State::INIT)
+    state(State::OFF)
 {}
 
 // Initialization
@@ -22,4 +22,8 @@ void LedMQ2::begin(){
 // State
 LedMQ2::State LedMQ2::getState() const {
     return state;
+}
+
+void LedMQ2::setState(State newState) {
+    state = newState;
 }
