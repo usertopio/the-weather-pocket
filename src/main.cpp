@@ -117,11 +117,11 @@ void loop() {
             // Read data
             dhtSensor.readTemp();
             // Serial monitor
-            monitor(dhtSensor.getTemp(), dhtSensor.getHumid(), dhtSensor.getStatus(), dhtSensor.getState());
+            monitor();
 
             dhtSensor.readHumid();
             // Serial monitor
-            monitor(dhtSensor.getTemp(), dhtSensor.getHumid(), dhtSensor.getStatus(), dhtSensor.getState());
+            monitor();
             
             // Display
 
