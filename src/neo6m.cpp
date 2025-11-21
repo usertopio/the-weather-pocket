@@ -2,9 +2,10 @@
 #include "neo6m.h"
 
 // Constructor
-NEO6M::NEO6M(HardwareSerial &serial):
+NEO6M::NEO6M(int neo_rx, int neo_tx):
     // Pins
-    gpsSerial(serial),
+    NEO_RX(neo_rx),
+    NEO_TX(neo_tx),
 
     // State
     state(State::INIT)
@@ -12,7 +13,7 @@ NEO6M::NEO6M(HardwareSerial &serial):
 
 // Initialization
 void NEO6M::begin(){
-    gpsSerial.begin(9600);
+    gpsSerial.begin(9600, SERIAL_8N1, NEO_RX, NEO_TX);
     status = Status::ON;
 }
 

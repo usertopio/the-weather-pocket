@@ -36,6 +36,8 @@ private:
 
     // ===== Sensor Data =====
     TinyGPSPlus gps;
+
+    HardwareSerial &gpsSerial = Serial1;
 };
 
 #endif
