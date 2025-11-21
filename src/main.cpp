@@ -24,7 +24,7 @@ bool isNEO6MOn = true;
 bool isWifiConnect = true;
 
 // State
-SystemState updateSystemState(){
+void updateSystemState(){
     switch (systemState)
     {
     case SystemState::INIT:
@@ -49,7 +49,6 @@ SystemState updateSystemState(){
         else{
             systemState = SystemState::PROCESS_DATA;
         }
-        
         break;
     
     case SystemState::MEASURE_MQ2:
@@ -59,12 +58,10 @@ SystemState updateSystemState(){
         else{
             systemState = SystemState::PROCESS_DATA;
         }
-        
         break;
     
     case SystemState::MEASURE_NEO6M:
         systemState = SystemState::PROCESS_DATA;
-
         break;
 
     case SystemState::PROCESS_DATA:
@@ -73,7 +70,6 @@ SystemState updateSystemState(){
         } else{
             systemState = SystemState::UPLOAD_DATA;
         }
-        
         break;
 
     case SystemState::UPLOAD_DATA:
@@ -81,6 +77,7 @@ SystemState updateSystemState(){
         break;
     
     default:
+        systemState = SystemState::INIT;
         break;
     }
 }
@@ -107,9 +104,12 @@ void loop() {
 
             // Read data
 
+            
+            // Serial monitor
+            Serial.print("State"); Serial.println("0");
 
             // Display
-
+            
 
             // Next state
             updateSystemState();
@@ -144,6 +144,9 @@ void loop() {
             // Read data
 
 
+            // Serial monitor
+            Serial.print("State"); Serial.println("2");
+
             // Display
 
 
@@ -159,6 +162,9 @@ void loop() {
 
             // Read data
 
+
+            // Serial monitor
+            Serial.print("State"); Serial.println("3");
 
             // Display
 
@@ -176,6 +182,9 @@ void loop() {
             // Read data
 
 
+            // Serial monitor
+            Serial.print("State"); Serial.println("4");
+
             // Display
 
 
@@ -192,6 +201,9 @@ void loop() {
             // Read data
 
 
+            // Serial monitor
+            Serial.print("State"); Serial.println("5");
+
             // Display
 
 
@@ -202,4 +214,5 @@ void loop() {
             Serial.println("Not fit to any state. Code need to be fixed!");
             break;
     }
+    delay(1000);
 }
