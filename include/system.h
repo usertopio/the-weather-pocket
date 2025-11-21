@@ -36,6 +36,8 @@ extern bool isMQ2On;
 extern bool isNEO6MOn;
 extern bool isWifiConnect;
 
+const char* systemStateToString(SystemState state);
+
 void updateSystemState();
 void runSystemState();
 

@@ -12,6 +12,7 @@ OLEDDisplay oledDisplay(128, 64, 0x3C);
 LedMQ2 led(0);
 
 // Define the global state variable
+// State
 SystemState systemState = SystemState::INIT;
 
 // Variables
@@ -20,6 +21,7 @@ bool isMQ2On = true;
 bool isNEO6MOn = true;
 bool isWifiConnect = true;
 
+// Functions
 // State
 void updateSystemState(){
     switch (systemState)
@@ -84,8 +86,6 @@ void runSystemState(){
     {
         case SystemState::INIT:
             // Initialize
-            // Monitor
-            Serial.begin(115200);
             // Components
             dhtSensor.begin();
             gpsSensor.begin();
@@ -105,7 +105,7 @@ void runSystemState(){
 
             // Display
             
-            delay(1000);
+            // delay(1000);
             break;
         case SystemState::MEASURE_BME280:
             // WIFI
@@ -201,6 +201,17 @@ void runSystemState(){
     }
 }
 
+const char* systemStateToString(SystemState state) {
+    switch (state) {
+        case SystemState::INIT: return "INIT";
+        case SystemState::MEASURE_BME280: return "MEASURE_BME280";
+        case SystemState::MEASURE_MQ2: return "MEASURE_MQ2";
+        case SystemState::MEASURE_NEO6M: return "MEASURE_NEO6M";
+        case SystemState::PROCESS_DATA: return "PROCESS_DATA";
+        case SystemState::UPLOAD_DATA: return "UPLOAD_DATA";
+        default: return "RUN_OUT_OF_STATE";
+    }
+}
 
 // Serial monitor
 void monitor(){
@@ -208,7 +219,7 @@ void monitor(){
     {
     case SystemState::INIT:
         Serial.println("=========");
-        Serial.print("System State: "); Serial.println(static_cast<int>(systemState));
+        Serial.print("System State: "); Serial.println(systemStateToString(systemState));
         Serial.println("=========");
         break;
 
@@ -217,7 +228,7 @@ void monitor(){
         {
         case DHTSensor::State::MEASURE_TEMPERATURE:
             Serial.println("=========");
-            Serial.print("System State: "); Serial.println(static_cast<int>(systemState));
+            Serial.print("System State: "); Serial.println(systemStateToString(systemState));
             Serial.print("Sensor Status: "); Serial.println(static_cast<int>(dhtSensor.getStatus()));
             Serial.print("Sensor State: "); Serial.println(static_cast<int>(dhtSensor.getState()));
             Serial.println("");
@@ -226,7 +237,7 @@ void monitor(){
             break;
         case DHTSensor::State::MEASURE_HUMIDITY:
             Serial.println("=========");
-            Serial.print("System State: "); Serial.println(static_cast<int>(systemState));
+            Serial.print("System State: "); Serial.println(systemStateToString(systemState));
             Serial.print("Sensor Status: "); Serial.println(static_cast<int>(dhtSensor.getStatus()));
             Serial.print("Sensor State: "); Serial.println(static_cast<int>(dhtSensor.getState()));
             Serial.println("");
@@ -243,7 +254,7 @@ void monitor(){
     
     case SystemState::MEASURE_MQ2:
         Serial.println("=========");
-        Serial.print("System State: "); Serial.println(static_cast<int>(systemState));
+        Serial.print("System State: "); Serial.println(systemStateToString(systemState));
         Serial.print("Sensor Status: "); Serial.println("NaN");
         Serial.print("Sensor State: "); Serial.println("NaN");
         Serial.println("");
@@ -253,7 +264,7 @@ void monitor(){
     
     case SystemState::MEASURE_NEO6M:
         Serial.println("=========");
-        Serial.print("System State: "); Serial.println(static_cast<int>(systemState));
+        Serial.print("System State: "); Serial.println(systemStateToString(systemState));
         Serial.print("Sensor Status: "); Serial.println("NaN");
         Serial.print("Sensor State: "); Serial.println("NaN");
         Serial.println("");
@@ -264,7 +275,7 @@ void monitor(){
 
     case SystemState::PROCESS_DATA:
         Serial.println("=========");
-        Serial.print("System State: "); Serial.println(static_cast<int>(systemState));
+        Serial.print("System State: "); Serial.println(systemStateToString(systemState));
         Serial.println("");
         Serial.println("Processing data...");
         Serial.println("=========");
@@ -272,7 +283,7 @@ void monitor(){
 
     case SystemState::UPLOAD_DATA:
         Serial.println("=========");
-        Serial.print("System State: "); Serial.println(static_cast<int>(systemState));
+        Serial.print("System State: "); Serial.println(systemStateToString(systemState));
         Serial.println("");
         Serial.println("Uploading data...");
         Serial.println("=========");
