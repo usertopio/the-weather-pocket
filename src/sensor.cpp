@@ -17,5 +17,6 @@ Sensor::Status Sensor::toggleStatus() {
     else
     {
         status == Sensor::Status::OFF;
-    }    
+    }
+    return status;    
 }

@@ -5,7 +5,7 @@
 #include "system.h"
 
 // Define the global state variable
-SystemState currentState = SystemState::INIT;
+SystemState systemState = SystemState::INIT;
 
 // Serial monitor
 void monitor(float dht_temp, float dht_humid, int component_status, int component_state){
