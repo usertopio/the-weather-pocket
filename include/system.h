@@ -10,6 +10,7 @@
 #include "neo6m.h"
 #include "oledDisplay.h"
 #include "ledMq2.h"
+#include "ledNeo6m.h"
 
 // Components
 extern DHTSensor dhtSensor;
@@ -28,6 +29,15 @@ enum class SystemState {
 };
 
 extern SystemState systemState;
+
+// Variables
+// Buffer
+bool isMQ2On;
+bool isNEO6MOn;
+bool isWifiConnect;
+
+void updateSystemState();
+void runSystemState();
 
 // Serial monitor
 void monitor();
