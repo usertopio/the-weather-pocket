@@ -28,7 +28,7 @@ void updateSystemState(){
     {
     case SystemState::INIT:
         if (dhtSensor.getStatus() == DHTSensor::Status::ON){
-            systemState = SystemState::MEASURE_BME280;
+            systemState = SystemState::READ_DHT;
         } else if (isMQ2On){
             systemState = SystemState::MEASURE_MQ2;
         } else if (isNEO6MOn){
@@ -38,7 +38,7 @@ void updateSystemState(){
         }
         break;
 
-    case SystemState::MEASURE_BME280:
+    case SystemState::READ_DHT:
         if (isMQ2On){
             systemState = SystemState::MEASURE_MQ2;
         }
@@ -65,14 +65,14 @@ void updateSystemState(){
 
     case SystemState::PROCESS_DATA:
         if (!isWifiConnect){
-            systemState = SystemState::MEASURE_BME280;
+            systemState = SystemState::READ_DHT;
         } else{
             systemState = SystemState::UPLOAD_DATA;
         }
         break;
 
     case SystemState::UPLOAD_DATA:
-        systemState = SystemState::MEASURE_BME280;
+        systemState = SystemState::READ_DHT;
         break;
     
     default:
@@ -107,7 +107,7 @@ void runSystemState(){
             
             // delay(1000);
             break;
-        case SystemState::MEASURE_BME280:
+        case SystemState::READ_DHT:
             // WIFI
 
 
@@ -115,11 +115,7 @@ void runSystemState(){
 
             
             // Read data
-            dhtSensor.readTemp();
-            // Serial monitor
-            monitor();
-
-            dhtSensor.readHumid();
+            dhtSensor.readTempAndHumid();
             // Serial monitor
             monitor();
             
@@ -204,7 +200,7 @@ void runSystemState(){
 const char* systemStateToString(SystemState state) {
     switch (state) {
         case SystemState::INIT: return "INIT";
-        case SystemState::MEASURE_BME280: return "MEASURE_BME280";
+        case SystemState::READ_DHT: return "READ_DHT";
         case SystemState::MEASURE_MQ2: return "MEASURE_MQ2";
         case SystemState::MEASURE_NEO6M: return "MEASURE_NEO6M";
         case SystemState::PROCESS_DATA: return "PROCESS_DATA";
@@ -223,33 +219,15 @@ void monitor(){
         Serial.println("=========");
         break;
 
-    case SystemState::MEASURE_BME280:
-        switch (dhtSensor.getState())
-        {
-        case DHTSensor::State::MEASURE_TEMPERATURE:
-            Serial.println("=========");
-            Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-            Serial.print("Sensor Status: "); Serial.println(static_cast<int>(dhtSensor.getStatus()));
-            Serial.print("Sensor State: "); Serial.println(static_cast<int>(dhtSensor.getState()));
-            Serial.println("");
-            Serial.print("DHT22 Temperature: "); Serial.println(dhtSensor.getTemp());
-            Serial.println("=========");
-            break;
-        case DHTSensor::State::MEASURE_HUMIDITY:
-            Serial.println("=========");
-            Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-            Serial.print("Sensor Status: "); Serial.println(static_cast<int>(dhtSensor.getStatus()));
-            Serial.print("Sensor State: "); Serial.println(static_cast<int>(dhtSensor.getState()));
-            Serial.println("");
-            Serial.print("DHT22 Humidity: "); Serial.println(dhtSensor.getHumid());
-            Serial.println("=========");
-            break;
-        
-        default:
-            Serial.println("Error");
-            break;
-        }
-
+    case SystemState::READ_DHT:
+        Serial.println("=========");
+        Serial.print("System State: "); Serial.println(systemStateToString(systemState));
+        Serial.print("Sensor Status: "); Serial.println(static_cast<int>(dhtSensor.getStatus()));
+        Serial.print("Sensor State: "); Serial.println(static_cast<int>(dhtSensor.getState()));
+        Serial.println("");
+        Serial.print("DHT22 Temperature: "); Serial.println(dhtSensor.getTemp());
+        Serial.print("DHT22 Humidity: "); Serial.println(dhtSensor.getHumid());
+        Serial.println("=========");
         break;
     
     case SystemState::MEASURE_MQ2:

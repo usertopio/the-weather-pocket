@@ -5,8 +5,9 @@
 #include "system.h"
 
 void setup() {
-    
-    delay(1000);
+    // Monitor
+    Serial.begin(115200);
+    delay(2000);
 }
 
 void loop() {
