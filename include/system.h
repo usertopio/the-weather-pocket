@@ -32,9 +32,9 @@ extern SystemState systemState;
 
 // Variables
 // Buffer
-bool isMQ2On;
-bool isNEO6MOn;
-bool isWifiConnect;
+extern bool isMQ2On;
+extern bool isNEO6MOn;
+extern bool isWifiConnect;
 
 void updateSystemState();
 void runSystemState();

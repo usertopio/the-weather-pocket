@@ -83,7 +83,10 @@ void runSystemState(){
     switch (systemState)
     {
         case SystemState::INIT:
-            // Initialize all components
+            // Initialize
+            // Monitor
+            Serial.begin(115200);
+            // Components
             dhtSensor.begin();
             gpsSensor.begin();
             oledDisplay.begin();
@@ -102,9 +105,7 @@ void runSystemState(){
 
             // Display
             
-
-            // Next state
-            
+            delay(1000);
             break;
         case SystemState::MEASURE_BME280:
             // WIFI
@@ -125,8 +126,6 @@ void runSystemState(){
             // Display
 
 
-            // Next state
-            
             break;
         case SystemState::MEASURE_MQ2:
             // WIFI
@@ -144,8 +143,6 @@ void runSystemState(){
             // Display
 
 
-            // Next state
-            
             break;
         case SystemState::MEASURE_NEO6M:
             // WIFI
@@ -163,8 +160,6 @@ void runSystemState(){
             // Display
 
 
-            // Next state
-            
             break;
         case SystemState::PROCESS_DATA:
             // WIFI
@@ -182,8 +177,6 @@ void runSystemState(){
             // Display
 
 
-            // Next state
-            
             break;
         case SystemState::UPLOAD_DATA:
             // WIFI
@@ -201,8 +194,6 @@ void runSystemState(){
             // Display
 
 
-            // Next state
-            
             break;
         default:
             Serial.println("Not fit to any state. Code need to be fixed!");
