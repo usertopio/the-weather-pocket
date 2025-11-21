@@ -1,6 +1,10 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+// Header files
+#include "sensor.h"
+#include "dht22.h"
+
 // State
 enum class SystemState {
     INIT,
