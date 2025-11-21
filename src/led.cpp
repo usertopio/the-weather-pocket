@@ -1,3 +1,6 @@
+// Framework
+#include <Arduino.h>
+
 // Header files
 #include "led.h"
 
