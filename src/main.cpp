@@ -18,6 +18,73 @@ NEO6M gpsSensor(20, 21);
 OLEDDisplay oledDisplay(128, 64, 0x3C);
 LED led(0);
 
+// Experiment buffer
+bool isMQ2On = true;
+bool isNEO6MOn = true;
+bool isWifiConnect = true;
+
+// State
+SystemState updateSystemState(){
+    switch (systemState)
+    {
+    case SystemState::INIT:
+        if (dhtSensor.getStatus() == DHTSensor::Status::ON){
+            systemState = SystemState::MEASURE_BME280;
+        } else if (isMQ2On){
+            systemState = SystemState::MEASURE_MQ2;
+        } else if (isNEO6MOn){
+            systemState = SystemState::MEASURE_NEO6M;
+        } else {
+            systemState = SystemState::PROCESS_DATA;
+        }
+        break;
+
+    case SystemState::MEASURE_BME280:
+        if (isMQ2On){
+            systemState = SystemState::MEASURE_MQ2;
+        }
+        else if (isNEO6MOn){
+            systemState = SystemState::MEASURE_NEO6M;
+        }
+        else{
+            systemState = SystemState::PROCESS_DATA;
+        }
+        
+        break;
+    
+    case SystemState::MEASURE_MQ2:
+        if (isNEO6MOn){
+            systemState = SystemState::MEASURE_NEO6M;
+        }
+        else{
+            systemState = SystemState::PROCESS_DATA;
+        }
+        
+        break;
+    
+    case SystemState::MEASURE_NEO6M:
+        systemState = SystemState::PROCESS_DATA;
+
+        break;
+
+    case SystemState::PROCESS_DATA:
+        if (!isWifiConnect){
+            systemState = SystemState::MEASURE_BME280;
+        } else{
+            systemState = SystemState::UPLOAD_DATA;
+        }
+        
+        break;
+
+    case SystemState::UPLOAD_DATA:
+        systemState = SystemState::MEASURE_BME280;
+        break;
+    
+    default:
+        break;
+    }
+}
+
 void setup() {
     Serial.begin(115200);
     delay(1000);
@@ -38,14 +105,22 @@ void loop() {
             // Action
             
 
-            // DHT22
+            // Read data
 
 
             // Display
 
 
             // Next state
-            systemState = SystemState::MEASURE_BME280;
+            if (dhtSensor.getStatus() == DHTSensor::Status::ON){
+                systemState = SystemState::MEASURE_BME280;
+            } else if (isMQ2On){
+                systemState = SystemState::MEASURE_MQ2;
+            } else if (isNEO6MOn){
+                systemState = SystemState::MEASURE_NEO6M;
+            } else {
+                systemState = SystemState::PROCESS_DATA;
+            }
             break;
         case SystemState::MEASURE_BME280:
             // WIFI
@@ -53,21 +128,14 @@ void loop() {
 
             // Action
 
+            
+            // Read data
+            dhtSensor.readTemp();
+            dhtSensor.readHumid();
 
-            // DHT22
-
-            if (dhtSensor.getStatus() == DHTSensor::Status::ON)
-            {
-                // Measure
-                dhtSensor.readTemp();
-                dhtSensor.readHumid();
-
-                // Serial monitor
-                monitor(dhtSensor.getTemp(), dhtSensor.getHumid(), dhtSensor.getStatus(), dhtSensor.getState());
-            } else {
-                
-            }
-
+            // Serial monitor
+            monitor(dhtSensor.getTemp(), dhtSensor.getHumid(), dhtSensor.getStatus(), dhtSensor.getState());
+            
             // Display
 
 
@@ -81,7 +149,7 @@ void loop() {
             // Action
             
 
-            // DHT22
+            // Read data
 
 
             // Display
@@ -97,7 +165,7 @@ void loop() {
             // Action
             
 
-            // DHT22
+            // Read data
 
 
             // Display
@@ -113,7 +181,7 @@ void loop() {
             // Action
             
 
-            // DHT22
+            // Read data
 
 
             // Display
@@ -129,7 +197,7 @@ void loop() {
             // Action
             
 
-            // DHT22
+            // Read data
 
 
             // Display
