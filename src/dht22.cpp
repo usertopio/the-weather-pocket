@@ -1,4 +1,5 @@
 // Header files
+// Child components
 #include "dht22.h"
 
 // Constructor

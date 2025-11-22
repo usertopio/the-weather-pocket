@@ -1,4 +1,5 @@
 // Header files
+// Child components
 #include "neo6m.h"
 
 // Constructor

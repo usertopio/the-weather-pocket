@@ -1,4 +1,5 @@
 // Header files
+// Parent components
 #include "component.h"
 
 // Constructor

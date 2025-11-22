@@ -2,6 +2,7 @@
 #include <Arduino.h>
 
 // Header files
+// Child components
 #include "ledNeo6m.h"
 
 // Constructor

@@ -1,27 +1,25 @@
 // Framework
 #include <Arduino.h>
 
-// Header file
-// System
+// Header files
+// Processing headers
 #include "system.h"
 
-// Components
+// Component instances
 DHTSensor dhtSensor(10);
 NEO6M gpsSensor(20, 21);
 OledDisplay oledDisplay(128, 64, 0x3C);
 LedMQ2 led(0);
 
-// Define the global state variable
 // State
 SystemState systemState = SystemState::INIT;
 
-// Variables
+// Data
 // Buffer
 bool isMQ2On = true;
 bool isNEO6MOn = true;
 bool isWifiConnect = true;
 
-// Functions
 // State
 void updateSystemState(){
     switch (systemState)

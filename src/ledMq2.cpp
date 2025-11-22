@@ -2,6 +2,7 @@
 #include <Arduino.h>
 
 // Header files
+// Child components
 #include "ledMq2.h"
 
 // Constructor
