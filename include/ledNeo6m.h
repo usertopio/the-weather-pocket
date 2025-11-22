@@ -6,17 +6,15 @@
 
 class LedNeo6m : public Sensor {
 public:
-    // ===== Types & Enums =====
     // State
     enum class State {
         ON,
         OFF,
     };
 
-    // ===== Constructor & Destructor =====
+    // Constructor
     LedNeo6m(int led_neo6m_pin);
 
-    // ===== Public Methods =====
     // Initialization
     void begin();
 
@@ -25,10 +23,10 @@ public:
     void setState(State newState); 
 
 private:
-    // ===== Pin Configuration =====
+    // Pins
     const int LED_NEO6M_PIN;
 
-    // ===== State Variables =====
+    // State
     State state;
 };
 

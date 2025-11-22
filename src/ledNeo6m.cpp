@@ -8,14 +8,15 @@
 LedNeo6m::LedNeo6m(int led_neo6m_pin): 
     // Pins
     LED_NEO6M_PIN(led_neo6m_pin),
-    
     // State
     state(State::OFF)
 {}
 
 // Initialization
 void LedNeo6m::begin(){
+    // Pins
     pinMode(LED_NEO6M_PIN, OUTPUT);
+    // State
     status = Status::ON;
 }
 
