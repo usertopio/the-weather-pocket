@@ -8,35 +8,38 @@
 // Header files
 #include "sensor.h"
 
-class OLEDDisplay : public Sensor {
+class OledDisplay : public Sensor {
 public:
-    // ===== Types & Enums =====
+    // State
     enum class State {
         INIT,
-        DISPLAY_WEATHER_1,
-        DISPLAY_WEATHER_2,
-        DISPLAY_STATUS,
+        DISPLAY_WEATHER,
+        DISPLAY_NEO6M,
         DISPLAY_SETTING
     };
 
-    // ===== Constructor & Destructor =====
-    OLEDDisplay(int screen_width, int screen_height, int oled_reset);
+    // Constructor
+    OledDisplay(int screen_width, int screen_height, int oled_reset);
 
-    // ===== Public Methods =====
+    //  Initialization
     void begin();
+
+    // State
     State getState() const;
+    void setState(State newState); 
 
 private:
-    // ===== Display Configuration =====
+    // Display configuration
     const int SCREEN_WIDTH;
     const int SCREEN_HEIGHT;
     const int ADDRESS;
     const int OLED_RESET;
 
-    // ===== State Variables =====
+    // State
     State state;
 
-    // ===== Display Data =====
+    // Data
+    // Libraries
     Adafruit_SSD1306 display;
 };
 
