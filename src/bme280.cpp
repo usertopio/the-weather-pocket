@@ -33,28 +33,47 @@ Bme280::State Bme280::getState() const {
     return state;
 }
 
+void Bme280::setState(State newState) {
+    state = newState;
+}
+
 // Read data
 void Bme280::readAllData(){
     temp = bme.readTemperature();
     humid = bme.readHumidity();
     pressure = bme.readPressure();
     altitude = bme.readAltitude(SEA_LEVEL_PRESSURE_HPA);
+
+    // Update state
+    setState(State::READ);
 }
 
 void Bme280::readTemp(){
     temp = bme.readTemperature();
+
+    // Update state
+    setState(State::READ_TEMPERATURE);
 }
 
 void Bme280::readHumid(){
     humid = bme.readHumidity();
+
+    // Update state
+    setState(State::READ_HUMIDITY);
 }
 
 void Bme280::readPressure(){
     pressure = bme.readPressure();
+
+    // Update state
+    setState(State::READ_PRESSURE);
 }
 
 void Bme280::readAltitude(){
     altitude = bme.readAltitude(SEA_LEVEL_PRESSURE_HPA);
+
+    // Update state
+    setState(State::CALCULATE_ALTITUDE);
 }
 
 // Get data

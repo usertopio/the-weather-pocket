@@ -14,9 +14,10 @@ class Bme280 : public Component {
         // State
         enum class State {
             INIT,
-            MEASURE_TEMPERATURE,
-            MEASURE_HUMIDITY,
-            MEASURE_PRESSURE,
+            READ,
+            READ_TEMPERATURE,
+            READ_HUMIDITY,
+            READ_PRESSURE,
             CALCULATE_ALTITUDE
         };
 
@@ -28,6 +29,7 @@ class Bme280 : public Component {
 
         // State
         State getState() const;
+        void setState(State newState); 
 
         // Read data
         void readAllData();
