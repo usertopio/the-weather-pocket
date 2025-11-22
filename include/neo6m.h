@@ -10,33 +10,34 @@
 
 class NEO6M : public Sensor {
 public:
-    // ===== Types & Enums =====
+    // State
     enum class State {
         INIT,
-        ACQUIRE_SIGNAL,
-        READ_LOCATION,
-        READ_DATE,
-        READ_TIME
+        WAIT_FOR_FIX,
+        GOT_FIX
     };
 
-    // ===== Constructor & Destructor =====
+    // Constructor
     NEO6M(int neo_rx, int neo_tx);
 
-    // ===== Public Methods =====
+    //  Initialization
     void begin() override;
+
+    // State
     State getState() const;
+    void setState(State newState); 
 
 private:
-    // ===== Pin Configuration =====
+    // Pins
     const int NEO_RX;
     const int NEO_TX;
 
-    // ===== State Variables =====
+    // State
     State state;
 
-    // ===== Sensor Data =====
+    // Data
+    // Libraries
     TinyGPSPlus gps;
-
     HardwareSerial &gpsSerial = Serial1;
 };
 
