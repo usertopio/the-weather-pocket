@@ -8,9 +8,9 @@
 // Component instances
 // Sensors
 // BME280 bme280(6, 5, 4, 7, 1010);
-DHTSensor dhtSensor(10);
+DhtSensor dhtSensor(10);
 Mq2 mq2(5); // GPIO5 for production
-NEO6M gpsSensor(20, 21);
+Neo6m gpsSensor(20, 21);
 // Display
 OledDisplay oledDisplay(128, 64, 0x3C);
 // Leds
@@ -34,7 +34,7 @@ void updateSystemState(){
     switch (systemState)
     {
     case SystemState::INIT:
-        if (dhtSensor.getStatus() == DHTSensor::Status::ON){
+        if (dhtSensor.getStatus() == DhtSensor::Status::ON){
             systemState = SystemState::READ_DHT;
         } else if (isMQ2On){
             systemState = SystemState::READ_MQ2;
@@ -236,6 +236,19 @@ void monitor(){
     case SystemState::INIT:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
+        Serial.println("=========");
+        break;
+
+    case SystemState::READ_BME280:
+        Serial.println("=========");
+        Serial.print("System State: "); Serial.println(systemStateToString(systemState));
+        Serial.print("Sensor Status: "); Serial.println(static_cast<int>(dhtSensor.getStatus()));
+        Serial.print("Sensor State: "); Serial.println(static_cast<int>(dhtSensor.getState()));
+        Serial.println("");
+        Serial.print("BME280 Temperature: "); Serial.println(dhtSensor.getTemp());
+        Serial.print("BME280 Humidity: "); Serial.println(dhtSensor.getHumid());
+        Serial.print("BME280 Pressure: "); Serial.println(dhtSensor.getPressure());
+        Serial.print("BME280 Alititude: "); Serial.println(dhtSensor.getAltitude());
         Serial.println("=========");
         break;
 

@@ -3,7 +3,7 @@
 #include "dht22.h"
 
 // Constructor
-DHTSensor::DHTSensor(int dht_pin) :
+DhtSensor::DhtSensor(int dht_pin) :
     // Pins
     DHT_PIN(dht_pin),
     // State
@@ -13,7 +13,7 @@ DHTSensor::DHTSensor(int dht_pin) :
 {}
 
 // Initialization
-void DHTSensor::begin() {
+void DhtSensor::begin() {
     // Libraries
     dht.begin();
     // State
@@ -21,16 +21,16 @@ void DHTSensor::begin() {
 }
 
 // State
-DHTSensor::State DHTSensor::getState() const {
+DhtSensor::State DhtSensor::getState() const {
     return state;
 }
 
-void DHTSensor::setState(State newState) {
+void DhtSensor::setState(State newState) {
     state = newState;
 }
 
 // Read data
-void DHTSensor::readTemp(){
+void DhtSensor::readTemp(){
 
     temp = dht.readTemperature();
 
@@ -38,7 +38,7 @@ void DHTSensor::readTemp(){
     setState(State::READ);
 }
 
-void DHTSensor::readHumid(){
+void DhtSensor::readHumid(){
 
     humid = dht.readHumidity();
 
@@ -46,7 +46,7 @@ void DHTSensor::readHumid(){
     setState(State::READ);
 }
 
-void DHTSensor::readTempAndHumid() {
+void DhtSensor::readTempAndHumid() {
 
     float t = dht.readTemperature();
     float h = dht.readHumidity();
@@ -60,15 +60,15 @@ void DHTSensor::readTempAndHumid() {
         setState(State::READ);
     } else {
         // Update state
-        state = DHTSensor::State::FAIL;
+        state = DhtSensor::State::FAIL;
     }  
 }
 
 // Get data
-float DHTSensor::getTemp(){
+float DhtSensor::getTemp(){
     return temp;
 }
 
-float DHTSensor::getHumid(){
+float DhtSensor::getHumid(){
     return humid;
 }

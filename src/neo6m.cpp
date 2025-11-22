@@ -3,7 +3,7 @@
 #include "neo6m.h"
 
 // Constructor
-NEO6M::NEO6M(int neo_rx, int neo_tx):
+Neo6m::Neo6m(int neo_rx, int neo_tx):
     // Pins
     NEO_RX(neo_rx),
     NEO_TX(neo_tx),
@@ -12,7 +12,7 @@ NEO6M::NEO6M(int neo_rx, int neo_tx):
 {}
 
 // Initialization
-void NEO6M::begin(){
+void Neo6m::begin(){
     // Libraries
     gpsSerial.begin(9600, SERIAL_8N1, NEO_RX, NEO_TX);
     // State
@@ -20,10 +20,10 @@ void NEO6M::begin(){
 }
 
 // State
-NEO6M::State NEO6M::getState() const {
+Neo6m::State Neo6m::getState() const {
     return state;
 }
 
-void NEO6M::setState(State newState) {
+void Neo6m::setState(State newState) {
     state = newState;
 }

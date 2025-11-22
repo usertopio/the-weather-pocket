@@ -8,7 +8,7 @@
 // Header files
 #include "component.h"
 
-class NEO6M : public Component {
+class Neo6m : public Component {
 public:
     // State
     enum class State {
@@ -18,7 +18,7 @@ public:
     };
 
     // Constructor
-    NEO6M(int neo_rx, int neo_tx);
+    Neo6m(int neo_rx, int neo_tx);
 
     //  Initialization
     void begin() override;
