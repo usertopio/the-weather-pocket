@@ -21,10 +21,13 @@
 
 
 // Component instances
-extern DHTSensor dhtSensor;
-extern NEO6M gpsSensor;
+extern DhtSensor dhtSensor;
+extern Neo6m neo6m;
 extern OledDisplay oledDisplay;
-extern LedMQ2 led;
+extern LedMq2 ledMq2;
+extern LedNeo6m ledNeo6m;
+extern ButtonOledDisplay buttonOledDisplay;
+extern ButtonWifi buttonWifi;
 
 // State
 enum class SystemState {

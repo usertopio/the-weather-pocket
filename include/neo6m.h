@@ -25,7 +25,20 @@ public:
 
     // State
     State getState() const;
-    void setState(State newState); 
+    void setState(State newState);
+
+    // Read data
+    void readData();
+
+    // Get data
+    float getLatitude();
+    float getLongitude();
+    float getAltitude();
+    float getDate();
+    float getTime();
+    float getSpeed();
+    float getAmountOfSat();
+    float getHDOP();
 
 private:
     // Pins
@@ -39,6 +52,15 @@ private:
     // Libraries
     TinyGPSPlus gps;
     HardwareSerial &gpsSerial = Serial1;
+    // My data
+    float latitude;
+    float longitude;
+    float altitude;
+    float date;
+    float time;
+    float speed;
+    float amount_of_satellite;
+    float hdop;
 };
 
 #endif

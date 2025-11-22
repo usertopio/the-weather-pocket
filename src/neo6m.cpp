@@ -27,3 +27,45 @@ Neo6m::State Neo6m::getState() const {
 void Neo6m::setState(State newState) {
     state = newState;
 }
+
+// Read data
+void Neo6m::readData(){
+
+    // #17
+
+    // Update state
+    setState(State::GOT_FIX);
+}
+
+// Get data
+float Neo6m::getLatitude(){
+    return latitude;
+}
+
+float Neo6m::getLongitude(){
+    return longitude;
+}
+
+float Neo6m::getAltitude(){
+    return altitude;
+}
+
+float Neo6m::getDate(){
+    return date;
+}
+
+float Neo6m::getTime(){
+    return time;
+}
+
+float Neo6m::getSpeed(){
+    return speed;
+}
+
+float Neo6m::getAmountOfSat(){
+    return amount_of_satellite;
+}
+
+float Neo6m::getHDOP(){
+    return hdop;
+}

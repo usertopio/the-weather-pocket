@@ -4,7 +4,7 @@
 // Header files
 #include "component.h"
 
-class LedMQ2 : public Component {
+class LedMq2 : public Component {
 public:
     // State
     enum class State {
@@ -13,7 +13,7 @@ public:
     };
 
     // Constructor
-    LedMQ2(int led_mq2_pin);
+    LedMq2(int led_mq2_pin);
 
     //  Initialization
     void begin();
