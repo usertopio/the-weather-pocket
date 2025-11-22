@@ -1,10 +1,6 @@
 // Header files
 #include "dht22.h"
 
-// Sensor Data
-float temp = 0.0;
-float humid = 0.0;
-
 // Constructor
 DHTSensor::DHTSensor(int dht_pin) :
     // Pins
@@ -46,6 +42,20 @@ void DHTSensor::readHumid(){
     // Update state
     setState(State::MEASURE_HUMIDITY);
 }
+
+void DHTSensor::readTempAndHumid() {
+    // static unsigned long lastRead = 0;
+    // if (millis() - lastRead < 2100) return;  // enforce 2.1s interval
+
+    float t = dht.readTemperature();
+    float h = dht.readHumidity();
+
+    if (!isnan(t)) temp = t;
+    if (!isnan(h)) humid = h;
+
+    // lastRead = millis();
+}
+
 
 float DHTSensor::getTemp(){
     return temp;

@@ -14,6 +14,7 @@ public:
         INIT,
         MEASURE_TEMPERATURE,
         MEASURE_HUMIDITY,
+        READ,
         FAIL
     };
 
@@ -30,6 +31,8 @@ public:
     void readHumid();
     float getTemp();
     float getHumid();
+
+    void readTempAndHumid();
 
 private:
     // ===== Pin Configuration =====
