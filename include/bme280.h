@@ -6,53 +6,61 @@
 #include <Adafruit_BME280.h>
 
 // Header files
-#include "sensor.h"
+// Parent components
+#include "component.h"
 
-class BME280 : public Sensor {
-public:
-    // ===== Types & Enums =====
-    enum class State {
-        INIT,
-        MEASURE_TEMPERATURE,
-        MEASURE_HUMIDITY,
-        MEASURE_PRESSURE,
-        CALCULATE_ALTITUDE
-    };
+class BME280 : public Component {
+    public:
+        // State
+        enum class State {
+            INIT,
+            MEASURE_TEMPERATURE,
+            MEASURE_HUMIDITY,
+            MEASURE_PRESSURE,
+            CALCULATE_ALTITUDE
+        };
 
-    // ===== Constructor & Destructor =====
-    BME280(int bme_mosi, int bme_miso, int bme_scl, int bme_cs, float sea_level_pressure_hpa);
+        // Constructor
+        BME280(int bme_mosi, int bme_miso, int bme_scl, int bme_cs, float sea_level_pressure_hpa);
 
-    // ===== Public Methods =====
-    void begin() override;
-    State getState() const;
-    void readTemp();
-    void readHumid();
-    void readPressure();
-    void readAltitude();
+        //  Initialization
+        void begin() override;
 
-    float getTemp();
-    float getHumid();
-    float getPressure();
-    float getAltitude();
+        // State
+        State getState() const;
 
-private:
-    // ===== Pin Configuration =====
-    const int BME_MOSI; // SDA
-    const int BME_MISO; // SDO
-    const int BME_SCK;  // SCL
-    const int BME_CS;   // CSB
+        // Read data
+        void readAllData();
+        void readTemp();
+        void readHumid();
+        void readPressure();
+        void readAltitude();
 
-    // ===== State Variables =====
-    State state;
+        // Get data
+        float getTemp();
+        float getHumid();
+        float getPressure();
+        float getAltitude();
 
-    // ===== Sensor Data =====
-    Adafruit_BME280 bme;
+    private:
+        // Pins
+        const int BME_MOSI; // SDA
+        const int BME_MISO; // SDO
+        const int BME_SCK;  // SCL
+        const int BME_CS;   // CSB
 
-    float temp;
-    float humid;
-    float pressure;
-    float altitude;
-    const int SEA_LEVEL_PRESSURE_HPA;
+        // State
+        State state;
+
+        // Data
+        // Libraries
+        Adafruit_BME280 bme;
+        // My data
+        float temp;
+        float humid;
+        float pressure;
+        float altitude;
+        const int SEA_LEVEL_PRESSURE_HPA;
 };
 
 #endif

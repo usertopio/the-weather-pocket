@@ -5,17 +5,17 @@
 DHTSensor::DHTSensor(int dht_pin) :
     // Pins
     DHT_PIN(dht_pin),
-
     // State
     state(State::INIT),
-
     // Library
     dht(dht_pin, DHT22)
 {}
 
 // Initialization
 void DHTSensor::begin() {
+    // Libraries
     dht.begin();
+    // State
     status = Status::ON;
 }
 
@@ -24,39 +24,46 @@ DHTSensor::State DHTSensor::getState() const {
     return state;
 }
 
-// State
 void DHTSensor::setState(State newState) {
     state = newState;
 }
 
+// Read data
 void DHTSensor::readTemp(){
+
     temp = dht.readTemperature();
 
     // Update state
-    setState(State::MEASURE_TEMPERATURE);
+    setState(State::READ);
 }
 
 void DHTSensor::readHumid(){
+
     humid = dht.readHumidity();
 
     // Update state
-    setState(State::MEASURE_HUMIDITY);
+    setState(State::READ);
 }
 
 void DHTSensor::readTempAndHumid() {
-    // static unsigned long lastRead = 0;
-    // if (millis() - lastRead < 2100) return;  // enforce 2.1s interval
 
     float t = dht.readTemperature();
     float h = dht.readHumidity();
 
-    if (!isnan(t)) temp = t;
-    if (!isnan(h)) humid = h;
+    if (!isnan(t) && !isnan(h))
+    {
+        temp = t;
+        humid = h;
 
-    // lastRead = millis();
+        // Update state
+        setState(State::READ);
+    } else {
+        // Update state
+        state = DHTSensor::State::FAIL;
+    }  
 }
 
-
+// Get data
 float DHTSensor::getTemp(){
     return temp;
 }

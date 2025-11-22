@@ -8,14 +8,15 @@
 LedMQ2::LedMQ2(int led_mq2_pin): 
     // Pins
     LED_MQ2_PIN(led_mq2_pin),
-    
     // State
     state(State::OFF)
 {}
 
 // Initialization
 void LedMQ2::begin(){
+    // Pins
     pinMode(LED_MQ2_PIN, OUTPUT);
+    // State
     status = Status::ON;
 }
 
