@@ -2,9 +2,9 @@
 #define SYSTEM_H
 
 // Header files
-// Components
+// Parent components
 #include "component.h"
-// Component
+// Child components
 #include "bme280.h"
 #include "dht22.h"
 #include "neo6m.h"
@@ -13,7 +13,7 @@
 #include "ledNeo6m.h"
 
 
-// Components
+// Component instances
 extern DHTSensor dhtSensor;
 extern NEO6M gpsSensor;
 extern OledDisplay oledDisplay;
@@ -31,18 +31,19 @@ enum class SystemState {
 
 extern SystemState systemState;
 
-// Variables
-// Buffer
-extern bool isMQ2On;
-extern bool isNEO6MOn;
-extern bool isWifiConnect;
-
+// State
 const char* systemStateToString(SystemState state);
-
 void updateSystemState();
 void runSystemState();
 
 // Serial monitor
 void monitor();
+
+// Data
+// Buffer
+extern bool isMQ2On;
+extern bool isNEO6MOn;
+extern bool isWifiConnect;
+
 
 #endif

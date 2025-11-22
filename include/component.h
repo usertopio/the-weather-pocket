@@ -1,11 +1,11 @@
-#ifndef SENSOR_H
-#define SENSOR_H
+#ifndef Component_H
+#define Component_H
 
-class Sensor {
+class Component {
     public:
         // Constructor
-        Sensor();
-        virtual ~Sensor() = default;
+        Component();
+        virtual ~Component() = default;
 
         // Status
         enum class Status {

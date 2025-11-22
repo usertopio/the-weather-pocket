@@ -4,7 +4,7 @@
 // Header files
 #include "component.h"
 
-class LedNeo6m : public Sensor {
+class LedNeo6m : public Component {
 public:
     // State
     enum class State {

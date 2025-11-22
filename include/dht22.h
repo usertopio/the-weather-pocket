@@ -7,7 +7,7 @@
 // Header files
 #include "component.h"
 
-class DHTSensor : public Sensor {
+class DHTSensor : public Component {
 public:
     // State
     enum class State {

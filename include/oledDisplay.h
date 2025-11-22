@@ -8,7 +8,7 @@
 // Header files
 #include "component.h"
 
-class OledDisplay : public Sensor {
+class OledDisplay : public Component {
 public:
     // State
     enum class State {

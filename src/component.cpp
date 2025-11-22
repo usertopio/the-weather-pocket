@@ -2,16 +2,16 @@
 #include "component.h"
 
 // Constructor
-Sensor::Sensor() : 
+Component::Component() : 
     status(Status::ON)
 {}
 
 // Status
-Sensor::Status Sensor::getStatus() const {
+Component::Status Component::getStatus() const {
     return status;
 }
 
-Sensor::Status Sensor::toggleStatus() {
+Component::Status Component::toggleStatus() {
     if (status == Status::OFF) {
         status = Status::ON;
     } else {
