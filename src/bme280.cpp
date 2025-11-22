@@ -1,4 +1,5 @@
 // Header files
+// Child components
 #include "bme280.h"
 
 // Constructor
@@ -21,13 +22,23 @@ BME280::BME280(int bme_mosi, int bme_miso, int bme_sck, int bme_cs, float sea_le
 
 // Initialization
 void BME280::begin(){
+    // Libraries
     bme.begin();
+    // State
     status = Status::ON;
 }
 
 // State
 BME280::State BME280::getState() const {
     return state;
+}
+
+// Read data
+void BME280::readAllData(){
+    temp = bme.readTemperature();
+    humid = bme.readHumidity();
+    pressure = bme.readPressure();
+    altitude = bme.readAltitude(SEA_LEVEL_PRESSURE_HPA);
 }
 
 void BME280::readTemp(){
@@ -46,6 +57,7 @@ void BME280::readAltitude(){
     altitude = bme.readAltitude(SEA_LEVEL_PRESSURE_HPA);
 }
 
+// Get data
 float BME280::getTemp(){
     return temp;
 }

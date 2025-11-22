@@ -6,11 +6,12 @@
 #include <Adafruit_BME280.h>
 
 // Header files
+// Parent components
 #include "component.h"
 
 class BME280 : public Component {
     public:
-        // ===== Types & Enums =====
+        // State
         enum class State {
             INIT,
             MEASURE_TEMPERATURE,
@@ -19,35 +20,42 @@ class BME280 : public Component {
             CALCULATE_ALTITUDE
         };
 
-        // ===== Constructor & Destructor =====
+        // Constructor
         BME280(int bme_mosi, int bme_miso, int bme_scl, int bme_cs, float sea_level_pressure_hpa);
 
-        // ===== Public Methods =====
+        //  Initialization
         void begin() override;
+
+        // State
         State getState() const;
+
+        // Read data
+        void readAllData();
         void readTemp();
         void readHumid();
         void readPressure();
         void readAltitude();
 
+        // Get data
         float getTemp();
         float getHumid();
         float getPressure();
         float getAltitude();
 
     private:
-        // ===== Pin Configuration =====
+        // Pins
         const int BME_MOSI; // SDA
         const int BME_MISO; // SDO
         const int BME_SCK;  // SCL
         const int BME_CS;   // CSB
 
-        // ===== State Variables =====
+        // State
         State state;
 
-        // ===== Component Data =====
+        // Data
+        // Libraries
         Adafruit_BME280 bme;
-
+        // My data
         float temp;
         float humid;
         float pressure;
