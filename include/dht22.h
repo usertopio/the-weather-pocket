@@ -9,41 +9,43 @@
 
 class DHTSensor : public Sensor {
 public:
-    // ===== Types & Enums =====
+    // State
     enum class State {
         INIT,
-        MEASURE_TEMPERATURE,
-        MEASURE_HUMIDITY,
         READ,
         FAIL
     };
 
-    // ===== Constructor & Destructor =====
+    // Constructor
     DHTSensor(int dht_pin);
 
-    // ===== Public Methods =====
+    //  Initialization
     void begin() override;
 
+    // State
     State getState() const;
     void setState(State newState); 
 
+    // Read data
     void readTemp();
     void readHumid();
+    void readTempAndHumid();
+
+    // Get data
     float getTemp();
     float getHumid();
 
-    void readTempAndHumid();
-
 private:
-    // ===== Pin Configuration =====
+    // Pins
     const int DHT_PIN;
 
-    // ===== State Variables =====
+    // State
     State state;
 
-    // ===== Sensor Data =====
+    // Data
+    // Libraries
     DHT dht;
-
+    // My data
     float temp;
     float humid;
 };
