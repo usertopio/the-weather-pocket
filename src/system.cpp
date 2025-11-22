@@ -55,7 +55,7 @@ void updateSystemState(){
     //         systemState = SystemState::PROCESS_DATA;
     //     }
     //     break;
-
+    
     case SystemState::READ_DHT:
         if (isMQ2On){
             systemState = SystemState::READ_MQ2;
@@ -67,7 +67,7 @@ void updateSystemState(){
             systemState = SystemState::PROCESS_DATA;
         }
         break;
-    
+    // #13
     case SystemState::READ_MQ2:
         if (isNEO6MOn){
             systemState = SystemState::READ_NEO6M;
@@ -76,7 +76,7 @@ void updateSystemState(){
             systemState = SystemState::PROCESS_DATA;
         }
         break;
-    
+    // #14
     case SystemState::READ_NEO6M:
         systemState = SystemState::PROCESS_DATA;
         break;
