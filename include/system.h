@@ -28,9 +28,10 @@ extern LedMQ2 led;
 // State
 enum class SystemState {
     INIT,
+    READ_BME280,
     READ_DHT,
-    MEASURE_MQ2,
-    MEASURE_NEO6M,
+    READ_MQ2,
+    READ_NEO6M,
     PROCESS_DATA,
     UPLOAD_DATA
 };
