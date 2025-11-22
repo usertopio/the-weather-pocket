@@ -31,8 +31,8 @@ private:
 
     // Data
     // My data
-    float lastButtonOledDisplayState;
-    float currentButtonOledDisplayState;
+    bool lastButtonOledDisplayState;
+    bool currentButtonOledDisplayState;
 };
 
 #endif

@@ -10,7 +10,9 @@ ButtonOledDisplay::ButtonOledDisplay(int data_pin) :
     // Pins
     DATA_PIN(data_pin),
     // State
-    state(State::NOT_PRESSED)
+    state(State::NOT_PRESSED),
+
+    lastButtonOledDisplayState(false)
 {}
 
 // Initialization
