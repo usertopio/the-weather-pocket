@@ -6,7 +6,7 @@
 #include <TinyGPS++.h>
 
 // Header files
-#include "sensor.h"
+#include "component.h"
 
 class NEO6M : public Sensor {
 public:

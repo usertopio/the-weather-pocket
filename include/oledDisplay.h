@@ -6,7 +6,7 @@
 #include <Adafruit_SSD1306.h>
 
 // Header files
-#include "sensor.h"
+#include "component.h"
 
 class OledDisplay : public Sensor {
 public:

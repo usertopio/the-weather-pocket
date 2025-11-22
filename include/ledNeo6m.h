@@ -2,7 +2,7 @@
 #define LEDMQ2_H
 
 // Header files
-#include "sensor.h"
+#include "component.h"
 
 class LedNeo6m : public Sensor {
 public:

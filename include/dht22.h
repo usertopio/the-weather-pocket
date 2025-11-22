@@ -5,7 +5,7 @@
 #include <DHT.h>
 
 // Header files
-#include "sensor.h"
+#include "component.h"
 
 class DHTSensor : public Sensor {
 public:

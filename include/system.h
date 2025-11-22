@@ -3,14 +3,15 @@
 
 // Header files
 // Components
-#include "sensor.h"
-
+#include "component.h"
+// Component
 #include "bme280.h"
 #include "dht22.h"
 #include "neo6m.h"
 #include "oledDisplay.h"
 #include "ledMq2.h"
 #include "ledNeo6m.h"
+
 
 // Components
 extern DHTSensor dhtSensor;

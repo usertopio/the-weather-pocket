@@ -1,5 +1,5 @@
 // Header files
-#include "sensor.h"
+#include "component.h"
 
 // Constructor
 Sensor::Sensor() : 
