@@ -7,14 +7,14 @@
 
 // Component instances
 // Sensors
-// BME280 bme280(6, 5, 4, 7, 1010);
-DHTSensor dhtSensor(10);
+// Bme280 bme280(6, 5, 4, 7, 1010);
+DhtSensor dhtSensor(10);
 Mq2 mq2(5); // GPIO5 for production
-NEO6M gpsSensor(20, 21);
+Neo6m neo6m(20, 21);
 // Display
 OledDisplay oledDisplay(128, 64, 0x3C);
 // Leds
-LedMQ2 ledMq2(0);
+LedMq2 ledMq2(0);
 LedNeo6m ledNeo6m(1);
 // Buttons
 ButtonOledDisplay buttonOledDisplay(2);
@@ -34,7 +34,7 @@ void updateSystemState(){
     switch (systemState)
     {
     case SystemState::INIT:
-        if (dhtSensor.getStatus() == DHTSensor::Status::ON){
+        if (dhtSensor.getStatus() == DhtSensor::Status::ON){
             systemState = SystemState::READ_DHT;
         } else if (isMQ2On){
             systemState = SystemState::READ_MQ2;
@@ -108,9 +108,15 @@ void runSystemState(){
             // Sensors
             // bme280.begin();
             dhtSensor.begin();
-            gpsSensor.begin();
+            neo6m.begin();
+            // Display
             oledDisplay.begin();
-            led.begin();
+            // Leds
+            ledMq2.begin();
+            ledNeo6m.begin();
+            // Buttons
+            buttonOledDisplay.begin();
+            buttonWifi.begin();
             // WIFI
 
 
@@ -239,6 +245,19 @@ void monitor(){
         Serial.println("=========");
         break;
 
+    // case SystemState::READ_BME280:
+    //     Serial.println("=========");
+    //     Serial.print("System State: "); Serial.println(systemStateToString(systemState));
+    //     Serial.print("Sensor Status: "); Serial.println(static_cast<int>(bme280.getStatus()));
+    //     Serial.print("Sensor State: "); Serial.println(static_cast<int>(bme280.getState()));
+    //     Serial.println("");
+    //     Serial.print("BME280 Temperature: "); Serial.println(bme280.getTemp());
+    //     Serial.print("BME280 Humidity: "); Serial.println(bme280.getHumid());
+    //     Serial.print("BME280 Pressure: "); Serial.println(bme280.getPressure());
+    //     Serial.print("BME280 Alititude: "); Serial.println(bme280.getAltitude());
+    //     Serial.println("=========");
+    //     break;
+
     case SystemState::READ_DHT:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
@@ -253,21 +272,28 @@ void monitor(){
     case SystemState::READ_MQ2:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-        Serial.print("Sensor Status: "); Serial.println("NaN");
-        Serial.print("Sensor State: "); Serial.println("NaN");
+        Serial.print("Sensor Status: "); Serial.println(static_cast<int>(mq2.getStatus()));
+        Serial.print("Sensor State: "); Serial.println(static_cast<int>(mq2.getStatus()));
         Serial.println("");
-        Serial.print("MQ2 Smoke: "); Serial.println("NaN");
+        Serial.print("MQ2 Gas: "); Serial.println(mq2.getGas());
         Serial.println("=========");
         break;
     
     case SystemState::READ_NEO6M:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-        Serial.print("Sensor Status: "); Serial.println("NaN");
-        Serial.print("Sensor State: "); Serial.println("NaN");
+        Serial.print("Sensor Status: "); Serial.println(static_cast<int>(neo6m.getStatus()));
+        Serial.print("Sensor State: "); Serial.println(static_cast<int>(neo6m.getStatus()));
         Serial.println("");
-        Serial.print("NEO6M Lat: "); Serial.println("NaN");
-        Serial.print("NEO6M Lon: "); Serial.println("NaN");
+        // Serial.print("NEO6M Lat: "); Serial.println(neo6m.getLatitude());
+        Serial.print("NEO6M Latitude: "); Serial.println(neo6m.getLatitude());
+        Serial.print("NEO6M Longitude: "); Serial.println(neo6m.getLongitude());
+        Serial.print("NEO6M Altitude: "); Serial.println(neo6m.getAltitude());
+        Serial.print("NEO6M Date: "); Serial.println(neo6m.getDate());
+        Serial.print("NEO6M Time: "); Serial.println(neo6m.getTime());
+        Serial.print("NEO6M Speed: "); Serial.println(neo6m.getSpeed());
+        Serial.print("NEO6M Amount of satellite: "); Serial.println(neo6m.getAmountOfSat());
+        Serial.print("NEO6M HDOP: "); Serial.println(neo6m.getHDOP());
         Serial.println("=========");
         break;
 

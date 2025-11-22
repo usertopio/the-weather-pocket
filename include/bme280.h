@@ -9,7 +9,7 @@
 // Parent components
 #include "component.h"
 
-class BME280 : public Component {
+class Bme280 : public Component {
     public:
         // State
         enum class State {
@@ -21,7 +21,7 @@ class BME280 : public Component {
         };
 
         // Constructor
-        BME280(int bme_mosi, int bme_miso, int bme_scl, int bme_cs, float sea_level_pressure_hpa);
+        Bme280(int bme_mosi, int bme_miso, int bme_scl, int bme_cs, float sea_level_pressure_hpa);
 
         //  Initialization
         void begin() override;

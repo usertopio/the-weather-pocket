@@ -8,7 +8,7 @@
 // Header files
 #include "component.h"
 
-class NEO6M : public Component {
+class Neo6m : public Component {
 public:
     // State
     enum class State {
@@ -18,14 +18,27 @@ public:
     };
 
     // Constructor
-    NEO6M(int neo_rx, int neo_tx);
+    Neo6m(int neo_rx, int neo_tx);
 
     //  Initialization
     void begin() override;
 
     // State
     State getState() const;
-    void setState(State newState); 
+    void setState(State newState);
+
+    // Read data
+    void readData();
+
+    // Get data
+    float getLatitude();
+    float getLongitude();
+    float getAltitude();
+    float getDate();
+    float getTime();
+    float getSpeed();
+    float getAmountOfSat();
+    float getHDOP();
 
 private:
     // Pins
@@ -39,6 +52,15 @@ private:
     // Libraries
     TinyGPSPlus gps;
     HardwareSerial &gpsSerial = Serial1;
+    // My data
+    float latitude;
+    float longitude;
+    float altitude;
+    float date;
+    float time;
+    float speed;
+    float amount_of_satellite;
+    float hdop;
 };
 
 #endif

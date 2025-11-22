@@ -6,7 +6,7 @@
 #include "ledMq2.h"
 
 // Constructor
-LedMQ2::LedMQ2(int led_mq2_pin): 
+LedMq2::LedMq2(int led_mq2_pin): 
     // Pins
     LED_MQ2_PIN(led_mq2_pin),
     // State
@@ -14,7 +14,7 @@ LedMQ2::LedMQ2(int led_mq2_pin):
 {}
 
 // Initialization
-void LedMQ2::begin(){
+void LedMq2::begin(){
     // Pins
     pinMode(LED_MQ2_PIN, OUTPUT);
     // State
@@ -22,10 +22,10 @@ void LedMQ2::begin(){
 }
 
 // State
-LedMQ2::State LedMQ2::getState() const {
+LedMq2::State LedMq2::getState() const {
     return state;
 }
 
-void LedMQ2::setState(State newState) {
+void LedMq2::setState(State newState) {
     state = newState;
 }

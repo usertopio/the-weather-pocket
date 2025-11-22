@@ -3,7 +3,7 @@
 #include "bme280.h"
 
 // Constructor
-BME280::BME280(int bme_mosi, int bme_miso, int bme_sck, int bme_cs, float sea_level_pressure_hpa) :
+Bme280::Bme280(int bme_mosi, int bme_miso, int bme_sck, int bme_cs, float sea_level_pressure_hpa) :
     // Pins
     BME_MOSI(bme_mosi),
     BME_MISO(bme_miso),
@@ -21,7 +21,7 @@ BME280::BME280(int bme_mosi, int bme_miso, int bme_sck, int bme_cs, float sea_le
 {}
 
 // Initialization
-void BME280::begin(){
+void Bme280::begin(){
     // Libraries
     bme.begin();
     // State
@@ -29,47 +29,47 @@ void BME280::begin(){
 }
 
 // State
-BME280::State BME280::getState() const {
+Bme280::State Bme280::getState() const {
     return state;
 }
 
 // Read data
-void BME280::readAllData(){
+void Bme280::readAllData(){
     temp = bme.readTemperature();
     humid = bme.readHumidity();
     pressure = bme.readPressure();
     altitude = bme.readAltitude(SEA_LEVEL_PRESSURE_HPA);
 }
 
-void BME280::readTemp(){
+void Bme280::readTemp(){
     temp = bme.readTemperature();
 }
 
-void BME280::readHumid(){
+void Bme280::readHumid(){
     humid = bme.readHumidity();
 }
 
-void BME280::readPressure(){
+void Bme280::readPressure(){
     pressure = bme.readPressure();
 }
 
-void BME280::readAltitude(){
+void Bme280::readAltitude(){
     altitude = bme.readAltitude(SEA_LEVEL_PRESSURE_HPA);
 }
 
 // Get data
-float BME280::getTemp(){
+float Bme280::getTemp(){
     return temp;
 }
 
-float BME280::getHumid(){
+float Bme280::getHumid(){
     return humid;
 }
 
-float BME280::getPressure(){
+float Bme280::getPressure(){
     return pressure;
 }
 
-float BME280::getAltitude(){
+float Bme280::getAltitude(){
     return altitude;
 }

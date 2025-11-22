@@ -3,7 +3,7 @@
 #include "neo6m.h"
 
 // Constructor
-NEO6M::NEO6M(int neo_rx, int neo_tx):
+Neo6m::Neo6m(int neo_rx, int neo_tx):
     // Pins
     NEO_RX(neo_rx),
     NEO_TX(neo_tx),
@@ -12,7 +12,7 @@ NEO6M::NEO6M(int neo_rx, int neo_tx):
 {}
 
 // Initialization
-void NEO6M::begin(){
+void Neo6m::begin(){
     // Libraries
     gpsSerial.begin(9600, SERIAL_8N1, NEO_RX, NEO_TX);
     // State
@@ -20,10 +20,52 @@ void NEO6M::begin(){
 }
 
 // State
-NEO6M::State NEO6M::getState() const {
+Neo6m::State Neo6m::getState() const {
     return state;
 }
 
-void NEO6M::setState(State newState) {
+void Neo6m::setState(State newState) {
     state = newState;
+}
+
+// Read data
+void Neo6m::readData(){
+
+    // #17
+
+    // Update state
+    setState(State::GOT_FIX);
+}
+
+// Get data
+float Neo6m::getLatitude(){
+    return latitude;
+}
+
+float Neo6m::getLongitude(){
+    return longitude;
+}
+
+float Neo6m::getAltitude(){
+    return altitude;
+}
+
+float Neo6m::getDate(){
+    return date;
+}
+
+float Neo6m::getTime(){
+    return time;
+}
+
+float Neo6m::getSpeed(){
+    return speed;
+}
+
+float Neo6m::getAmountOfSat(){
+    return amount_of_satellite;
+}
+
+float Neo6m::getHDOP(){
+    return hdop;
 }

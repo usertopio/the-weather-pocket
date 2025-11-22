@@ -7,7 +7,7 @@
 // Header files
 #include "component.h"
 
-class DHTSensor : public Component {
+class DhtSensor : public Component {
 public:
     // State
     enum class State {
@@ -17,7 +17,7 @@ public:
     };
 
     // Constructor
-    DHTSensor(int dht_pin);
+    DhtSensor(int dht_pin);
 
     //  Initialization
     void begin() override;
