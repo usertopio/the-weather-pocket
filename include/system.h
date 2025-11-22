@@ -15,7 +15,7 @@
 // Components
 extern DHTSensor dhtSensor;
 extern NEO6M gpsSensor;
-extern OLEDDisplay oledDisplay;
+extern OledDisplay oledDisplay;
 extern LedMQ2 led;
 
 // State

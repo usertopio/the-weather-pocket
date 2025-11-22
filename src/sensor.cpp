@@ -2,7 +2,9 @@
 #include "sensor.h"
 
 // Constructor
-Sensor::Sensor() : status(Status::OFF) {}
+Sensor::Sensor() : 
+    status(Status::ON)
+{}
 
 // Status
 Sensor::Status Sensor::getStatus() const {
@@ -11,7 +13,7 @@ Sensor::Status Sensor::getStatus() const {
 
 Sensor::Status Sensor::toggleStatus() {
     if (status == Status::OFF) {
-        status = Status::ON;   // assignment
+        status = Status::ON;
     } else {
         status = Status::OFF;
     }

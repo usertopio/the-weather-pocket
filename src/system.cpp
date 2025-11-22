@@ -8,7 +8,7 @@
 // Components
 DHTSensor dhtSensor(10);
 NEO6M gpsSensor(20, 21);
-OLEDDisplay oledDisplay(128, 64, 0x3C);
+OledDisplay oledDisplay(128, 64, 0x3C);
 LedMQ2 led(0);
 
 // Define the global state variable
