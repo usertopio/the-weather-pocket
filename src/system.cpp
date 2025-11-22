@@ -7,7 +7,7 @@
 
 // Component instances
 // Sensors
-// BME280 bme280();
+// BME280 bme280(6, 5, 4, 7, 1010);
 DHTSensor dhtSensor(10);
 NEO6M gpsSensor(20, 21);
 // Display
@@ -120,7 +120,7 @@ void runSystemState(){
 
             
             // Serial monitor
-            Serial.print("State"); Serial.println("0");
+            monitor();
 
             // Display
             
@@ -153,7 +153,7 @@ void runSystemState(){
 
 
             // Serial monitor
-            Serial.print("State"); Serial.println("2");
+            monitor();
 
             // Display
 
@@ -170,7 +170,7 @@ void runSystemState(){
 
 
             // Serial monitor
-            Serial.print("State"); Serial.println("3");
+            monitor();
 
             // Display
 
@@ -187,7 +187,7 @@ void runSystemState(){
 
 
             // Serial monitor
-            Serial.print("State"); Serial.println("4");
+            monitor();
 
             // Display
 
@@ -204,14 +204,14 @@ void runSystemState(){
 
 
             // Serial monitor
-            Serial.print("State"); Serial.println("5");
+            monitor();
 
             // Display
 
 
             break;
         default:
-            Serial.println("Not fit to any state. Code need to be fixed!");
+            Serial.println("Run out of state. Plese fix the code!");
             break;
     }
 }
