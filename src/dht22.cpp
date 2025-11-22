@@ -13,7 +13,9 @@ DHTSensor::DHTSensor(int dht_pin) :
 
 // Initialization
 void DHTSensor::begin() {
+    // Libraries
     dht.begin();
+    // State
     status = Status::ON;
 }
 
