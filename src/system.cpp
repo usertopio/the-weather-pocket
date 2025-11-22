@@ -6,10 +6,17 @@
 #include "system.h"
 
 // Component instances
+// Sensors
 DHTSensor dhtSensor(10);
 NEO6M gpsSensor(20, 21);
+// Display
 OledDisplay oledDisplay(128, 64, 0x3C);
-LedMQ2 led(0);
+// Leds
+LedMQ2 ledMq2(0);
+LedNeo6m ledNeo6m(1);
+// Buttons
+ButtonOledDisplay buttonOledDisplay(2);
+ButtonWifi buttonWifi(3);
 
 // State
 SystemState systemState = SystemState::INIT;

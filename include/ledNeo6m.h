@@ -1,5 +1,5 @@
-#ifndef LEDMQ2_H
-#define LEDMQ2_H
+#ifndef LEDNEO6M_H
+#define LEDNEO6M_H
 
 // Header files
 #include "component.h"

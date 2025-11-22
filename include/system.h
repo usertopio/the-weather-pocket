@@ -5,12 +5,18 @@
 // Parent components
 #include "component.h"
 // Child components
+// Sensors
 #include "bme280.h"
 #include "dht22.h"
 #include "neo6m.h"
+// Display
 #include "oledDisplay.h"
+// Leds
 #include "ledMq2.h"
 #include "ledNeo6m.h"
+// Buttons
+#include "buttonOledDisplay.h"
+#include "buttonWifi.h"
 
 
 // Component instances
