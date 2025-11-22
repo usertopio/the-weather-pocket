@@ -9,6 +9,7 @@
 // Sensors
 // BME280 bme280(6, 5, 4, 7, 1010);
 DHTSensor dhtSensor(10);
+Mq2 mq2(5); // GPIO5 for production
 NEO6M gpsSensor(20, 21);
 // Display
 OledDisplay oledDisplay(128, 64, 0x3C);

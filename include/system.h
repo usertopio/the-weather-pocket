@@ -8,6 +8,7 @@
 // Sensors
 #include "bme280.h"
 #include "dht22.h"
+#include "mq2.h"
 #include "neo6m.h"
 // Display
 #include "oledDisplay.h"
