@@ -7,6 +7,7 @@
 
 // Component instances
 // Sensors
+// BME280 bme280();
 DHTSensor dhtSensor(10);
 NEO6M gpsSensor(20, 21);
 // Display
@@ -35,36 +36,48 @@ void updateSystemState(){
         if (dhtSensor.getStatus() == DHTSensor::Status::ON){
             systemState = SystemState::READ_DHT;
         } else if (isMQ2On){
-            systemState = SystemState::MEASURE_MQ2;
+            systemState = SystemState::READ_MQ2;
         } else if (isNEO6MOn){
-            systemState = SystemState::MEASURE_NEO6M;
+            systemState = SystemState::READ_NEO6M;
         } else {
             systemState = SystemState::PROCESS_DATA;
         }
         break;
+    // // #16 #3
+    // case SystemState::READ_BME280:
+    //     if (isMQ2On){
+    //         systemState = SystemState::READ_MQ2;
+    //     }
+    //     else if (isNEO6MOn){
+    //         systemState = SystemState::READ_NEO6M;
+    //     }
+    //     else{
+    //         systemState = SystemState::PROCESS_DATA;
+    //     }
+    //     break;
 
     case SystemState::READ_DHT:
         if (isMQ2On){
-            systemState = SystemState::MEASURE_MQ2;
+            systemState = SystemState::READ_MQ2;
         }
         else if (isNEO6MOn){
-            systemState = SystemState::MEASURE_NEO6M;
+            systemState = SystemState::READ_NEO6M;
         }
         else{
             systemState = SystemState::PROCESS_DATA;
         }
         break;
     
-    case SystemState::MEASURE_MQ2:
+    case SystemState::READ_MQ2:
         if (isNEO6MOn){
-            systemState = SystemState::MEASURE_NEO6M;
+            systemState = SystemState::READ_NEO6M;
         }
         else{
             systemState = SystemState::PROCESS_DATA;
         }
         break;
     
-    case SystemState::MEASURE_NEO6M:
+    case SystemState::READ_NEO6M:
         systemState = SystemState::PROCESS_DATA;
         break;
 
@@ -90,8 +103,9 @@ void runSystemState(){
     switch (systemState)
     {
         case SystemState::INIT:
-            // Initialize
-            // Components
+            // Initialize the components
+            // Sensors
+            // bme280.begin();
             dhtSensor.begin();
             gpsSensor.begin();
             oledDisplay.begin();
@@ -128,7 +142,7 @@ void runSystemState(){
 
 
             break;
-        case SystemState::MEASURE_MQ2:
+        case SystemState::READ_MQ2:
             // WIFI
 
 
@@ -145,7 +159,7 @@ void runSystemState(){
 
 
             break;
-        case SystemState::MEASURE_NEO6M:
+        case SystemState::READ_NEO6M:
             // WIFI
 
 
@@ -206,8 +220,8 @@ const char* systemStateToString(SystemState state) {
     switch (state) {
         case SystemState::INIT: return "INIT";
         case SystemState::READ_DHT: return "READ_DHT";
-        case SystemState::MEASURE_MQ2: return "MEASURE_MQ2";
-        case SystemState::MEASURE_NEO6M: return "MEASURE_NEO6M";
+        case SystemState::READ_MQ2: return "READ_MQ2";
+        case SystemState::READ_NEO6M: return "READ_NEO6M";
         case SystemState::PROCESS_DATA: return "PROCESS_DATA";
         case SystemState::UPLOAD_DATA: return "UPLOAD_DATA";
         default: return "RUN_OUT_OF_STATE";
@@ -235,7 +249,7 @@ void monitor(){
         Serial.println("=========");
         break;
     
-    case SystemState::MEASURE_MQ2:
+    case SystemState::READ_MQ2:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
         Serial.print("Sensor Status: "); Serial.println("NaN");
@@ -245,7 +259,7 @@ void monitor(){
         Serial.println("=========");
         break;
     
-    case SystemState::MEASURE_NEO6M:
+    case SystemState::READ_NEO6M:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
         Serial.print("Sensor Status: "); Serial.println("NaN");
