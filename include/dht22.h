@@ -24,7 +24,7 @@ public:
 
     // State
     State getState() const;
-    void setState(State newState); 
+    void setState(State newState);
 
     // Read data
     void readTemp();
@@ -49,5 +49,11 @@ private:
     float temp;
     float humid;
 };
+
+// Status
+const char* dht22StatusToString(DhtSensor::Status status);
+
+// State
+const char* dht22StateToString(DhtSensor::State state);
 
 #endif

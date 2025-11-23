@@ -261,8 +261,8 @@ void monitor(){
     case SystemState::READ_DHT:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-        Serial.print("Sensor Status: "); Serial.println(static_cast<int>(dhtSensor.getStatus()));
-        Serial.print("Sensor State: "); Serial.println(static_cast<int>(dhtSensor.getState()));
+        Serial.print("Sensor Status: "); Serial.println(dht22StatusToString(dhtSensor.getStatus()));
+        Serial.print("Sensor State: "); Serial.println(dht22StateToString(dhtSensor.getState()));
         Serial.println("");
         Serial.print("DHT22 Temperature: "); Serial.println(dhtSensor.getTemp());
         Serial.print("DHT22 Humidity: "); Serial.println(dhtSensor.getHumid());
