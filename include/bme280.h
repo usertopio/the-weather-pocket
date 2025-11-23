@@ -15,10 +15,7 @@ class Bme280 : public Component {
         enum class State {
             INIT,
             READ,
-            READ_TEMPERATURE,
-            READ_HUMIDITY,
-            READ_PRESSURE,
-            CALCULATE_ALTITUDE
+            FAIL
         };
 
         // Constructor

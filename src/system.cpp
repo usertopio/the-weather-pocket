@@ -131,7 +131,6 @@ void runSystemState(){
 
             // Display
             
-            // delay(1000);
             break;
         case SystemState::READ_DHT:
             // WIFI
@@ -141,7 +140,7 @@ void runSystemState(){
 
             
             // Read data
-            dhtSensor.readTempAndHumid();
+            dhtSensor.read();
             // Serial monitor
             monitor();
             
@@ -157,7 +156,7 @@ void runSystemState(){
             
 
             // Read data
-
+            mq2.getGas();
 
             // Serial monitor
             monitor();
@@ -174,7 +173,7 @@ void runSystemState(){
             
 
             // Read data
-
+            
 
             // Serial monitor
             monitor();
@@ -285,13 +284,26 @@ void monitor(){
         Serial.print("Sensor Status: "); Serial.println(neo6mStatusToString(neo6m.getStatus()));
         Serial.print("Sensor State: "); Serial.println(neo6mStateToString(neo6m.getState()));
         Serial.println("");
-        // Serial.print("NEO6M Lat: "); Serial.println(neo6m.getLatitude());
+        // Location
+        Serial.println("Location"); 
         Serial.print("NEO6M Latitude: "); Serial.println(neo6m.getLatitude());
         Serial.print("NEO6M Longitude: "); Serial.println(neo6m.getLongitude());
         Serial.print("NEO6M Altitude: "); Serial.println(neo6m.getAltitude());
-        Serial.print("NEO6M Date: "); Serial.println(neo6m.getDate());
-        Serial.print("NEO6M Time: "); Serial.println(neo6m.getTime());
         Serial.print("NEO6M Speed: "); Serial.println(neo6m.getSpeed());
+        // Date and time
+        Serial.println("Date and time");
+        Serial.print("Date: ");  
+        Serial.print(neo6m.getDay()); Serial.print(", ");
+        Serial.print(neo6m.getMonth()); Serial.print(", ");
+        Serial.println(neo6m.getYear());
+
+        Serial.print("NEO6M Time: ");
+        Serial.print(neo6m.getHour()); Serial.print(", ");
+        Serial.print(neo6m.getMinute()); Serial.print(", ");
+        Serial.println(neo6m.getSecond());
+
+        // Accuracy
+        Serial.println("Accuracy"); 
         Serial.print("NEO6M Amount of satellite: "); Serial.println(neo6m.getAmountOfSat());
         Serial.print("NEO6M HDOP: "); Serial.println(neo6m.getHDOP());
         Serial.println("=========");

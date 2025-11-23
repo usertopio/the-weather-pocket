@@ -28,17 +28,27 @@ public:
     void setState(State newState);
 
     // Read data
-    void readData();
+    void read();
+
+    void readLocation();
+    void readDateAndTime();
+    void readAccuracy();
 
     // Get data
     float getLatitude();
     float getLongitude();
     float getAltitude();
-    float getDate();
-    float getTime();
     float getSpeed();
-    float getAmountOfSat();
-    float getHDOP();
+    
+    int getYear();
+    int getMonth();
+    int getDay();
+    int getHour();
+    int getMinute();
+    int getSecond();
+
+    int getAmountOfSat();
+    int getHDOP();
 
 private:
     // Pins
@@ -53,14 +63,32 @@ private:
     TinyGPSPlus gps;
     HardwareSerial &gpsSerial = Serial1;
     // My data
-    float latitude;
-    float longitude;
-    float altitude;
-    float date;
-    float time;
-    float speed;
-    float amount_of_satellite;
-    float hdop;
+    struct Location {
+        float latitude;
+        float longitude;
+        float altitude;
+        float speed;
+    };
+
+    struct DateAndTime {
+        int year;
+        int month;
+        int day;
+
+        int hour;
+        int minute;
+        int second;
+    };
+    
+    struct Accuracy {
+        int amount_of_satellite;
+        int hdop;
+    };
+
+protected:
+    Location location;
+    DateAndTime dateAndTime;
+    Accuracy accuracy;
 };
 
 // Status

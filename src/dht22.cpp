@@ -64,7 +64,7 @@ void DhtSensor::readHumid(){
     setState(State::READ);
 }
 
-void DhtSensor::readTempAndHumid() {
+void DhtSensor::read() {
 
     float t = dht.readTemperature();
     float h = dht.readHumidity();

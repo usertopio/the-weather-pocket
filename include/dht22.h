@@ -27,9 +27,9 @@ public:
     void setState(State newState);
 
     // Read data
+    void read();
     void readTemp();
     void readHumid();
-    void readTempAndHumid();
 
     // Get data
     float getTemp();

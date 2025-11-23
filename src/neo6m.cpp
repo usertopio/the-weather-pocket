@@ -37,7 +37,7 @@ void Neo6m::setState(State newState) {
     state = newState;
 }
 
-const char* dht22StateToString(Neo6m::State state) {
+const char* neo6mStateToString(Neo6m::State state) {
     switch (state) {
         case Neo6m::State::INIT: return "INIT";
         case Neo6m::State::WAIT_FOR_FIX: return "WAIT_FOR_FIX";
@@ -47,43 +47,111 @@ const char* dht22StateToString(Neo6m::State state) {
 }
 
 // Read data
-void Neo6m::readData(){
+void Neo6m::read(){
 
     // #17
+    readLocation();
+    readDateAndTime();
+    readAccuracy();
 
     // Update state
     setState(State::GOT_FIX);
 }
 
+void Neo6m::readLocation(){
+
+    if (gps.location.isValid()) {
+        
+        location.latitude = gps.location.lat();
+
+        // Update state
+        setState(State::GOT_FIX);
+    } else {
+        // Update state
+        setState(State::WAIT_FOR_FIX);
+    }
+}
+
+void Neo6m::readDateAndTime(){
+
+    if (gps.location.isValid()) {
+        
+        dateAndTime.year  = gps.date.year();
+        dateAndTime.month = gps.date.month();
+        dateAndTime.day   = gps.date.day();
+
+        dateAndTime.hour  = gps.time.hour();
+        dateAndTime.minute = gps.time.minute();
+        dateAndTime.second   = gps.time.second();
+
+        // Update state
+        setState(State::GOT_FIX);
+    } else {
+        // Update state
+        setState(State::WAIT_FOR_FIX);
+    }
+}
+
+void Neo6m::readAccuracy(){
+
+    if (gps.location.isValid()) {
+        
+        accuracy.amount_of_satellite  = gps.satellites.value();
+        accuracy.hdop = gps.hdop.value();
+
+        // Update state
+        setState(State::GOT_FIX);
+    } else {
+        // Update state
+        setState(State::WAIT_FOR_FIX);
+    }
+}
+
 // Get data
 float Neo6m::getLatitude(){
-    return latitude;
+    return location.latitude;
 }
 
 float Neo6m::getLongitude(){
-    return longitude;
+    return location.longitude;
 }
 
 float Neo6m::getAltitude(){
-    return altitude;
-}
-
-float Neo6m::getDate(){
-    return date;
-}
-
-float Neo6m::getTime(){
-    return time;
+    return location.altitude;
 }
 
 float Neo6m::getSpeed(){
-    return speed;
+    return location.speed;
 }
 
-float Neo6m::getAmountOfSat(){
-    return amount_of_satellite;
+int Neo6m::getYear(){
+    return dateAndTime.year;
 }
 
-float Neo6m::getHDOP(){
-    return hdop;
+int Neo6m::getMonth(){
+    return dateAndTime.month;
+}
+
+int Neo6m::getDay(){
+    return dateAndTime.day;
+}
+
+int Neo6m::getHour(){
+    return dateAndTime.day;
+}
+
+int Neo6m::getMinute(){
+    return dateAndTime.day;
+}
+
+int Neo6m::getSecond(){
+    return dateAndTime.day;
+}
+
+int Neo6m::getAmountOfSat(){
+    return accuracy.amount_of_satellite;
+}
+
+int Neo6m::getHDOP(){
+    return accuracy.hdop;
 }

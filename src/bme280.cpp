@@ -29,7 +29,7 @@ void Bme280::begin(){
 }
 
 // Status
-const char* dht22StatusToString(Bme280::Status status) {
+const char* bme280StatusToString(Bme280::Status status) {
     switch (status) {
         case Bme280::Status::ON:  return "ON";
         case Bme280::Status::OFF: return "OFF";
@@ -44,6 +44,15 @@ Bme280::State Bme280::getState() const {
 
 void Bme280::setState(State newState) {
     state = newState;
+}
+
+const char* bme280StateToString(Bme280::State state) {
+    switch (state) {
+        case Bme280::State::INIT: return "INIT";
+        case Bme280::State::READ: return "READ";
+        case Bme280::State::FAIL: return "FAIL";
+        default: return "RUN_OUT_OF_STATE";
+    }
 }
 
 // Read data
@@ -61,28 +70,28 @@ void Bme280::readTemp(){
     temp = bme.readTemperature();
 
     // Update state
-    setState(State::READ_TEMPERATURE);
+    setState(State::READ);
 }
 
 void Bme280::readHumid(){
     humid = bme.readHumidity();
 
     // Update state
-    setState(State::READ_HUMIDITY);
+    setState(State::READ);
 }
 
 void Bme280::readPressure(){
     pressure = bme.readPressure();
 
     // Update state
-    setState(State::READ_PRESSURE);
+    setState(State::READ);
 }
 
 void Bme280::readAltitude(){
     altitude = bme.readAltitude(SEA_LEVEL_PRESSURE_HPA);
 
     // Update state
-    setState(State::CALCULATE_ALTITUDE);
+    setState(State::READ);
 }
 
 // Get data
