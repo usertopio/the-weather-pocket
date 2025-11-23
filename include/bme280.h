@@ -29,7 +29,7 @@ class Bme280 : public Component {
         void setState(State newState); 
 
         // Read data
-        void readAllData();
+        void read();
         void readTemp();
         void readHumid();
         void readPressure();

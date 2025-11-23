@@ -56,7 +56,7 @@ const char* bme280StateToString(Bme280::State state) {
 }
 
 // Read data
-void Bme280::readAllData(){
+void Bme280::read(){
     temp = bme.readTemperature();
     humid = bme.readHumidity();
     pressure = bme.readPressure();
