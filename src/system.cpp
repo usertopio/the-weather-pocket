@@ -272,8 +272,8 @@ void monitor(){
     case SystemState::READ_MQ2:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-        Serial.print("Sensor Status: "); Serial.println(static_cast<int>(mq2.getStatus()));
-        Serial.print("Sensor State: "); Serial.println(static_cast<int>(mq2.getStatus()));
+        Serial.print("Sensor Status: "); Serial.println(mq2StatusToString(mq2.getStatus()));
+        Serial.print("Sensor State: "); Serial.println(mq2StateToString(mq2.getState()));
         Serial.println("");
         Serial.print("MQ2 Gas: "); Serial.println(mq2.getGas());
         Serial.println("=========");
