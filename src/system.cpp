@@ -282,8 +282,8 @@ void monitor(){
     case SystemState::READ_NEO6M:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-        Serial.print("Sensor Status: "); Serial.println(static_cast<int>(neo6m.getStatus()));
-        Serial.print("Sensor State: "); Serial.println(static_cast<int>(neo6m.getStatus()));
+        Serial.print("Sensor Status: "); Serial.println(neo6mStatusToString(neo6m.getStatus()));
+        Serial.print("Sensor State: "); Serial.println(neo6mStateToString(neo6m.getState()));
         Serial.println("");
         // Serial.print("NEO6M Lat: "); Serial.println(neo6m.getLatitude());
         Serial.print("NEO6M Latitude: "); Serial.println(neo6m.getLatitude());
