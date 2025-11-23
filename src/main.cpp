@@ -12,6 +12,7 @@ void setup() {
 
 void loop() {
     updateSystemState();
+    delay(2000);
     runSystemState();
     delay(1000);
 }

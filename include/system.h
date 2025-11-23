@@ -21,7 +21,7 @@
 
 
 // Component instances
-extern DhtSensor dhtSensor;
+// extern DhtSensor dhtSensor;
 extern Neo6m neo6m;
 extern OledDisplay oledDisplay;
 extern LedMq2 ledMq2;

@@ -7,9 +7,9 @@
 
 // Component instances
 // Sensors
-// Bme280 bme280(6, 5, 4, 7, 1010);
-DhtSensor dhtSensor(10);
-Mq2 mq2(5); // GPIO5 for production
+Bme280 bme280(6, 5, 4, 7, 1010);
+// DhtSensor dhtSensor(10);
+Mq2 mq2(10); // GPIO5 for production
 Neo6m neo6m(20, 21);
 // Display
 OledDisplay oledDisplay(128, 64, 0x3C);
@@ -34,18 +34,34 @@ void updateSystemState(){
     switch (systemState)
     {
     case SystemState::INIT:
-        if (dhtSensor.getStatus() == DhtSensor::Status::ON){
-            systemState = SystemState::READ_DHT;
-        } else if (isMQ2On){
+        // if (dhtSensor.getStatus() == DhtSensor::Status::ON){
+        //     systemState = SystemState::READ_DHT;
+        if (bme280.getStatus() == Bme280::Status::ON){
+            systemState = SystemState::READ_BME280;
+        } else if (mq2.getStatus() == Mq2::Status::ON){
             systemState = SystemState::READ_MQ2;
-        } else if (isNEO6MOn){
+        } else if (neo6m.getStatus() == Neo6m::Status::ON){
             systemState = SystemState::READ_NEO6M;
-        } else {
+        } else if (true){
             systemState = SystemState::PROCESS_DATA;
+        } else if (true){
+            systemState = SystemState::UPLOAD_DATA;
         }
         break;
     // // #16 #3
-    // case SystemState::READ_BME280:
+    case SystemState::READ_BME280:
+        if (mq2.getStatus() == Mq2::Status::ON){
+            systemState = SystemState::READ_MQ2;
+        } else if (neo6m.getStatus() == Neo6m::Status::ON){
+            systemState = SystemState::READ_NEO6M;
+        } else if (true){
+            systemState = SystemState::PROCESS_DATA;
+        } else if (true){
+            systemState = SystemState::UPLOAD_DATA;
+        }
+        break;
+    
+    // case SystemState::READ_DHT:
     //     if (isMQ2On){
     //         systemState = SystemState::READ_MQ2;
     //     }
@@ -56,42 +72,33 @@ void updateSystemState(){
     //         systemState = SystemState::PROCESS_DATA;
     //     }
     //     break;
-    
-    case SystemState::READ_DHT:
-        if (isMQ2On){
-            systemState = SystemState::READ_MQ2;
-        }
-        else if (isNEO6MOn){
-            systemState = SystemState::READ_NEO6M;
-        }
-        else{
-            systemState = SystemState::PROCESS_DATA;
-        }
-        break;
     // #13
     case SystemState::READ_MQ2:
-        if (isNEO6MOn){
+        if (neo6m.getStatus() == Neo6m::Status::ON){
             systemState = SystemState::READ_NEO6M;
-        }
-        else{
+        } else if (true){
             systemState = SystemState::PROCESS_DATA;
+        } else if (true){
+            systemState = SystemState::UPLOAD_DATA;
         }
         break;
     // #14
     case SystemState::READ_NEO6M:
-        systemState = SystemState::PROCESS_DATA;
+        if (true){
+            systemState = SystemState::PROCESS_DATA;
+        } else if (true){
+            systemState = SystemState::UPLOAD_DATA;
+        }
         break;
 
     case SystemState::PROCESS_DATA:
-        if (!isWifiConnect){
-            systemState = SystemState::READ_DHT;
-        } else{
+        if (true){
             systemState = SystemState::UPLOAD_DATA;
         }
         break;
 
     case SystemState::UPLOAD_DATA:
-        systemState = SystemState::READ_DHT;
+        systemState = SystemState::READ_BME280;
         break;
     
     default:
@@ -106,8 +113,8 @@ void runSystemState(){
         case SystemState::INIT:
             // Initialize the components
             // Sensors
-            // bme280.begin();
-            dhtSensor.begin();
+            bme280.begin();
+            // dhtSensor.begin();
             neo6m.begin();
             // Display
             oledDisplay.begin();
@@ -132,7 +139,7 @@ void runSystemState(){
             // Display
             
             break;
-        case SystemState::READ_DHT:
+        case SystemState::READ_BME280:
             // WIFI
 
 
@@ -140,7 +147,7 @@ void runSystemState(){
 
             
             // Read data
-            dhtSensor.read();
+            bme280.read();
             // Serial monitor
             monitor();
             
@@ -148,6 +155,22 @@ void runSystemState(){
 
 
             break;
+        // case SystemState::READ_DHT:
+        //     // WIFI
+
+
+        //     // Action
+
+            
+        //     // Read data
+        //     dhtSensor.read();
+        //     // Serial monitor
+        //     monitor();
+            
+        //     // Display
+
+
+        //     break;
         case SystemState::READ_MQ2:
             // WIFI
 
@@ -173,7 +196,7 @@ void runSystemState(){
             
 
             // Read data
-            
+            neo6m.read();
 
             // Serial monitor
             monitor();
@@ -257,16 +280,16 @@ void monitor(){
     //     Serial.println("=========");
     //     break;
 
-    case SystemState::READ_DHT:
-        Serial.println("=========");
-        Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-        Serial.print("Sensor Status: "); Serial.println(dht22StatusToString(dhtSensor.getStatus()));
-        Serial.print("Sensor State: "); Serial.println(dht22StateToString(dhtSensor.getState()));
-        Serial.println("");
-        Serial.print("DHT22 Temperature: "); Serial.println(dhtSensor.getTemp());
-        Serial.print("DHT22 Humidity: "); Serial.println(dhtSensor.getHumid());
-        Serial.println("=========");
-        break;
+    // case SystemState::READ_DHT:
+    //     Serial.println("=========");
+    //     Serial.print("System State: "); Serial.println(systemStateToString(systemState));
+    //     Serial.print("Sensor Status: "); Serial.println(dht22StatusToString(dhtSensor.getStatus()));
+    //     Serial.print("Sensor State: "); Serial.println(dht22StateToString(dhtSensor.getState()));
+    //     Serial.println("");
+    //     Serial.print("DHT22 Temperature: "); Serial.println(dhtSensor.getTemp());
+    //     Serial.print("DHT22 Humidity: "); Serial.println(dhtSensor.getHumid());
+    //     Serial.println("=========");
+    //     break;
     
     case SystemState::READ_MQ2:
         Serial.println("=========");
