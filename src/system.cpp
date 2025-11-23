@@ -248,8 +248,8 @@ void monitor(){
     // case SystemState::READ_BME280:
     //     Serial.println("=========");
     //     Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-    //     Serial.print("Sensor Status: "); Serial.println(dht22StatusToString(bme280.getStatus()));
-    //     Serial.print("Sensor State: "); Serial.println(dht22StateToString(bme280.getState()));
+    //     Serial.print("Sensor Status: "); Serial.println(bme280StatusToString(bme280.getStatus()));
+    //     Serial.print("Sensor State: "); Serial.println(bme280StateToString(bme280.getState()));
     //     Serial.println("");
     //     Serial.print("BME280 Temperature: "); Serial.println(bme280.getTemp());
     //     Serial.print("BME280 Humidity: "); Serial.println(bme280.getHumid());

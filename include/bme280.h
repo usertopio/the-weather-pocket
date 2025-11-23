@@ -66,10 +66,10 @@ class Bme280 : public Component {
 };
 
 // Status
-const char* dht22StatusToString(Bme280::Status status);
+const char* bme280StatusToString(Bme280::Status status);
 
 // State
-const char* dht22StateToString(Bme280::State state);
+const char* bme280StateToString(Bme280::State state);
 
 
 #endif
