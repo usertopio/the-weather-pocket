@@ -19,6 +19,15 @@ void Neo6m::begin(){
     status = Status::ON;
 }
 
+// Status
+const char* neo6mStatusToString(Neo6m::Status status) {
+    switch (status) {
+        case Neo6m::Status::ON:  return "ON";
+        case Neo6m::Status::OFF: return "OFF";
+        default: return "UNKNOWN";
+    }
+}
+
 // State
 Neo6m::State Neo6m::getState() const {
     return state;
@@ -26,6 +35,15 @@ Neo6m::State Neo6m::getState() const {
 
 void Neo6m::setState(State newState) {
     state = newState;
+}
+
+const char* dht22StateToString(Neo6m::State state) {
+    switch (state) {
+        case Neo6m::State::INIT: return "INIT";
+        case Neo6m::State::WAIT_FOR_FIX: return "WAIT_FOR_FIX";
+        case Neo6m::State::GOT_FIX: return "GOT_FIX";
+        default: return "RUN_OUT_OF_STATE";
+    }
 }
 
 // Read data

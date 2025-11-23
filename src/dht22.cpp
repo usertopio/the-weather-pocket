@@ -20,6 +20,15 @@ void DhtSensor::begin() {
     status = Status::ON;
 }
 
+// Status
+const char* dht22StatusToString(DhtSensor::Status status) {
+    switch (status) {
+        case DhtSensor::Status::ON:  return "ON";
+        case DhtSensor::Status::OFF: return "OFF";
+        default: return "UNKNOWN";
+    }
+}
+
 // State
 DhtSensor::State DhtSensor::getState() const {
     return state;
@@ -27,6 +36,15 @@ DhtSensor::State DhtSensor::getState() const {
 
 void DhtSensor::setState(State newState) {
     state = newState;
+}
+
+const char* dht22StateToString(DhtSensor::State state) {
+    switch (state) {
+        case DhtSensor::State::INIT: return "INIT";
+        case DhtSensor::State::READ: return "READ";
+        case DhtSensor::State::FAIL: return "FAIL";
+        default: return "RUN_OUT_OF_STATE";
+    }
 }
 
 // Read data

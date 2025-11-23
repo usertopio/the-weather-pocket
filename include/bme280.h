@@ -65,4 +65,11 @@ class Bme280 : public Component {
         const int SEA_LEVEL_PRESSURE_HPA;
 };
 
+// Status
+const char* bme280StatusToString(Bme280::Status status);
+
+// State
+const char* bme280StateToString(Bme280::State state);
+
+
 #endif

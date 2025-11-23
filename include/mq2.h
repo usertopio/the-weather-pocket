@@ -41,4 +41,10 @@ private:
     float gas;
 };
 
+// Status
+const char* mq2StatusToString(Mq2::Status status);
+
+// State
+const char* mq2StateToString(Mq2::State state);
+
 #endif

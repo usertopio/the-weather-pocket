@@ -63,4 +63,10 @@ private:
     float hdop;
 };
 
+// Status
+const char* neo6mStatusToString(Neo6m::Status status);
+
+// State
+const char* neo6mStateToString(Neo6m::State state);
+
 #endif
