@@ -80,8 +80,17 @@ void Bme280::readHumid(){
     setState(State::READ);
 }
 
-void Bme280::readPressure(){
-    pressure = bme.readPressure();
+// void Bme280::readPressure(){
+//     pressure = bme.readPressure() / 100.0F;
+
+//     // Update state
+//     setState(State::READ);
+// }
+
+void Bme280::readPressure() {
+    rawPressure = bme.readPressure();  // Raw pressure in Pa
+
+    pressure = rawPressure / 100.0F;  // Convert to hPa
 
     // Update state
     setState(State::READ);
@@ -101,6 +110,10 @@ float Bme280::getTemp(){
 
 float Bme280::getHumid(){
     return humid;
+}
+
+float Bme280::getRawPressure(){
+    return rawPressure;
 }
 
 float Bme280::getPressure(){

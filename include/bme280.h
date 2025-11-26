@@ -38,6 +38,7 @@ class Bme280 : public Component {
         // Get data
         float getTemp();
         float getHumid();
+        float getRawPressure();
         float getPressure();
         float getAltitude();
 
@@ -57,6 +58,7 @@ class Bme280 : public Component {
         // My data
         float temp;
         float humid;
+        float rawPressure;
         float pressure;
         float altitude;
         const int SEA_LEVEL_PRESSURE_HPA;

@@ -7,7 +7,7 @@
 
 // Component instances
 // Sensors
-Bme280 bme280(6, 5, 4, 7, 1010);
+Bme280 bme280(6, 5, 4, 7, 1013.25);
 // DhtSensor dhtSensor(10);
 Mq2 mq2(10); // GPIO5 for production
 Neo6m neo6m(20, 21);
@@ -248,6 +248,7 @@ void runSystemState(){
 const char* systemStateToString(SystemState state) {
     switch (state) {
         case SystemState::INIT: return "INIT";
+        case SystemState::READ_BME280: return "READ_BME280";
         case SystemState::READ_DHT: return "READ_DHT";
         case SystemState::READ_MQ2: return "READ_MQ2";
         case SystemState::READ_NEO6M: return "READ_NEO6M";
@@ -267,18 +268,19 @@ void monitor(){
         Serial.println("=========");
         break;
 
-    // case SystemState::READ_BME280:
-    //     Serial.println("=========");
-    //     Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-    //     Serial.print("Sensor Status: "); Serial.println(bme280StatusToString(bme280.getStatus()));
-    //     Serial.print("Sensor State: "); Serial.println(bme280StateToString(bme280.getState()));
-    //     Serial.println("");
-    //     Serial.print("BME280 Temperature: "); Serial.println(bme280.getTemp());
-    //     Serial.print("BME280 Humidity: "); Serial.println(bme280.getHumid());
-    //     Serial.print("BME280 Pressure: "); Serial.println(bme280.getPressure());
-    //     Serial.print("BME280 Alititude: "); Serial.println(bme280.getAltitude());
-    //     Serial.println("=========");
-    //     break;
+    case SystemState::READ_BME280:
+        Serial.println("=========");
+        Serial.print("System State: "); Serial.println(systemStateToString(systemState));
+        Serial.print("Sensor Status: "); Serial.println(bme280StatusToString(bme280.getStatus()));
+        Serial.print("Sensor State: "); Serial.println(bme280StateToString(bme280.getState()));
+        Serial.println("");
+        Serial.print("BME280 Temperature: "); Serial.println(bme280.getTemp());
+        Serial.print("BME280 Humidity: "); Serial.println(bme280.getHumid());
+        Serial.print("BME280 Raw Pressure: "); Serial.println(bme280.getRawPressure());
+        Serial.print("BME280 Pressure: "); Serial.println(bme280.getPressure());
+        Serial.print("BME280 Alititude: "); Serial.println(bme280.getAltitude());
+        Serial.println("=========");
+        break;
 
     // case SystemState::READ_DHT:
     //     Serial.println("=========");

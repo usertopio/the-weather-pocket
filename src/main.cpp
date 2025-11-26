@@ -11,8 +11,8 @@ void setup() {
 }
 
 void loop() {
-    updateSystemState();
-    delay(2000);
     runSystemState();
-    delay(1000);
+    delay(500);
+    updateSystemState();
+    delay(500);
 }
