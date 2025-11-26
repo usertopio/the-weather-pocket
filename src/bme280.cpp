@@ -59,7 +59,8 @@ const char* bme280StateToString(Bme280::State state) {
 void Bme280::read(){
     temp = bme.readTemperature();
     humid = bme.readHumidity();
-    pressure = bme.readPressure();
+    rawPressure = bme.readPressure();
+    pressure = rawPressure / 100.0F;
     altitude = bme.readAltitude(SEA_LEVEL_PRESSURE_HPA);
 
     // Update state
