@@ -1,10 +1,10 @@
-#ifndef BUTTONWIFI_H
-#define BUTTONWIFI_H
+#ifndef BUTTONCONFIRM_H
+#define BUTTONCONFIRM_H
 
 // Header files
 #include "component.h"
 
-class ButtonWifi : public Component {
+class ButtonConfirm : public Component {
 public:
     // State
     enum class State {
@@ -13,7 +13,7 @@ public:
     };
 
     // Constructor
-    ButtonWifi(int signal_pin);
+    ButtonConfirm(int signal_pin);
 
     //  Initialization
     void begin() override;
@@ -31,8 +31,8 @@ private:
 
     // Data
     // My data
-    bool lastButtonWifiState;
-    bool currentButtonWifiState;
+    bool lastButtonConfirmState;
+    bool currentButtonConfirmState;
 };
 
 #endif

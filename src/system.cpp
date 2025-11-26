@@ -18,7 +18,7 @@ LedMq2 ledMq2(0);
 LedNeo6m ledNeo6m(1);
 // Buttons
 ButtonOledDisplay buttonOledDisplay(2);
-ButtonWifi buttonWifi(3);
+ButtonConfirm buttonConfirm(3);
 
 // State
 SystemState systemState = SystemState::INIT;
@@ -123,7 +123,7 @@ void runSystemState(){
             ledNeo6m.begin();
             // Buttons
             buttonOledDisplay.begin();
-            buttonWifi.begin();
+            buttonConfirm.begin();
             // WIFI
 
 

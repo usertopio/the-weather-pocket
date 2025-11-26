@@ -3,20 +3,20 @@
 
 // Header files
 // Child components
-#include "buttonWifi.h"
+#include "buttonConfirm.h"
 
 // Constructor
-ButtonWifi::ButtonWifi(int signal_pin) :
+ButtonConfirm::ButtonConfirm(int signal_pin) :
     // Pins
     SIGNAL_PIN(signal_pin),
     // State
     state(State::NOT_PRESSED),
 
-    lastButtonWifiState(false)
+    lastButtonConfirmState(false)
 {}
 
 // Initialization
-void ButtonWifi::begin() {
+void ButtonConfirm::begin() {
     // Pins
     pinMode(SIGNAL_PIN, INPUT_PULLUP);
     // State
@@ -24,10 +24,10 @@ void ButtonWifi::begin() {
 }
 
 // State
-ButtonWifi::State ButtonWifi::getState() const {
+ButtonConfirm::State ButtonConfirm::getState() const {
     return state;
 }
 
-void ButtonWifi::setState(State newState) {
+void ButtonConfirm::setState(State newState) {
     state = newState;
 }

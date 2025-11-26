@@ -17,7 +17,7 @@
 #include "ledNeo6m.h"
 // Buttons
 #include "buttonOledDisplay.h"
-#include "buttonWifi.h"
+#include "buttonConfirm.h"
 
 
 // Component instances
@@ -27,7 +27,7 @@ extern OledDisplay oledDisplay;
 extern LedMq2 ledMq2;
 extern LedNeo6m ledNeo6m;
 extern ButtonOledDisplay buttonOledDisplay;
-extern ButtonWifi buttonWifi;
+extern ButtonConfirm buttonConfirm;
 
 // State
 enum class SystemState {
