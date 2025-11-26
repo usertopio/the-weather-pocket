@@ -114,6 +114,7 @@ void runSystemState(){
             // Initialize the components
             // Sensors
             bme280.begin();
+            // delay(1000);
             // dhtSensor.begin();
             neo6m.begin();
             // Display
@@ -148,6 +149,7 @@ void runSystemState(){
             
             // Read data
             bme280.read();
+            // delay(2000);
             // Serial monitor
             monitor();
             
