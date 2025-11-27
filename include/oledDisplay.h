@@ -6,15 +6,23 @@
 #include <Adafruit_SSD1306.h>
 
 // Header files
+// Parent coponents
 #include "component.h"
+// Child coponents
+#include "buttonNext.h"
+#include "buttonConfirm.h"
+
+// Component instances
+extern ButtonNext buttonNext;
+extern ButtonConfirm buttonConfirm;
 
 class OledDisplay : public Component {
 public:
     // State
     enum class State {
-        INIT,
+        WELCOME,
         DISPLAY_WEATHER,
-        DISPLAY_NEO6M,
+        DISPLAY_LOCATION,
         DISPLAY_SETTING
     };
 
@@ -26,7 +34,9 @@ public:
 
     // State
     State getState() const;
-    void setState(State newState); 
+    void setState(State newState);
+
+    void updateDisplay();
 
 private:
     // Display configuration

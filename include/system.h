@@ -16,7 +16,7 @@
 #include "ledMq2.h"
 #include "ledNeo6m.h"
 // Buttons
-#include "buttonOledDisplay.h"
+#include "buttonNext.h"
 #include "buttonConfirm.h"
 
 
@@ -26,8 +26,6 @@ extern Neo6m neo6m;
 extern OledDisplay oledDisplay;
 extern LedMq2 ledMq2;
 extern LedNeo6m ledNeo6m;
-extern ButtonOledDisplay buttonOledDisplay;
-extern ButtonConfirm buttonConfirm;
 
 // State
 enum class SystemState {

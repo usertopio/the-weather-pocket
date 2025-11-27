@@ -16,9 +16,6 @@ OledDisplay oledDisplay(128, 64, 0x3C);
 // Leds
 LedMq2 ledMq2(0);
 LedNeo6m ledNeo6m(1);
-// Buttons
-ButtonOledDisplay buttonOledDisplay(2);
-ButtonConfirm buttonConfirm(3);
 
 // State
 SystemState systemState = SystemState::INIT;
@@ -123,7 +120,7 @@ void runSystemState(){
             ledMq2.begin();
             ledNeo6m.begin();
             // Buttons
-            buttonOledDisplay.begin();
+            buttonNext.begin();
             buttonConfirm.begin();
             // WIFI
 
@@ -138,6 +135,7 @@ void runSystemState(){
             monitor();
 
             // Display
+            oledDisplay.updateDisplay();
             
             break;
         case SystemState::READ_BME280:
@@ -145,7 +143,7 @@ void runSystemState(){
 
 
             // Action
-
+            
             
             // Read data
             bme280.read();
@@ -154,7 +152,7 @@ void runSystemState(){
             monitor();
             
             // Display
-
+            oledDisplay.updateDisplay();
 
             break;
         // case SystemState::READ_DHT:
@@ -187,7 +185,7 @@ void runSystemState(){
             monitor();
 
             // Display
-
+            oledDisplay.updateDisplay();
 
             break;
         case SystemState::READ_NEO6M:
@@ -204,7 +202,7 @@ void runSystemState(){
             monitor();
 
             // Display
-
+            oledDisplay.updateDisplay();
 
             break;
         case SystemState::PROCESS_DATA:
@@ -221,7 +219,7 @@ void runSystemState(){
             monitor();
 
             // Display
-
+            oledDisplay.updateDisplay();
 
             break;
         case SystemState::UPLOAD_DATA:
@@ -238,7 +236,7 @@ void runSystemState(){
             monitor();
 
             // Display
-
+            oledDisplay.updateDisplay();
 
             break;
         default:
