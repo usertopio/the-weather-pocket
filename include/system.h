@@ -26,8 +26,6 @@ extern Neo6m neo6m;
 extern OledDisplay oledDisplay;
 extern LedMq2 ledMq2;
 extern LedNeo6m ledNeo6m;
-extern ButtonNext buttonNext;
-extern ButtonConfirm buttonConfirm;
 
 // State
 enum class SystemState {
