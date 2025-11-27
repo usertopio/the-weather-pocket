@@ -17,7 +17,7 @@ OledDisplay oledDisplay(128, 64, 0x3C);
 LedMq2 ledMq2(0);
 LedNeo6m ledNeo6m(1);
 // Buttons
-ButtonOledDisplay buttonOledDisplay(2);
+ButtonNext buttonNext(2);
 ButtonConfirm buttonConfirm(3);
 
 // State
@@ -123,7 +123,7 @@ void runSystemState(){
             ledMq2.begin();
             ledNeo6m.begin();
             // Buttons
-            buttonOledDisplay.begin();
+            buttonNext.begin();
             buttonConfirm.begin();
             // WIFI
 

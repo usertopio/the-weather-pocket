@@ -3,20 +3,20 @@
 
 // Header files
 // Child components
-#include "buttonOledDisplay.h"
+#include "buttonNext.h"
 
 // Constructor
-ButtonOledDisplay::ButtonOledDisplay(int data_pin) :
+ButtonNext::ButtonNext(int data_pin) :
     // Pins
     DATA_PIN(data_pin),
     // State
     state(State::NOT_PRESSED),
 
-    lastButtonOledDisplayState(false)
+    lastButtonNextState(false)
 {}
 
 // Initialization
-void ButtonOledDisplay::begin() {
+void ButtonNext::begin() {
     // Pins
     pinMode(DATA_PIN, INPUT_PULLUP);
     // State
@@ -24,10 +24,10 @@ void ButtonOledDisplay::begin() {
 }
 
 // State
-ButtonOledDisplay::State ButtonOledDisplay::getState() const {
+ButtonNext::State ButtonNext::getState() const {
     return state;
 }
 
-void ButtonOledDisplay::setState(State newState) {
+void ButtonNext::setState(State newState) {
     state = newState;
 }

@@ -1,10 +1,10 @@
-#ifndef BUTTONOLEDDISPLAY_H
-#define BUTTONOLEDDISPLAY_H
+#ifndef BUTTONNEXT_H
+#define BUTTONNEXT_H
 
 // Header files
 #include "component.h"
 
-class ButtonOledDisplay : public Component {
+class ButtonNext : public Component {
 public:
     // State
     enum class State {
@@ -13,7 +13,7 @@ public:
     };
 
     // Constructor
-    ButtonOledDisplay(int data_pin);
+    ButtonNext(int data_pin);
 
     //  Initialization
     void begin() override;
@@ -31,8 +31,8 @@ private:
 
     // Data
     // My data
-    bool lastButtonOledDisplayState;
-    bool currentButtonOledDisplayState;
+    bool lastButtonNextState;
+    bool currentButtonNextState;
 };
 
 #endif
