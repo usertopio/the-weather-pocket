@@ -55,4 +55,8 @@ private:
     Adafruit_SSD1306 display;
 };
 
+// My data
+extern int y;
+extern int gap;
+
 #endif

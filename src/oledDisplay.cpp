@@ -1,11 +1,17 @@
     // Header files
+    // Parent components
+    #include "system.h" 
     // Child components
     #include "oledDisplay.h"
+    #include "bme280.h"
 
     // Component instances
     // Buttons
     ButtonNext buttonNext(2);
     ButtonConfirm buttonConfirm(3);
+
+    int y = 0;
+    int gap = 0;
 
     // Constructor
     OledDisplay::OledDisplay(int oled_sda, int oled_scl,int screen_width, int screen_height, int address):   
@@ -72,7 +78,29 @@
             display.setTextColor(SSD1306_WHITE);
             display.setCursor(0, 0);
             display.print("WEATHER");
+
+            display.setTextSize(1);
+
+            y = 20;     // starting Y
+            gap = 12;   // <-- line spacing (increase for more space)
+
+            display.setCursor(0, y);
+            display.print("Temp: "); display.println(bme280.getTemp());
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("Humid: "); display.println(bme280.getHumid());
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("Pressure: "); display.println(bme280.getPressure());
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("Altitude: "); display.println(bme280.getAltitude());
+
             display.display();
+
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
