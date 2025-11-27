@@ -8,8 +8,10 @@
     ButtonConfirm buttonConfirm(3);
 
     // Constructor
-    OledDisplay::OledDisplay(int screen_width, int screen_height, int address):   
+    OledDisplay::OledDisplay(int oled_sda, int oled_scl,int screen_width, int screen_height, int address):   
         // Display configuration
+        OLED_SDA(oled_sda),
+        OLED_SCL(oled_scl),
         SCREEN_WIDTH(screen_width),
         SCREEN_HEIGHT(screen_height),
         ADDRESS(address),
@@ -23,7 +25,9 @@
     // Initialization
     void OledDisplay::begin(){
         // Libraries
+        Wire.begin(OLED_SDA, OLED_SCL);
         display.begin(SSD1306_SWITCHCAPVCC, ADDRESS);
+
         // State
         status = Status::ON;
     }

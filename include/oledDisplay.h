@@ -27,7 +27,7 @@ public:
     };
 
     // Constructor
-    OledDisplay(int screen_width, int screen_height, int oled_reset);
+    OledDisplay(int oled_sda, int oled_scl, int screen_width, int screen_height, int oled_reset);
 
     //  Initialization
     void begin();
@@ -40,6 +40,8 @@ public:
 
 private:
     // Display configuration
+    const int OLED_SDA;
+    const int OLED_SCL;
     const int SCREEN_WIDTH;
     const int SCREEN_HEIGHT;
     const int ADDRESS;
