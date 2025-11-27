@@ -12,7 +12,7 @@ Bme280 bme280(6, 5, 4, 7, 1013.25);
 Mq2 mq2(10); // GPIO5 for production
 Neo6m neo6m(20, 21);
 // Display
-OledDisplay oledDisplay(128, 64, 0x3C);
+OledDisplay oledDisplay(8, 9, 128, 64, 0x3C);
 // Leds
 LedMq2 ledMq2(0);
 LedNeo6m ledNeo6m(1);
