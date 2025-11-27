@@ -23,7 +23,7 @@
     // Initialization
     void OledDisplay::begin(){
         // Libraries
-        display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+        display.begin(SSD1306_SWITCHCAPVCC, ADDRESS);
         // State
         status = Status::ON;
     }
@@ -45,7 +45,12 @@
             // Serial monitor
             Serial.println("Display: WELCOME");
             // Content
-
+            display.clearDisplay();
+            display.setTextSize(3);
+            display.setTextColor(SSD1306_WHITE);
+            display.setCursor(128, 64);
+            display.print("WELCOME");
+            display.display();
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
@@ -58,7 +63,12 @@
             // Serial monitor
             Serial.println("Display: DISPLAY_WEATHER");
             // Content
-
+            display.clearDisplay();
+            display.setTextSize(3);
+            display.setTextColor(SSD1306_WHITE);
+            display.setCursor(128, 64);
+            display.print("WELCOME");
+            display.display();
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
@@ -70,7 +80,12 @@
             // Serial monitor
             Serial.println("Display: DISPLAY_LOCATION");
             // Content
-
+            display.clearDisplay();
+            display.setTextSize(3);
+            display.setTextColor(SSD1306_WHITE);
+            display.setCursor(128, 64);
+            display.print("WELCOME");
+            display.display();
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
@@ -82,7 +97,12 @@
             // Serial monitor
             Serial.println("Display: DISPLAY_SETTING");
             // Content
-
+            display.clearDisplay();
+            display.setTextSize(3);
+            display.setTextColor(SSD1306_WHITE);
+            display.setCursor(128, 64);
+            display.print("WELCOME");
+            display.display();
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
