@@ -50,9 +50,9 @@
             Serial.println("Display: WELCOME");
             // Content
             display.clearDisplay();
-            display.setTextSize(3);
+            display.setTextSize(2);
             display.setTextColor(SSD1306_WHITE);
-            display.setCursor(128, 64);
+            display.setCursor(0, 0);
             display.print("WELCOME");
             display.display();
             // Check button next
@@ -68,10 +68,10 @@
             Serial.println("Display: DISPLAY_WEATHER");
             // Content
             display.clearDisplay();
-            display.setTextSize(3);
+            display.setTextSize(2);
             display.setTextColor(SSD1306_WHITE);
-            display.setCursor(128, 64);
-            display.print("WELCOME");
+            display.setCursor(0, 0);
+            display.print("WEATHER");
             display.display();
             // Check button next
             if (buttonNext.isButtonNextPressed())
@@ -85,10 +85,10 @@
             Serial.println("Display: DISPLAY_LOCATION");
             // Content
             display.clearDisplay();
-            display.setTextSize(3);
+            display.setTextSize(2);
             display.setTextColor(SSD1306_WHITE);
-            display.setCursor(128, 64);
-            display.print("WELCOME");
+            display.setCursor(0, 0);
+            display.print("LOCATION");
             display.display();
             // Check button next
             if (buttonNext.isButtonNextPressed())
@@ -102,10 +102,10 @@
             Serial.println("Display: DISPLAY_SETTING");
             // Content
             display.clearDisplay();
-            display.setTextSize(3);
+            display.setTextSize(2);
             display.setTextColor(SSD1306_WHITE);
-            display.setCursor(128, 64);
-            display.print("WELCOME");
+            display.setCursor(0, 0);
+            display.print("SETTING");
             display.display();
             // Check button next
             if (buttonNext.isButtonNextPressed())
