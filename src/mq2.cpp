@@ -49,7 +49,7 @@ const char* mq2StateToString(Mq2::State state) {
 // Read data
 void Mq2::readGas(){
 
-    gas = digitalRead(DATA_PIN);
+    gas = analogRead(DATA_PIN);
 
     // Update state
     setState(State::READ);

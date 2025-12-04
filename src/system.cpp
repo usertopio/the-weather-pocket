@@ -8,7 +8,7 @@
 // Component instances
 // Sensors
 Bme280 bme280(6, 5, 4, 7, 1013.25);
-Mq2 mq2(10); // GPIO5 for production
+Mq2 mq2(2);
 Neo6m neo6m(20, 21);
 // Display
 OledDisplay oledDisplay(8, 9, 128, 64, 0x3C);
@@ -147,7 +147,7 @@ void runSystemState(){
             
 
             // Read data
-            mq2.getGas();
+            mq2.readGas();
 
             // Serial monitor
             monitor();
