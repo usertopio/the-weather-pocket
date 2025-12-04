@@ -7,7 +7,7 @@
 
     // Component instances
     // Buttons
-    ButtonNext buttonNext(2);
+    ButtonNext buttonNext(10);
     ButtonConfirm buttonConfirm(3);
 
     int y = 0;

@@ -49,8 +49,6 @@ void monitor();
 
 // Data
 // Buffer
-extern bool isMQ2On;
-extern bool isNEO6MOn;
 extern bool isWifiConnect;
 
 

@@ -21,8 +21,6 @@ SystemState systemState = SystemState::INIT;
 
 // Data
 // Buffer
-bool isMQ2On = true;
-bool isNEO6MOn = true;
 bool isWifiConnect = true;
 
 // State
