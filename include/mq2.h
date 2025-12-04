@@ -13,6 +13,25 @@ public:
         FAIL
     };
 
+    enum class LpgStatus {
+        NORMAL,
+        WARNING,
+        DANGER
+    };
+
+    enum class CoStatus {
+        NORMAL,
+        WARNING,
+        DANGER,
+        SEVERE
+    };
+
+    enum class SmokeStatus {
+        NORMAL,
+        WARNING,
+        DANGER
+    };
+
     // Constructor
     Mq2(int data_pin);
 
@@ -21,7 +40,11 @@ public:
 
     // State
     State getState() const;
-    void setState(State newState); 
+    void setState(State newState);
+    
+    void setLpgStatus(LpgStatus newLpgStatus);
+    void setCoStatus(CoStatus newCoStatus);
+    void setSmokeStatus(SmokeStatus newSmokeStatus);
 
     // Read data
     void readRaw();
@@ -29,6 +52,11 @@ public:
     void readCO();
     void readSmoke();
 
+    // Get status
+    LpgStatus getLpgStatus() const;
+    CoStatus getCoStatus() const;
+    SmokeStatus getSmokeStatus() const;
+    
     // Get data
     float getRaw();
     float getLPG();
@@ -41,6 +69,10 @@ private:
 
     // State
     State state;
+
+    LpgStatus lpgStatus;
+    CoStatus coStatus;
+    SmokeStatus  smokeStatus;
 
     // Data
     // My data

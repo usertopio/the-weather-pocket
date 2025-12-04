@@ -33,8 +33,32 @@ Mq2::State Mq2::getState() const {
     return state;
 }
 
+Mq2::LpgStatus Mq2::getLpgStatus() const {
+    return lpgStatus;
+}
+
+Mq2::CoStatus Mq2::getCoStatus() const {
+    return coStatus;
+}
+
+Mq2::SmokeStatus Mq2::getSmokeStatus() const {
+    return smokeStatus;
+}
+
 void Mq2::setState(State newState) {
     state = newState;
+}
+
+void Mq2::setLpgStatus(LpgStatus newLpgStatus) {
+    lpgStatus = newLpgStatus;
+}
+
+void Mq2::setCoStatus(CoStatus newCoStatus) {
+    coStatus = newCoStatus;
+}
+
+void Mq2::setSmokeStatus(SmokeStatus newSmokeStatus) {
+    smokeStatus = newSmokeStatus;
 }
 
 const char* mq2StateToString(Mq2::State state) {
@@ -65,6 +89,14 @@ void Mq2::readLPG() {
 
     lpg_ppm = calculatePPM(ratio, 1000, -2.0);
 
+    if (lpg_ppm <= 300){
+        setLpgStatus(LpgStatus::NORMAL);
+    } else if (lpg_ppm > 300 && lpg_ppm <= 1000){
+        setLpgStatus(LpgStatus::WARNING);
+    } else if (lpg_ppm > 1000){
+        setLpgStatus(LpgStatus::DANGER);
+    }
+
     // Update state
     setState(State::READ);
 }
@@ -75,6 +107,16 @@ void Mq2::readCO() {
 
     co_ppm = calculatePPM(ratio, 50, -1.5);
 
+    if (co_ppm <= 9){
+        setCoStatus(CoStatus::NORMAL);
+    } else if (co_ppm > 9 && co_ppm <= 50){
+        setCoStatus(CoStatus::WARNING);
+    } else if (co_ppm > 50 && co_ppm <= 200){
+        setCoStatus(CoStatus::DANGER);
+    } else if (co_ppm > 200){
+        setCoStatus(CoStatus::SEVERE);
+    }
+
     // Update state
     setState(State::READ);
 }
@@ -84,6 +126,14 @@ void Mq2::readSmoke() {
     ratio = raw / 1023.0;
 
     smoke_ppm = calculatePPM(ratio, 200, -1.7);
+
+    if (smoke_ppm <= 100){
+        setSmokeStatus(SmokeStatus::NORMAL);
+    } else if (smoke_ppm > 100 && smoke_ppm <= 300){
+        setSmokeStatus(SmokeStatus::WARNING);
+    } else if (smoke_ppm > 300){
+        setSmokeStatus(SmokeStatus::DANGER);
+    }
 
     // Update state
     setState(State::READ);
