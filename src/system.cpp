@@ -8,7 +8,6 @@
 // Component instances
 // Sensors
 Bme280 bme280(6, 5, 4, 7, 1013.25);
-// DhtSensor dhtSensor(10);
 Mq2 mq2(10); // GPIO5 for production
 Neo6m neo6m(20, 21);
 // Display
@@ -31,8 +30,6 @@ void updateSystemState(){
     switch (systemState)
     {
     case SystemState::INIT:
-        // if (dhtSensor.getStatus() == DhtSensor::Status::ON){
-        //     systemState = SystemState::READ_DHT;
         if (bme280.getStatus() == Bme280::Status::ON){
             systemState = SystemState::READ_BME280;
         } else if (mq2.getStatus() == Mq2::Status::ON){
@@ -57,18 +54,6 @@ void updateSystemState(){
             systemState = SystemState::UPLOAD_DATA;
         }
         break;
-    
-    // case SystemState::READ_DHT:
-    //     if (isMQ2On){
-    //         systemState = SystemState::READ_MQ2;
-    //     }
-    //     else if (isNEO6MOn){
-    //         systemState = SystemState::READ_NEO6M;
-    //     }
-    //     else{
-    //         systemState = SystemState::PROCESS_DATA;
-    //     }
-    //     break;
     // #13
     case SystemState::READ_MQ2:
         if (neo6m.getStatus() == Neo6m::Status::ON){
@@ -112,7 +97,6 @@ void runSystemState(){
             // Sensors
             bme280.begin();
             // delay(1000);
-            // dhtSensor.begin();
             neo6m.begin();
             // Display
             oledDisplay.begin();
@@ -155,22 +139,6 @@ void runSystemState(){
             oledDisplay.updateDisplay();
 
             break;
-        // case SystemState::READ_DHT:
-        //     // WIFI
-
-
-        //     // Action
-
-            
-        //     // Read data
-        //     dhtSensor.read();
-        //     // Serial monitor
-        //     monitor();
-            
-        //     // Display
-
-
-        //     break;
         case SystemState::READ_MQ2:
             // WIFI
 
@@ -249,7 +217,6 @@ const char* systemStateToString(SystemState state) {
     switch (state) {
         case SystemState::INIT: return "INIT";
         case SystemState::READ_BME280: return "READ_BME280";
-        case SystemState::READ_DHT: return "READ_DHT";
         case SystemState::READ_MQ2: return "READ_MQ2";
         case SystemState::READ_NEO6M: return "READ_NEO6M";
         case SystemState::PROCESS_DATA: return "PROCESS_DATA";
@@ -281,17 +248,6 @@ void monitor(){
         Serial.print("BME280 Alititude: "); Serial.println(bme280.getAltitude());
         Serial.println("=========");
         break;
-
-    // case SystemState::READ_DHT:
-    //     Serial.println("=========");
-    //     Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-    //     Serial.print("Sensor Status: "); Serial.println(dht22StatusToString(dhtSensor.getStatus()));
-    //     Serial.print("Sensor State: "); Serial.println(dht22StateToString(dhtSensor.getState()));
-    //     Serial.println("");
-    //     Serial.print("DHT22 Temperature: "); Serial.println(dhtSensor.getTemp());
-    //     Serial.print("DHT22 Humidity: "); Serial.println(dhtSensor.getHumid());
-    //     Serial.println("=========");
-    //     break;
     
     case SystemState::READ_MQ2:
         Serial.println("=========");
@@ -351,7 +307,7 @@ void monitor(){
         break;
     
     default:
-        
+        Serial.println("Run out of display state!");
         break;
     }
 }

@@ -7,7 +7,6 @@
 // Child components
 // Sensors
 #include "bme280.h"
-#include "dht22.h"
 #include "mq2.h"
 #include "neo6m.h"
 // Display
@@ -21,7 +20,6 @@
 
 
 // Component instances
-// extern DhtSensor dhtSensor;
 extern Bme280 bme280;
 extern Mq2 mq2;
 extern Neo6m neo6m;
@@ -33,7 +31,6 @@ extern LedNeo6m ledNeo6m;
 enum class SystemState {
     INIT,
     READ_BME280,
-    READ_DHT,
     READ_MQ2,
     READ_NEO6M,
     PROCESS_DATA,
