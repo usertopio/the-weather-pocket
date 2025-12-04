@@ -47,12 +47,27 @@
         state = newState;
     }
 
+    void OledDisplay::displayHeader(const char* header_name){
+        display.clearDisplay();
+
+        display.setTextSize(2);
+        display.setTextColor(SSD1306_WHITE);
+        display.setCursor(0, 0);
+        display.print(header_name);
+
+        display.display();
+    }
+
+
     void OledDisplay::resetGap(){
         y = 0;
         gap = 0;
     }
 
     void OledDisplay::updateDisplay(){
+        y = 20;
+        gap = 12;
+
         buttonNext.readSignal();
         switch (getState())
         {
@@ -60,12 +75,7 @@
             // Serial monitor
             Serial.println("Display: WELCOME");
             // Content
-            display.clearDisplay();
-            display.setTextSize(2);
-            display.setTextColor(SSD1306_WHITE);
-            display.setCursor(0, 0);
-            display.print("WELCOME");
-            display.display();
+            displayHeader("WELCOME");
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
@@ -79,15 +89,9 @@
             // Serial monitor
             Serial.println("Display: DISPLAY_WEATHER");
             // Content
-            display.clearDisplay();
-            display.setTextSize(2);
-            display.setTextColor(SSD1306_WHITE);
-            display.setCursor(0, 0);
-            display.print("WEATHER");
+            displayHeader("WEATHER");
 
             display.setTextSize(1);
-            y = 20;
-            gap = 12;
 
             display.setCursor(0, y);
             display.print("Temp: "); display.println(bme280.getTemp());
@@ -114,15 +118,9 @@
             // Serial monitor
             Serial.println("Display: DISPLAY_GAS");
             // Content
-            display.clearDisplay();
-            display.setTextSize(2);
-            display.setTextColor(SSD1306_WHITE);
-            display.setCursor(0, 0);
-            display.print("GAS");
+            displayHeader("GAS");
 
             display.setTextSize(1);
-            y = 20;
-            gap = 12;
 
             display.setCursor(0, y);
             display.print("Raw: "); display.println(mq2.getRaw());
@@ -153,15 +151,9 @@
             // Serial monitor
             Serial.println("Display: DISPLAY_LOCATION");
             // Content
-            display.clearDisplay();
-            display.setTextSize(2);
-            display.setTextColor(SSD1306_WHITE);
-            display.setCursor(0, 0);
-            display.print("LOCATION");
+            displayHeader("LOCATION");
 
             display.setTextSize(1);
-            y = 20;
-            gap = 12;
 
             display.setCursor(0, y);
             display.print("Temp: "); display.println(bme280.getTemp());
@@ -192,15 +184,9 @@
             // Serial monitor
             Serial.println("Display: DISPLAY_SETTING");
             // Content
-            display.clearDisplay();
-            display.setTextSize(2);
-            display.setTextColor(SSD1306_WHITE);
-            display.setCursor(0, 0);
-            display.print("SETTING");
+            displayHeader("SETTING");
 
             display.setTextSize(1);
-            y = 20;
-            gap = 12;
 
             display.setCursor(0, y);
             display.print("Temp: "); display.println(bme280.getTemp());
