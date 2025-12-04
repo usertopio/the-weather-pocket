@@ -39,6 +39,10 @@ public:
 
     void updateDisplay();
 
+    void resetGap();
+
+    void displayContent(int text_size, int y_start, int gap);
+
 private:
     // Display configuration
     const int OLED_SDA;

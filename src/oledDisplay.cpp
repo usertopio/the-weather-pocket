@@ -47,6 +47,11 @@
         state = newState;
     }
 
+    void OledDisplay::resetGap(){
+        y = 0;
+        gap = 0;
+    }
+
     void OledDisplay::updateDisplay(){
         buttonNext.readSignal();
         switch (getState())
@@ -65,6 +70,7 @@
             if (buttonNext.isButtonNextPressed())
             {
                 setState(State::DISPLAY_WEATHER);
+                resetGap();
             }
             
             break;
@@ -80,9 +86,82 @@
             display.print("WEATHER");
 
             display.setTextSize(1);
+            y = 20;
+            gap = 12;
 
-            y = 20;     // starting Y
-            gap = 12;   // <-- line spacing (increase for more space)
+            display.setCursor(0, y);
+            display.print("Temp: "); display.println(bme280.getTemp());
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("Humid: "); display.println(bme280.getHumid());
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("Pressure: "); display.println(bme280.getPressure());
+
+            display.display();
+
+            // Check button next
+            if (buttonNext.isButtonNextPressed())
+            {
+                setState(State::DISPLAY_GAS);
+                resetGap();
+            }
+            break;
+
+        case State::DISPLAY_GAS:
+            // Serial monitor
+            Serial.println("Display: DISPLAY_GAS");
+            // Content
+            display.clearDisplay();
+            display.setTextSize(2);
+            display.setTextColor(SSD1306_WHITE);
+            display.setCursor(0, 0);
+            display.print("GAS");
+
+            display.setTextSize(1);
+            y = 20;
+            gap = 12;
+
+            display.setCursor(0, y);
+            display.print("Raw: "); display.println(mq2.getRaw());
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("LPG: "); display.println(mq2.getLPG());
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("CO: "); display.println(mq2.getCO());
+
+            y += gap;
+            display.setCursor(0, y);
+            // display.print("Altitude: "); display.println(bme280.getAltitude());
+            display.print("Smoke: "); display.println(mq2.getSmoke());
+
+            display.display();
+            // Check button next
+            if (buttonNext.isButtonNextPressed())
+            {
+                setState(State::DISPLAY_LOCATION);
+                resetGap();
+            }
+            break;
+        
+        case State::DISPLAY_LOCATION:
+            // Serial monitor
+            Serial.println("Display: DISPLAY_LOCATION");
+            // Content
+            display.clearDisplay();
+            display.setTextSize(2);
+            display.setTextColor(SSD1306_WHITE);
+            display.setCursor(0, 0);
+            display.print("LOCATION");
+
+            display.setTextSize(1);
+            y = 20;
+            gap = 12;
 
             display.setCursor(0, y);
             display.print("Temp: "); display.println(bme280.getTemp());
@@ -101,45 +180,11 @@
             display.print("Gas: "); display.println(mq2.getRaw());
 
             display.display();
-
-            // Check button next
-            if (buttonNext.isButtonNextPressed())
-            {
-                setState(State::DISPLAY_GAS);
-            }
-            break;
-
-        case State::DISPLAY_GAS:
-            // Serial monitor
-            Serial.println("Display: DISPLAY_GAS");
-            // Content
-            display.clearDisplay();
-            display.setTextSize(2);
-            display.setTextColor(SSD1306_WHITE);
-            display.setCursor(0, 0);
-            display.print("GAS");
-            display.display();
-            // Check button next
-            if (buttonNext.isButtonNextPressed())
-            {
-                setState(State::DISPLAY_LOCATION);
-            }
-            break;
-        
-        case State::DISPLAY_LOCATION:
-            // Serial monitor
-            Serial.println("Display: DISPLAY_LOCATION");
-            // Content
-            display.clearDisplay();
-            display.setTextSize(2);
-            display.setTextColor(SSD1306_WHITE);
-            display.setCursor(0, 0);
-            display.print("LOCATION");
-            display.display();
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
                 setState(State::DISPLAY_SETTING);
+                resetGap();
             }
             break;
 
@@ -152,11 +197,33 @@
             display.setTextColor(SSD1306_WHITE);
             display.setCursor(0, 0);
             display.print("SETTING");
+
+            display.setTextSize(1);
+            y = 20;
+            gap = 12;
+
+            display.setCursor(0, y);
+            display.print("Temp: "); display.println(bme280.getTemp());
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("Humid: "); display.println(bme280.getHumid());
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("Pressure: "); display.println(bme280.getPressure());
+
+            y += gap;
+            display.setCursor(0, y);
+            // display.print("Altitude: "); display.println(bme280.getAltitude());
+            display.print("Gas: "); display.println(mq2.getRaw());
+            
             display.display();
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
                 setState(State::DISPLAY_WEATHER);
+                resetGap();
             }
             break;
         
@@ -164,6 +231,7 @@
             // Serial monitor
             Serial.println("Run out of oled display state!");
             setState(State::DISPLAY_WEATHER);
+            resetGap();
             break;
         }
     }
