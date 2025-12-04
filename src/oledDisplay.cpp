@@ -105,10 +105,27 @@
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
-                setState(State::DISPLAY_LOCATION);
+                setState(State::DISPLAY_GAS);
             }
             break;
 
+        case State::DISPLAY_GAS:
+            // Serial monitor
+            Serial.println("Display: DISPLAY_GAS");
+            // Content
+            display.clearDisplay();
+            display.setTextSize(2);
+            display.setTextColor(SSD1306_WHITE);
+            display.setCursor(0, 0);
+            display.print("GAS");
+            display.display();
+            // Check button next
+            if (buttonNext.isButtonNextPressed())
+            {
+                setState(State::DISPLAY_LOCATION);
+            }
+            break;
+        
         case State::DISPLAY_LOCATION:
             // Serial monitor
             Serial.println("Display: DISPLAY_LOCATION");
@@ -125,7 +142,7 @@
                 setState(State::DISPLAY_SETTING);
             }
             break;
-        
+
         case State::DISPLAY_SETTING:
             // Serial monitor
             Serial.println("Display: DISPLAY_SETTING");
