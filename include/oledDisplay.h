@@ -22,6 +22,7 @@ public:
     enum class State {
         WELCOME,
         DISPLAY_WEATHER,
+        DISPLAY_GAS,
         DISPLAY_LOCATION,
         DISPLAY_SETTING
     };
@@ -37,6 +38,10 @@ public:
     void setState(State newState);
 
     void updateDisplay();
+
+    void resetGap();
+
+    void displayContent(int text_size, int y_start, int gap);
 
 private:
     // Display configuration

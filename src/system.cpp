@@ -8,7 +8,7 @@
 // Component instances
 // Sensors
 Bme280 bme280(6, 5, 4, 7, 1013.25);
-Mq2 mq2(10); // GPIO5 for production
+Mq2 mq2(2);
 Neo6m neo6m(20, 21);
 // Display
 OledDisplay oledDisplay(8, 9, 128, 64, 0x3C);
@@ -21,8 +21,6 @@ SystemState systemState = SystemState::INIT;
 
 // Data
 // Buffer
-bool isMQ2On = true;
-bool isNEO6MOn = true;
 bool isWifiConnect = true;
 
 // State
@@ -147,7 +145,9 @@ void runSystemState(){
             
 
             // Read data
-            mq2.getGas();
+            mq2.readLPG();
+            mq2.readCO();
+            mq2.readSmoke();
 
             // Serial monitor
             monitor();
@@ -255,7 +255,10 @@ void monitor(){
         Serial.print("Sensor Status: "); Serial.println(mq2StatusToString(mq2.getStatus()));
         Serial.print("Sensor State: "); Serial.println(mq2StateToString(mq2.getState()));
         Serial.println("");
-        Serial.print("MQ2 Gas: "); Serial.println(mq2.getGas());
+        Serial.print("MQ2 Raw: "); Serial.println(mq2.getRaw());
+        Serial.print("MQ2 LPG: "); Serial.println(mq2.getLPG());
+        Serial.print("MQ2 CO: "); Serial.println(mq2.getCO());
+        Serial.print("MQ2 Smoke: "); Serial.println(mq2.getSmoke());
         Serial.println("=========");
         break;
     
