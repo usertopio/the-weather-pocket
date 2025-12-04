@@ -41,7 +41,7 @@ public:
 
     void resetGap();
 
-    void displayContent(int text_size, int y_start, int gap);
+    void displayHeader(const char* header_name);
 
 private:
     // Display configuration
