@@ -24,10 +24,16 @@ public:
     void setState(State newState); 
 
     // Read data
-    void readGas();
+    void readRaw();
+    void readLPG();
+    void readCO();
+    void readSmoke();
 
     // Get data
-    float getGas();
+    float getRaw();
+    float getLPG();
+    float getCO();
+    float getSmoke();
 
 private:
     // Pins
@@ -38,7 +44,14 @@ private:
 
     // Data
     // My data
-    float gas;
+    float raw;
+    float lpg_ppm;
+    float co_ppm;
+    float smoke_ppm;
+
+    float ratio;
+
+    float calculatePPM(float ratio, float a, float b);
 };
 
 // Status

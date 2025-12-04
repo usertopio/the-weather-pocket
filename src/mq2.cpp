@@ -46,18 +46,62 @@ const char* mq2StateToString(Mq2::State state) {
     }
 }
 
-// Read data
-void Mq2::readGas(){
-
-    gas = analogRead(DATA_PIN);
+void Mq2::readRaw() {
+    raw = analogRead(DATA_PIN);
 
     // Update state
     setState(State::READ);
 }
 
+// Generic formula for gas estimation
+float Mq2::calculatePPM(float ratio, float a, float b) {
+    // ppm = a * (ratio ^ b)
+    return a * pow(ratio, b);
+}
 
+void Mq2::readLPG() {
+    readRaw();
+    ratio = raw / 1023.0;   // simple scaling
+
+    lpg_ppm = calculatePPM(ratio, 1000, -2.0);
+
+    // Update state
+    setState(State::READ);
+}
+
+void Mq2::readCO() {
+    readRaw();
+    ratio = raw / 1023.0;
+
+    co_ppm = calculatePPM(ratio, 50, -1.5);
+
+    // Update state
+    setState(State::READ);
+}
+
+void Mq2::readSmoke() {
+    readRaw();
+    ratio = raw / 1023.0;
+
+    smoke_ppm = calculatePPM(ratio, 200, -1.7);
+
+    // Update state
+    setState(State::READ);
+}
 
 // Get data
-float Mq2::getGas(){
-    return gas;
+float Mq2::getRaw(){
+    return raw;
+}
+
+float Mq2::getLPG(){
+    return lpg_ppm;
+}
+
+float Mq2::getCO(){
+    return co_ppm;
+}
+
+float Mq2::getSmoke(){
+    return smoke_ppm;
 }

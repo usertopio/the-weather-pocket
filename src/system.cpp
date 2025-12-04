@@ -145,7 +145,9 @@ void runSystemState(){
             
 
             // Read data
-            mq2.readGas();
+            mq2.readLPG();
+            mq2.readCO();
+            mq2.readSmoke();
 
             // Serial monitor
             monitor();
@@ -253,7 +255,10 @@ void monitor(){
         Serial.print("Sensor Status: "); Serial.println(mq2StatusToString(mq2.getStatus()));
         Serial.print("Sensor State: "); Serial.println(mq2StateToString(mq2.getState()));
         Serial.println("");
-        Serial.print("MQ2 Gas: "); Serial.println(mq2.getGas());
+        Serial.print("MQ2 Raw: "); Serial.println(mq2.getRaw());
+        Serial.print("MQ2 LPG: "); Serial.println(mq2.getLPG());
+        Serial.print("MQ2 CO: "); Serial.println(mq2.getCO());
+        Serial.print("MQ2 Smoke: "); Serial.println(mq2.getSmoke());
         Serial.println("=========");
         break;
     

@@ -97,7 +97,8 @@
 
             y += gap;
             display.setCursor(0, y);
-            display.print("Altitude: "); display.println(bme280.getAltitude());
+            // display.print("Altitude: "); display.println(bme280.getAltitude());
+            display.print("Gas: "); display.println(mq2.getRaw());
 
             display.display();
 
