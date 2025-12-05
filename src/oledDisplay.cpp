@@ -127,16 +127,21 @@
 
             display.setTextSize(1);
             display.setCursor(0, y);
-            display.print("LPG: "); display.println(mq2LpgStatusToStr(mq2.getLpgStatus()));
+            // display.print("LPG: "); display.println(mq2LpgStatusToStr(mq2.getLpgStatus()));
+            display.print("LPG: "); display.println(mq2.statusToStr(mq2.getStatus()) == "ON" ? mq2LpgStatusToStr(mq2.getLpgStatus()) : "-");
+
 
             y += gap;
             display.setCursor(0, y);
-            display.print("CO: "); display.println(mq2CoStatusToStr(mq2.getCoStatus()));
+            // display.print("CO: "); display.println(mq2CoStatusToStr(mq2.getCoStatus()));
+            display.print("CO: "); display.println(mq2.statusToStr(mq2.getStatus()) == "ON" ? mq2CoStatusToStr(mq2.getCoStatus()) : "-");
 
             y += gap;
             display.setCursor(0, y);
             // display.print("Altitude: "); display.println(bme280.getAltitude());
-            display.print("Smoke: "); display.println(mq2SmokeStatusToStr(mq2.getSmokeStatus()));
+            // display.print("Smoke: "); display.println(mq2SmokeStatusToStr(mq2.getSmokeStatus()));
+            display.print("Smoke: "); display.println(mq2.statusToStr(mq2.getStatus()) == "ON" ? mq2SmokeStatusToStr(mq2.getSmokeStatus()) : "-");
+
             display.display();
 
             // Check confirm button
@@ -162,20 +167,25 @@
 
             display.setTextSize(1);
             display.setCursor(0, y);
-            display.print("Raw: "); display.println(mq2.getRaw());
+            // display.print("Raw: "); display.println(mq2.getRaw());
+            display.print("Raw: "); display.println(mq2.statusToStr(mq2.getStatus()) == "ON" ? String(mq2.getRaw()) : "-");
 
             y += gap;
             display.setCursor(0, y);
-            display.print("LPG: "); display.println(mq2.getLPG());
+            // display.print("LPG: "); display.println(mq2.getLPG());
+            display.print("LPG: "); display.println(mq2.statusToStr(mq2.getStatus()) == "ON" ? String(mq2.getLPG()) : "-");
 
             y += gap;
             display.setCursor(0, y);
-            display.print("CO: "); display.println(mq2.getCO());
+            // display.print("CO: "); display.println(mq2.getCO());
+            display.print("CO: "); display.println(mq2.statusToStr(mq2.getStatus()) == "ON" ? String(mq2.getCO()) : "-");
 
             y += gap;
             display.setCursor(0, y);
             // display.print("Altitude: "); display.println(bme280.getAltitude());
-            display.print("Smoke: "); display.println(mq2.getSmoke());
+            // display.print("Smoke: "); display.println(mq2.getSmoke());
+            display.print("Smoke: "); display.println(mq2.statusToStr(mq2.getStatus()) == "ON" ? String(mq2.getSmoke()) : "-");
+
             display.display();
 
             // Check confirm button
@@ -201,20 +211,18 @@
             display.setTextSize(1);
 
             display.setCursor(0, y);
-            display.print("Temp: "); display.println(bme280.getTemp());
+            // display.print("Temp: "); display.println(bme280.getTemp());
+            display.print("Temp: "); display.println(bme280.statusToStr(bme280.getStatus()) == "ON" ? String(bme280.getTemp()) : "-");
 
             y += gap;
             display.setCursor(0, y);
-            display.print("Humid: "); display.println(bme280.getHumid());
+            // display.print("Humid: "); display.println(bme280.getHumid());
+            display.print("Humid: "); display.println(bme280.statusToStr(bme280.getStatus()) == "ON" ? String(bme280.getHumid()) : "-");
 
             y += gap;
             display.setCursor(0, y);
-            display.print("Pressure: "); display.println(bme280.getPressure());
-
-            y += gap;
-            display.setCursor(0, y);
-            // display.print("Altitude: "); display.println(bme280.getAltitude());
-            display.print("Gas: "); display.println(mq2.getRaw());
+            // display.print("Pressure: "); display.println(bme280.getPressure());
+            display.print("Pressure: "); display.println(bme280.statusToStr(bme280.getStatus()) == "ON" ? String(bme280.getPressure()) : "-");
 
             display.display();
             // Check button next
@@ -242,11 +250,11 @@
 
             y += gap;
             display.setCursor(0, y);
-            display.print("MQ2: "); display.println("ON");
+            display.print("MQ2: "); display.println(mq2.statusToStr(mq2.getStatus()));
 
             y += gap;
             display.setCursor(0, y);
-            display.print("NEO6M: "); display.println("ON");
+            display.print("NEO6M: "); display.println(neo6m.statusToStr(neo6m.getStatus()));
             
             display.display();
             // #19
@@ -280,11 +288,11 @@
 
             y += gap;
             display.setCursor(0, y);
-            display.print("MQ2: "); display.println("ON");
+            display.print("MQ2: "); display.println(mq2.statusToStr(mq2.getStatus()));
 
             y += gap;
             display.setCursor(0, y);
-            display.print("NEO6M: "); display.println("ON");
+            display.print("NEO6M: "); display.println(neo6m.statusToStr(neo6m.getStatus()));
             
             display.display();
 
@@ -318,18 +326,18 @@
 
             y += gap;
             display.setCursor(0, y);
-            display.print("> MQ2: "); display.println("ON");
+            display.print("> MQ2: "); display.println(mq2.statusToStr(mq2.getStatus()));
 
             y += gap;
             display.setCursor(0, y);
-            display.print("NEO6M: "); display.println("ON");
+            display.print("NEO6M: "); display.println(neo6m.statusToStr(neo6m.getStatus()));
             
             display.display();
 
             // Check confirm button to toggle component status
             if (buttonConfirm.isButtonConfirmPressed())
             {
-                
+                mq2.toggleStatus();
             }
             // Check button next
             if (buttonNext.isButtonNextPressed())
@@ -356,18 +364,18 @@
 
             y += gap;
             display.setCursor(0, y);
-            display.print("MQ2: "); display.println("ON");
+            display.print("MQ2: "); display.println(mq2.statusToStr(mq2.getStatus()));
 
             y += gap;
             display.setCursor(0, y);
-            display.print("> NEO6M: "); display.println("ON");
+            display.print("> NEO6M: "); display.println(neo6m.statusToStr(neo6m.getStatus()));
             
             display.display();
 
             // Check confirm button to toggle component status
             if (buttonConfirm.isButtonConfirmPressed())
             {
-                
+                neo6m.toggleStatus();
             }
             // Check button next
             if (buttonNext.isButtonNextPressed())
