@@ -20,3 +20,11 @@ Component::Status Component::toggleStatus() {
     }
     return status;
 }
+
+const char* Component::statusToStr(Status status) const {
+    switch (status) {
+        case Status::ON:  return "ON";
+        case Status::OFF: return "OFF";
+        default: return "UNKNOWN";
+    }
+}

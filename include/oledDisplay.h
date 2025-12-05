@@ -25,7 +25,10 @@ public:
         DISPLAY_GAS_TEXT,
         DISPLAY_GAS,
         DISPLAY_LOCATION,
-        DISPLAY_SETTING
+        DISPLAY_SETTING_WIFI,
+        DISPLAY_SETTING_BME280,
+        DISPLAY_SETTING_MQ2,
+        DISPLAY_SETTING_NEO6M
     };
 
     // Constructor

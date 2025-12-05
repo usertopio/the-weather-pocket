@@ -217,12 +217,12 @@
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
-                setState(State::DISPLAY_SETTING);
+                setState(State::DISPLAY_SETTING_WIFI);
                 resetGap();
             }
             break;
 
-        case State::DISPLAY_SETTING:
+        case State::DISPLAY_SETTING_WIFI:
             // Serial monitor
             Serial.println("Display: DISPLAY_SETTING");
             // Content
@@ -231,22 +231,141 @@
             display.setTextSize(1);
 
             display.setCursor(0, y);
-            display.print("Temp: "); display.println(bme280.getTemp());
+            display.print("> WIFI: "); display.println("ON");
 
             y += gap;
             display.setCursor(0, y);
-            display.print("Humid: "); display.println(bme280.getHumid());
+            display.print("BME280: "); display.println("ON");
 
             y += gap;
             display.setCursor(0, y);
-            display.print("Pressure: "); display.println(bme280.getPressure());
+            display.print("MQ2: "); display.println("ON");
 
             y += gap;
             display.setCursor(0, y);
-            // display.print("Altitude: "); display.println(bme280.getAltitude());
-            display.print("Gas: "); display.println(mq2.getRaw());
+            display.print("NEO6M: "); display.println("ON");
             
             display.display();
+            // #19
+            // // Check confirm button to toggle component status
+            // if (buttonConfirm.isButtonConfirmPressed())
+            // {
+            //     
+            // }
+            // Check button next
+            if (buttonNext.isButtonNextPressed())
+            {
+                setState(State::DISPLAY_SETTING_BME280);
+                resetGap();
+            }
+            break;
+        
+        case State::DISPLAY_SETTING_BME280:
+            // Serial monitor
+            Serial.println("Display: DISPLAY_SETTING");
+            // Content
+            displayHeader("SETTING");
+
+            display.setTextSize(1);
+
+            display.setCursor(0, y);
+            display.print("WIFI: "); display.println("ON");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("> BME280: "); display.println(bme280.statusToStr(bme280.getStatus()));
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("MQ2: "); display.println("ON");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("NEO6M: "); display.println("ON");
+            
+            display.display();
+
+            // Check confirm button to toggle component status
+            if (buttonConfirm.isButtonConfirmPressed())
+            {
+                bme280.toggleStatus();
+            }
+            // Check button next
+            if (buttonNext.isButtonNextPressed())
+            {
+                setState(State::DISPLAY_SETTING_MQ2);
+                resetGap();
+            }
+            break;
+        
+        case State::DISPLAY_SETTING_MQ2:
+            // Serial monitor
+            Serial.println("Display: DISPLAY_SETTING");
+            // Content
+            displayHeader("SETTING");
+
+            display.setTextSize(1);
+
+            display.setCursor(0, y);
+            display.print("WIFI: "); display.println("ON");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("BME280: "); display.println("ON");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("> MQ2: "); display.println("ON");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("NEO6M: "); display.println("ON");
+            
+            display.display();
+
+            // Check confirm button to toggle component status
+            if (buttonConfirm.isButtonConfirmPressed())
+            {
+                
+            }
+            // Check button next
+            if (buttonNext.isButtonNextPressed())
+            {
+                setState(State::DISPLAY_SETTING_NEO6M);
+                resetGap();
+            }
+            break;
+
+        case State::DISPLAY_SETTING_NEO6M:
+            // Serial monitor
+            Serial.println("Display: DISPLAY_SETTING");
+            // Content
+            displayHeader("SETTING");
+
+            display.setTextSize(1);
+
+            display.setCursor(0, y);
+            display.print("WIFI: "); display.println("ON");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("BME280: "); display.println("ON");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("MQ2: "); display.println("ON");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("> NEO6M: "); display.println("ON");
+            
+            display.display();
+
+            // Check confirm button to toggle component status
+            if (buttonConfirm.isButtonConfirmPressed())
+            {
+                
+            }
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
