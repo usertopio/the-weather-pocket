@@ -68,7 +68,9 @@
         y = 20;
         gap = 12;
 
+        buttonConfirm.readSignal();
         buttonNext.readSignal();
+        
         switch (getState())
         {
         case State::WELCOME:
@@ -109,9 +111,44 @@
             // Check button next
             if (buttonNext.isButtonNextPressed())
             {
+                setState(State::DISPLAY_GAS_TEXT);
+                resetGap();
+            }
+            break;
+        
+        case State::DISPLAY_GAS_TEXT:
+            // Serial monitor
+            Serial.println("Display: DISPLAY_GAS");
+            // Content
+            displayHeader("GAS");
+
+            display.setTextSize(1);
+            display.setCursor(0, y);
+            display.print("LPG: "); display.println(mq2LpgStatusToStr(mq2.getLpgStatus()));
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("CO: "); display.println(mq2CoStatusToStr(mq2.getCoStatus()));
+
+            y += gap;
+            display.setCursor(0, y);
+            // display.print("Altitude: "); display.println(bme280.getAltitude());
+            display.print("Smoke: "); display.println(mq2SmokeStatusToStr(mq2.getSmokeStatus()));
+            display.display();
+
+            // Check confirm button
+            if (buttonConfirm.isButtonConfirmPressed())
+            {
                 setState(State::DISPLAY_GAS);
                 resetGap();
             }
+            // Check next button 
+            if (buttonNext.isButtonNextPressed())
+            {
+                setState(State::DISPLAY_LOCATION);
+                resetGap();
+            }
+
             break;
 
         case State::DISPLAY_GAS:
@@ -121,7 +158,6 @@
             displayHeader("GAS");
 
             display.setTextSize(1);
-
             display.setCursor(0, y);
             display.print("Raw: "); display.println(mq2.getRaw());
 
@@ -137,9 +173,15 @@
             display.setCursor(0, y);
             // display.print("Altitude: "); display.println(bme280.getAltitude());
             display.print("Smoke: "); display.println(mq2.getSmoke());
-
             display.display();
-            // Check button next
+
+            // Check confirm button
+            if (buttonConfirm.isButtonConfirmPressed())
+            {
+                setState(State::DISPLAY_GAS_TEXT);
+                resetGap();
+            }
+            // Check next button 
             if (buttonNext.isButtonNextPressed())
             {
                 setState(State::DISPLAY_LOCATION);

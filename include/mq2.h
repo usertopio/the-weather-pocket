@@ -89,6 +89,10 @@ private:
 // Status
 const char* mq2StatusToString(Mq2::Status status);
 
+const char* mq2LpgStatusToStr(Mq2::LpgStatus lpgStatus);
+const char* mq2CoStatusToStr(Mq2::CoStatus coStatus);
+const char* mq2SmokeStatusToStr(Mq2::SmokeStatus smokeStatus);
+
 // State
 const char* mq2StateToString(Mq2::State state);
 

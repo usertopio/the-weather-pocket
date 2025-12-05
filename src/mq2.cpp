@@ -28,6 +28,34 @@ const char* mq2StatusToString(Mq2::Status status) {
     }
 }
 
+const char* mq2LpgStatusToStr(Mq2::LpgStatus lpgStatus) {
+    switch (lpgStatus) {
+        case Mq2::LpgStatus::NORMAL:  return "NORMAL";
+        case Mq2::LpgStatus::WARNING: return "WARNING";
+        case Mq2::LpgStatus::DANGER: return "DANGER";
+        default: return "UNKNOWN";
+    }
+}
+
+const char* mq2CoStatusToStr(Mq2::CoStatus coStatus) {
+    switch (coStatus) {
+        case Mq2::CoStatus::NORMAL:  return "NORMAL";
+        case Mq2::CoStatus::WARNING: return "WARNING";
+        case Mq2::CoStatus::DANGER: return "DANGER";
+        case Mq2::CoStatus::SEVERE: return "SEVERE";
+        default: return "UNKNOWN";
+    }
+}
+
+const char* mq2SmokeStatusToStr(Mq2::SmokeStatus smokeStatus) {
+    switch (smokeStatus) {
+        case Mq2::SmokeStatus::NORMAL:  return "NORMAL";
+        case Mq2::SmokeStatus::WARNING: return "WARNING";
+        case Mq2::SmokeStatus::DANGER: return "DANGER";
+        default: return "UNKNOWN";
+    }
+}
+
 // State
 Mq2::State Mq2::getState() const {
     return state;
