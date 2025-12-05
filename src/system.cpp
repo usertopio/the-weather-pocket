@@ -34,10 +34,8 @@ void updateSystemState(){
             systemState = SystemState::READ_MQ2;
         } else if (neo6m.getStatus() == Neo6m::Status::ON){
             systemState = SystemState::READ_NEO6M;
-        } else if (true){
-            systemState = SystemState::PROCESS_DATA;
-        } else if (true){
-            systemState = SystemState::UPLOAD_DATA;
+        } else {
+            systemState = SystemState::IDLE;
         }
         break;
     // // #16 #3
@@ -46,10 +44,8 @@ void updateSystemState(){
             systemState = SystemState::READ_MQ2;
         } else if (neo6m.getStatus() == Neo6m::Status::ON){
             systemState = SystemState::READ_NEO6M;
-        } else if (true){
+        } else {
             systemState = SystemState::PROCESS_DATA;
-        } else if (true){
-            systemState = SystemState::UPLOAD_DATA;
         }
         break;
     // #13
@@ -64,21 +60,37 @@ void updateSystemState(){
         break;
     // #14
     case SystemState::READ_NEO6M:
-        if (true){
-            systemState = SystemState::PROCESS_DATA;
-        } else if (true){
-            systemState = SystemState::UPLOAD_DATA;
-        }
+        systemState = SystemState::PROCESS_DATA;
         break;
 
     case SystemState::PROCESS_DATA:
-        if (true){
-            systemState = SystemState::UPLOAD_DATA;
-        }
+        systemState = SystemState::UPLOAD_DATA;
         break;
 
     case SystemState::UPLOAD_DATA:
-        systemState = SystemState::READ_BME280;
+        // systemState = SystemState::READ_BME280;
+        if (bme280.getStatus() == Bme280::Status::ON){
+            systemState = SystemState::READ_BME280;
+        } else if (mq2.getStatus() == Mq2::Status::ON){
+            systemState = SystemState::READ_MQ2;
+        } else if (neo6m.getStatus() == Neo6m::Status::ON){
+            systemState = SystemState::READ_NEO6M;
+        } else {
+            systemState = SystemState::IDLE;
+        }
+        break;
+
+    case SystemState::IDLE:
+        // systemState = SystemState::READ_BME280;
+        if (bme280.getStatus() == Bme280::Status::ON){
+            systemState = SystemState::READ_BME280;
+        } else if (mq2.getStatus() == Mq2::Status::ON){
+            systemState = SystemState::READ_MQ2;
+        } else if (neo6m.getStatus() == Neo6m::Status::ON){
+            systemState = SystemState::READ_NEO6M;
+        } else {
+            systemState = SystemState::IDLE;
+        }
         break;
     
     default:
@@ -207,6 +219,25 @@ void runSystemState(){
             oledDisplay.updateDisplay();
 
             break;
+
+        case SystemState::IDLE:
+            // WIFI
+
+
+            // Action
+            
+
+            // Read data
+
+
+            // Serial monitor
+            monitor();
+
+            // Display
+            oledDisplay.updateDisplay();
+
+            break;
+            
         default:
             Serial.println("Run out of state. Plese fix the code!");
             break;
@@ -306,6 +337,14 @@ void monitor(){
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
         Serial.println("");
         Serial.println("Uploading data...");
+        Serial.println("=========");
+        break;
+    
+    case SystemState::IDLE:
+        Serial.println("=========");
+        Serial.print("System State: "); Serial.println(systemStateToString(systemState));
+        Serial.println("");
+        Serial.println("All sensor are off");
         Serial.println("=========");
         break;
     

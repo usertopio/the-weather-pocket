@@ -19,6 +19,7 @@ class Component {
         // Status
         Status getStatus() const;
         Status toggleStatus();
+        const char* statusToStr(Status status) const;
 
     protected:
         // Status
