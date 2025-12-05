@@ -34,7 +34,8 @@ enum class SystemState {
     READ_MQ2,
     READ_NEO6M,
     PROCESS_DATA,
-    UPLOAD_DATA
+    UPLOAD_DATA,
+    IDLE
 };
 
 extern SystemState systemState;

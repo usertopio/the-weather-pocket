@@ -96,15 +96,18 @@
             display.setTextSize(1);
 
             display.setCursor(0, y);
-            display.print("Temp: "); display.println(bme280.getTemp());
+            // display.print("Temp: "); display.println(bme280.getTemp());
+            display.print("Temp: "); display.println(bme280.statusToStr(bme280.getStatus()) == "ON" ? String(bme280.getTemp()) : "-");
 
             y += gap;
             display.setCursor(0, y);
-            display.print("Humid: "); display.println(bme280.getHumid());
+            // display.print("Humid: "); display.println(bme280.getHumid());
+            display.print("Humid: "); display.println(bme280.statusToStr(bme280.getStatus()) == "ON" ? String(bme280.getHumid()) : "-");
 
             y += gap;
             display.setCursor(0, y);
-            display.print("Pressure: "); display.println(bme280.getPressure());
+            // display.print("Pressure: "); display.println(bme280.getPressure());
+            display.print("Pressure: "); display.println(bme280.statusToStr(bme280.getStatus()) == "ON" ? String(bme280.getPressure()) : "-");
 
             display.display();
 
@@ -235,7 +238,7 @@
 
             y += gap;
             display.setCursor(0, y);
-            display.print("BME280: "); display.println("ON");
+            display.print("BME280: "); display.println(bme280.statusToStr(bme280.getStatus()));
 
             y += gap;
             display.setCursor(0, y);
@@ -311,7 +314,7 @@
 
             y += gap;
             display.setCursor(0, y);
-            display.print("BME280: "); display.println("ON");
+            display.print("BME280: "); display.println(bme280.statusToStr(bme280.getStatus()));
 
             y += gap;
             display.setCursor(0, y);
@@ -349,7 +352,7 @@
 
             y += gap;
             display.setCursor(0, y);
-            display.print("BME280: "); display.println("ON");
+            display.print("BME280: "); display.println(bme280.statusToStr(bme280.getStatus()));
 
             y += gap;
             display.setCursor(0, y);
