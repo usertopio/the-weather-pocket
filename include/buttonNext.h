@@ -13,7 +13,7 @@ public:
     };
 
     // Constructor
-    ButtonNext(int DATA_SIGNAL);
+    ButtonNext(int SIGNAL_PIN);
 
     //  Initialization
     void begin() override;
@@ -33,7 +33,7 @@ public:
 
 private:
     // Pins
-    const int DATA_SIGNAL;
+    const int SIGNAL_PIN;
 
     // State
     State state;

@@ -6,9 +6,9 @@
 #include "buttonNext.h"
 
 // Constructor
-ButtonNext::ButtonNext(int data_signal) :
+ButtonNext::ButtonNext(int signal_pin) :
     // Pins
-    DATA_SIGNAL(data_signal),
+    SIGNAL_PIN(signal_pin),
     // State
     state(State::NOT_PRESSED),
 
@@ -20,9 +20,9 @@ ButtonNext::ButtonNext(int data_signal) :
 // Initialization
 void ButtonNext::begin() {
     // Pins
-    pinMode(DATA_SIGNAL, INPUT);  // Use INPUT for external pull-up
+    pinMode(SIGNAL_PIN, INPUT);  // Use INPUT for external pull-up
     // Read the initial state of the pin
-    lastButtonNextState = digitalRead(DATA_SIGNAL);
+    lastButtonNextState = digitalRead(SIGNAL_PIN);
     currentButtonNextState = lastButtonNextState;
     // State
     status = Status::ON;
@@ -61,7 +61,7 @@ bool ButtonNext::isButtonNextPressed() {
 
 // Read signal
 void ButtonNext::readSignal(){
-    currentButtonNextState = digitalRead(DATA_SIGNAL);
+    currentButtonNextState = digitalRead(SIGNAL_PIN);
 }
 
 // Get signal

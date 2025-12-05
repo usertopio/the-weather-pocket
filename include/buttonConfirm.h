@@ -22,6 +22,15 @@ public:
     State getState() const;
     void setState(State newState); 
 
+    // Read signal
+    void readSignal();
+
+    // Get signal
+    bool getButtonFlag();
+    bool getLastButtonConfirmState();
+    bool getCurrentButtonConfirmState();
+    bool isButtonConfirmPressed();
+
 private:
     // Pins
     const int SIGNAL_PIN;
@@ -31,6 +40,7 @@ private:
 
     // Data
     // My data
+    bool isPressed;
     bool lastButtonConfirmState;
     bool currentButtonConfirmState;
 };

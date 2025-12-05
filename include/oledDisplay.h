@@ -22,6 +22,7 @@ public:
     enum class State {
         WELCOME,
         DISPLAY_WEATHER,
+        DISPLAY_GAS_TEXT,
         DISPLAY_GAS,
         DISPLAY_LOCATION,
         DISPLAY_SETTING
