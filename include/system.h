@@ -45,9 +45,6 @@ const char* systemStateToString(SystemState state);
 void updateSystemState();
 void runSystemState();
 
-// Serial monitor
-void monitor();
-
 // Data
 // Buffer
 extern bool isWifiConnect;
