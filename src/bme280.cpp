@@ -28,15 +28,6 @@ void Bme280::begin(){
     status = Status::ON;
 }
 
-// Status
-const char* bme280StatusToString(Bme280::Status status) {
-    switch (status) {
-        case Bme280::Status::ON:  return "ON";
-        case Bme280::Status::OFF: return "OFF";
-        default: return "UNKNOWN";
-    }
-}
-
 // State
 Bme280::State Bme280::getState() const {
     return state;

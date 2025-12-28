@@ -10,7 +10,8 @@
 
 class Neo6m : public Component {
 public:
-    // State
+
+    // State machine
     enum class State {
         INIT,
         WAIT_FOR_FIX,
@@ -20,16 +21,15 @@ public:
     // Constructor
     Neo6m(int neo_rx, int neo_tx);
 
-    //  Initialization
+    // Initialization
     void begin() override;
 
     // State
     State getState() const;
     void setState(State newState);
 
-    // Read data
+    // Read data from GPS
     void read();
-
     void readLocation();
     void readDateAndTime();
     void readAccuracy();
@@ -39,7 +39,8 @@ public:
     float getLongitude();
     float getAltitude();
     float getSpeed();
-    
+    float getCourse();
+
     int getYear();
     int getMonth();
     int getDay();
@@ -48,7 +49,7 @@ public:
     int getSecond();
 
     int getAmountOfSat();
-    int getHDOP();
+    float getHDOP();
 
 private:
     // Pins
@@ -58,31 +59,31 @@ private:
     // State
     State state;
 
-    // Data
-    // Libraries
+    // GPS Library
     TinyGPSPlus gps;
-    HardwareSerial &gpsSerial = Serial1;
-    // My data
+    HardwareSerial& gpsSerial = Serial1;
+
+    // My data structures
     struct Location {
-        float latitude;
-        float longitude;
-        float altitude;
-        float speed;
+        float latitude = 0;
+        float longitude = 0;
+        float altitude = 0;
+        float speed = 0;
+        float course = 0;
     };
 
     struct DateAndTime {
-        int year;
-        int month;
-        int day;
-
-        int hour;
-        int minute;
-        int second;
+        int year = 0;
+        int month = 0;
+        int day = 0;
+        int hour = 0;
+        int minute = 0;
+        int second = 0;
     };
-    
+
     struct Accuracy {
-        int amount_of_satellite;
-        int hdop;
+        int amount_of_satellite = 0;
+        float hdop = 0;
     };
 
 protected:
@@ -90,9 +91,6 @@ protected:
     DateAndTime dateAndTime;
     Accuracy accuracy;
 };
-
-// Status
-const char* neo6mStatusToString(Neo6m::Status status);
 
 // State
 const char* neo6mStateToString(Neo6m::State state);

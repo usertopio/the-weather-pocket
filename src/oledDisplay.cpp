@@ -211,19 +211,64 @@
             display.setTextSize(1);
 
             display.setCursor(0, y);
-            // display.print("Temp: "); display.println(bme280.getTemp());
-            display.print("Temp: "); display.println(bme280.statusToStr(bme280.getStatus()) == "ON" ? String(bme280.getTemp()) : "-");
+            display.print("Lat: "); display.println(neo6m.statusToStr(neo6m.getStatus()) == "ON" ? String(neo6m.getLatitude()) : "-");
 
             y += gap;
             display.setCursor(0, y);
-            // display.print("Humid: "); display.println(bme280.getHumid());
-            display.print("Humid: "); display.println(bme280.statusToStr(bme280.getStatus()) == "ON" ? String(bme280.getHumid()) : "-");
+            display.print("Lon: "); display.println(neo6m.statusToStr(neo6m.getStatus()) == "ON" ? String(neo6m.getLongitude()) : "-");
 
             y += gap;
             display.setCursor(0, y);
-            // display.print("Pressure: "); display.println(bme280.getPressure());
-            display.print("Pressure: "); display.println(bme280.statusToStr(bme280.getStatus()) == "ON" ? String(bme280.getPressure()) : "-");
+            display.print("Alt: "); display.println(neo6m.statusToStr(neo6m.getStatus()) == "ON" ? String(neo6m.getAltitude()) : "-");
 
+            // Check confirm button
+            if (buttonConfirm.isButtonConfirmPressed())
+            {
+                setState(State::DISPLAY_LOCATION_ACCURACY);
+                resetGap();
+            }
+            display.display();
+
+            // Check button next
+            if (buttonNext.isButtonNextPressed())
+            {
+                setState(State::DISPLAY_SETTING_WIFI);
+                resetGap();
+            }
+            break;
+
+        case State::DISPLAY_LOCATION_ACCURACY:
+            // Serial monitor
+            Serial.println("Display: DISPLAY_LOCATION");
+            // Content
+            displayHeader("LOCATION");
+
+            display.setTextSize(1);
+
+            display.setCursor(0, y);
+            display.print("Speed: "); display.println(neo6m.statusToStr(neo6m.getStatus()) == "ON" ? String(neo6m.getSpeed()) : "-");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("Course: "); display.println(neo6m.statusToStr(neo6m.getStatus()) == "ON" ? String(neo6m.getCourse()) : "-");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("Amount of Sat: "); display.println(neo6m.statusToStr(neo6m.getStatus()) == "ON" ? String(neo6m.getAmountOfSat()) : "-");
+
+            y += gap;
+            display.setCursor(0, y);
+            display.print("HDOP: "); display.println(neo6m.statusToStr(neo6m.getStatus()) == "ON" ? String(neo6m.getHDOP()) : "-");
+
+
+            display.display();
+
+            // Check confirm button
+            if (buttonConfirm.isButtonConfirmPressed())
+            {
+                setState(State::DISPLAY_LOCATION);
+                resetGap();
+            }
             display.display();
             // Check button next
             if (buttonNext.isButtonNextPressed())

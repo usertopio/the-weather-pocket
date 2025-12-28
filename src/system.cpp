@@ -269,7 +269,7 @@ void monitor(){
     case SystemState::READ_BME280:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-        Serial.print("Sensor Status: "); Serial.println(bme280StatusToString(bme280.getStatus()));
+        Serial.print("Sensor Status: "); Serial.println(bme280.statusToStr(bme280.getStatus()));
         Serial.print("Sensor State: "); Serial.println(bme280StateToString(bme280.getState()));
         Serial.println("");
         Serial.print("BME280 Temperature: "); Serial.println(bme280.getTemp());
@@ -283,7 +283,7 @@ void monitor(){
     case SystemState::READ_MQ2:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-        Serial.print("Sensor Status: "); Serial.println(mq2StatusToString(mq2.getStatus()));
+        Serial.print("Sensor Status: "); Serial.println(mq2.statusToStr(mq2.getStatus()));
         Serial.print("Sensor State: "); Serial.println(mq2StateToString(mq2.getState()));
         Serial.println("");
         Serial.print("MQ2 Raw: "); Serial.println(mq2.getRaw());
@@ -296,7 +296,7 @@ void monitor(){
     case SystemState::READ_NEO6M:
         Serial.println("=========");
         Serial.print("System State: "); Serial.println(systemStateToString(systemState));
-        Serial.print("Sensor Status: "); Serial.println(neo6mStatusToString(neo6m.getStatus()));
+        Serial.print("Sensor Status: "); Serial.println(neo6m.statusToStr(neo6m.getStatus()));
         Serial.print("Sensor State: "); Serial.println(neo6mStateToString(neo6m.getState()));
         Serial.println("");
         // Location

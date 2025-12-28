@@ -19,15 +19,6 @@ void Mq2::begin() {
     status = Status::ON;
 }
 
-// Status
-const char* mq2StatusToString(Mq2::Status status) {
-    switch (status) {
-        case Mq2::Status::ON:  return "ON";
-        case Mq2::Status::OFF: return "OFF";
-        default: return "UNKNOWN";
-    }
-}
-
 const char* mq2LpgStatusToStr(Mq2::LpgStatus lpgStatus) {
     switch (lpgStatus) {
         case Mq2::LpgStatus::NORMAL:  return "NORMAL";
